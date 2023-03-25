@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  web:
+    container_name: iroha_web
+    build: .
+    volumes:
+      - .:/iroha_front
+    tty: true
+    ports:
+      - "8080:8080"
