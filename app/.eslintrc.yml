@@ -13,4 +13,7 @@ parserOptions:
 plugins:
   - react
 rules: {}
-ignorePatterns: ['vite.config.ts', 'vite-env.d.ts']
+settings:
+  import/resolver:
+    typescript: []
+ignorePatterns: ["vite.config.ts", "vite-env.d.ts"]
