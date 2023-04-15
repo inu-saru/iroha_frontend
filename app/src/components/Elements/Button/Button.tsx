@@ -10,7 +10,7 @@ const variants = {
 }
 
 const sizes = {
-  default: "py-2 px-4 text-middle",
+  default: "py-2 px-4 text-default",
   small: "py-2 px-4 text-middle",
   middle: "py-1 px-2 text-small"
 }
