@@ -2,6 +2,7 @@ import * as z from "zod"
 
 import { Form, Input } from "@/components/Form"
 import { Button } from "@/components/Elements/Button"
+import { useLogin } from "@/lib/auth"
 
 const schema = z.object({
   email: z
@@ -13,9 +14,17 @@ const schema = z.object({
   password: z.string().min(1, { message: "1文字以上入力する必要があります。" })
 })
 
-export const LoginForm = (): JSX.Element => {
+interface LoginFormProps {
+  onSuccess: () => void
+}
+
+export const LoginForm = ({ onSuccess }: LoginFormProps): JSX.Element => {
+  const login = useLogin()
+
   const onSubmit = (data: any): void => {
-    console.log(data)
+    login.mutate(data, {
+      onSuccess
+    })
   }
 
   return (

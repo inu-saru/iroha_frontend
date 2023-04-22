@@ -1,3 +1,4 @@
+import { type AxiosResponse } from "axios"
 import { axios } from "@/lib/axios"
 
 import { type AuthUser } from "../types"
@@ -9,6 +10,6 @@ export interface LoginCredentialsDTO {
 
 export const loginWithEmailAndPassword = async (
   data: LoginCredentialsDTO
-): Promise<AuthUser> => {
+): Promise<AxiosResponse<AuthUser, any>> => {
   return await axios.post("/api/v1/login", data)
 }
