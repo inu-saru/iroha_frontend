@@ -28,7 +28,6 @@ axios.interceptors.response.use(
     console.log(`WIP api response error ${message}`)
     if (error.response.status === 401) {
       storage.clearToken()
-      window.location.href = "/auth/login"
     }
 
     return await Promise.reject(error)

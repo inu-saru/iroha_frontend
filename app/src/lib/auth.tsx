@@ -37,7 +37,6 @@ const registerFn = (): void => {
 const logoutFn = async (): Promise<void> => {
   await deleteAuthToken()
   storage.clearToken()
-  window.location.assign(window.location.origin as unknown as string)
 }
 
 export const { useUser, useLogin, useRegister, useLogout, AuthLoader } =

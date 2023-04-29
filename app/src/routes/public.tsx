@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom"
 import { lazyImport } from "@/utils/lazyImport"
 
 const { AuthRoutes } = lazyImport(
@@ -9,5 +10,6 @@ export const publicRoutes = [
   {
     path: "/auth/*",
     element: <AuthRoutes />
-  }
+  },
+  { path: "/app/*", element: <Navigate to="/auth/login" /> }
 ]

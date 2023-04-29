@@ -34,5 +34,6 @@ export const protectedRoutes = [
       { path: "", element: <Dashboard /> },
       { path: "*", element: <Navigate to="." /> }
     ]
-  }
+  },
+  { path: "/auth/*", element: <Navigate to="/app" /> }
 ]
