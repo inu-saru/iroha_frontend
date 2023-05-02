@@ -9,6 +9,7 @@ import { Spinner } from "@/components/Elements"
 
 import { AuthLoader } from "@/lib/auth"
 import { queryClient } from "@/lib/react-query"
+import { Toasts } from "@/components/Toasts"
 
 const ErrorFallback = (): JSX.Element => {
   return (
@@ -38,7 +39,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
         <HelmetProvider>
           <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== "test" && <ReactQueryDevtools />}
-            {/* <Toast /> */}
+            <Toasts />
             <AuthLoader renderLoading={() => loading}>
               <Router>{children}</Router>
             </AuthLoader>

@@ -2,6 +2,7 @@ import Axios, { type AxiosRequestConfig } from "axios"
 
 import { API_URL } from "@/config"
 import storage from "@/utils/storage"
+import { useToastStore } from "@/stores/toasts"
 
 export const axios = Axios.create({
   baseURL: API_URL
@@ -25,7 +26,12 @@ axios.interceptors.response.use(
   },
   async (error) => {
     const message = error.response?.data?.message || error.message
-    console.log(`WIP api response error ${message}`)
+    useToastStore.getState().addToast({
+      variant: "error",
+      title: "Error",
+      message
+    })
+
     if (error.response.status === 401) {
       storage.clearToken()
     }
