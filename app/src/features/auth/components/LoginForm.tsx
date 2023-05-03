@@ -1,7 +1,7 @@
 import * as z from "zod"
 
 import { Form, Input } from "@/components/Form"
-import { Button } from "@/components/Elements/Button"
+import { Button, Link } from "@/components/Elements"
 import { useLogin } from "@/lib/auth"
 
 const schema = z.object({
@@ -47,6 +47,9 @@ export const LoginForm = ({ onSuccess }: LoginFormProps): JSX.Element => {
             <Button className="w-full" type="submit">
               ログイン
             </Button>
+            <Link to="/auth/password_reset" className="block">
+              パスワードがわからない方はこちら
+            </Link>
           </>
         )}
       </Form>
