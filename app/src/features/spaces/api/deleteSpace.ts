@@ -38,7 +38,7 @@ export const useDeleteSpace = ({ config }: UseDeleteSpaceOptions) => {
       queryClient.invalidateQueries(["spaces"])
       addToast({
         type: "success",
-        title: "Space Deleted"
+        title: "スペースを削除しました。"
       })
     },
     ...config,

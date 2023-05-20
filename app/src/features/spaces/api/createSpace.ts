@@ -46,7 +46,7 @@ export const useCreateSpace = ({ config }: UseCreateSpaceOptions = {}) => {
       queryClient.invalidateQueries(["spaces"])
       addToast({
         type: "success",
-        title: "Space Created"
+        title: "スペースを作成しました。"
       })
     },
     ...config,
