@@ -68,6 +68,7 @@ module.exports = {
         },
         primary: {
           20: "#F0F6FF",
+          30: "#E9F2FF",
           40: "#DFEDFF",
           50: "#BFDAFF",
           75: "#85B7FA",
@@ -79,6 +80,7 @@ module.exports = {
         },
         error: {
           20: "#FCECF3",
+          30: "#FADCE9",
           40: "#F8CDDF",
           50: "#F099BE",
           75: "#EB74A6",
@@ -90,6 +92,7 @@ module.exports = {
         },
         alert: {
           20: "#FFFAE7",
+          30: "#FFF6D8",
           40: "#FFF2C7",
           50: "#FFE68C",
           75: "#FFDA58",
