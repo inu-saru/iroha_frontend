@@ -1,3 +1,5 @@
+import { type Schema } from "zod"
+
 import {
   type UseMutationResult,
   type UseQueryResult
@@ -8,6 +10,7 @@ import { NavItem, NavItemUpdate, NavItemSwitch } from "@/components/Nav"
 
 interface NavItemsProps {
   resourcesQuery: UseQueryResult
+  schema?: Schema
   updateResourceQuery: UseMutationResult
   resourcesUrl: string
   icon?: string
@@ -17,6 +20,7 @@ interface NavItemsProps {
 
 export const NavItems = ({
   resourcesQuery,
+  schema,
   updateResourceQuery,
   resourcesUrl,
   icon,
@@ -48,6 +52,7 @@ export const NavItems = ({
                 {methods.isSwitched ? (
                   <div ref={methods.ref}>
                     <NavItemUpdate
+                      schema={schema}
                       resourceId={resource.id}
                       defaultValue={resource.name}
                       actionResource={updateResourceQuery}

@@ -14,7 +14,7 @@ import { useDisclosure } from "@/hooks/useDisclosure"
 import { useDeleteSpace } from "../api/deleteSpace"
 
 const schema = z.object({
-  name: z.string()
+  name: z.string().min(1, "Required")
 })
 
 export const Spaces = (): JSX.Element => {
@@ -52,6 +52,7 @@ export const Spaces = (): JSX.Element => {
       )}
       <NavItems
         resourcesQuery={spacesQuery}
+        schema={schema}
         updateResourceQuery={useUpdateSpace}
         resourcesUrl="spaces"
         icon="space"
