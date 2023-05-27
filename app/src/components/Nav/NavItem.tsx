@@ -18,7 +18,8 @@ export const NavItem = ({
   dropDown = undefined
 }: NavItemProps): JSX.Element => {
   const dropDownWitoResourceId = React.cloneElement(dropDown, {
-    resourceId
+    resourceId,
+    label
   })
 
   return (
