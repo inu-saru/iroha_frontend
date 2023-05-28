@@ -11,6 +11,7 @@ import { NavItem, NavItemUpdate, NavItemSwitch } from "@/components/Nav"
 interface NavItemsProps {
   resourcesQuery: UseQueryResult
   schema?: Schema
+  maxLength?: number
   updateResourceQuery: UseMutationResult
   resourcesUrl: string
   icon?: string
@@ -21,6 +22,7 @@ interface NavItemsProps {
 export const NavItems = ({
   resourcesQuery,
   schema,
+  maxLength,
   updateResourceQuery,
   resourcesUrl,
   icon,
@@ -53,6 +55,7 @@ export const NavItems = ({
                   <div ref={methods.ref}>
                     <NavItemUpdate
                       schema={schema}
+                      maxLength={maxLength}
                       resourceId={resource.id}
                       defaultValue={resource.name}
                       actionResource={updateResourceQuery}

@@ -8,6 +8,7 @@ interface NavItemUpdateProps {
   resourceId?: number
   actionResource: UseMutationResult
   schema?: Schema
+  maxLength?: number
   defaultValue?: string
   placeholder?: string
   toggle: () => void
@@ -17,6 +18,7 @@ export const NavItemUpdate = ({
   resourceId,
   actionResource,
   schema,
+  maxLength = 255,
   defaultValue = "",
   placeholder = "",
   toggle
@@ -38,6 +40,7 @@ export const NavItemUpdate = ({
           {({ register, formState }) => (
             <>
               <input
+                maxLength={maxLength}
                 className="w-full outline-none bg-primary-20 h-8 text-natural-900 text-small placeholder-natural-90 "
                 defaultValue={defaultValue}
                 placeholder={placeholder}

@@ -45,6 +45,7 @@ export const Spaces = (): JSX.Element => {
           <NavItemCreate
             actionResource={useCreateSpace}
             schema={schema}
+            maxLength={255}
             placeholder="新しいスペース"
             toggle={toggle}
           />
@@ -53,6 +54,7 @@ export const Spaces = (): JSX.Element => {
       <NavItems
         resourcesQuery={spacesQuery}
         schema={schema}
+        maxLength={255}
         updateResourceQuery={useUpdateSpace}
         resourcesUrl="spaces"
         icon="space"

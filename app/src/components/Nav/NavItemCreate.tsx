@@ -6,6 +6,7 @@ import { Form } from "@/components/Form"
 interface NavItemCreateProps {
   actionResource: () => void
   schema?: Schema
+  maxLength?: number
   placeholder?: string
   toggle: () => void
 }
@@ -13,6 +14,7 @@ interface NavItemCreateProps {
 export const NavItemCreate = ({
   actionResource,
   schema,
+  maxLength = 255,
   placeholder = "",
   toggle
 }: NavItemCreateProps): JSX.Element => {
@@ -35,6 +37,7 @@ export const NavItemCreate = ({
           {({ register, formState }) => (
             <>
               <input
+                maxLength={maxLength}
                 className="w-full outline-none bg-primary-20 h-8 text-natural-900 text-small placeholder-natural-90 "
                 placeholder={placeholder}
                 {...register("name")}
