@@ -1,29 +1,24 @@
-import { type Schema } from "zod"
-
-import {
-  type UseMutationResult,
-  type UseQueryResult
-} from "@tanstack/react-query"
+import React from "react"
+import { type UseQueryResult } from "@tanstack/react-query"
 
 import { Spinner } from "@/components/Elements"
-import { NavItem, NavItemUpdate, NavItemSwitch } from "@/components/Nav"
+import {
+  NavItem,
+  NavItemSwitch,
+  type NavitemUpadteResourceDataProps
+} from "@/components/Nav"
 
 interface NavItemsProps {
   resourcesQuery: UseQueryResult
-  schema?: Schema
-  maxLength?: number
-  updateResourceQuery: UseMutationResult
+  navItemUpdate: React.ReactElement
   resourcesUrl: string
   icon?: string
   dropDown?: JSX.Element
-  swichedElementRef: any
 }
 
 export const NavItems = ({
   resourcesQuery,
-  schema,
-  maxLength,
-  updateResourceQuery,
+  navItemUpdate,
   resourcesUrl,
   icon,
   dropDown
@@ -44,6 +39,18 @@ export const NavItems = ({
     )
   }
 
+  const navItemUpdateWith = ({
+    resourceId,
+    defaultValue,
+    toggle
+  }: NavitemUpadteResourceDataProps): React.ReactElement => {
+    return React.cloneElement(navItemUpdate, {
+      resourceId,
+      defaultValue,
+      toggle
+    })
+  }
+
   return (
     <ul>
       {resourcesQuery.data.map((resource, index) => (
@@ -53,14 +60,11 @@ export const NavItems = ({
               <>
                 {methods.isSwitched ? (
                   <div ref={methods.ref}>
-                    <NavItemUpdate
-                      schema={schema}
-                      maxLength={maxLength}
-                      resourceId={resource.id}
-                      defaultValue={resource.name}
-                      actionResource={updateResourceQuery}
-                      toggle={methods.toggle}
-                    />
+                    {navItemUpdateWith({
+                      resourceId: resource.id,
+                      defaultValue: resource.name,
+                      toggle: methods.toggle
+                    })}
                   </div>
                 ) : (
                   <NavItem

@@ -3,7 +3,12 @@ import { useClickAway, useToggle } from "react-use"
 import { z } from "zod"
 
 import { Button, Icon } from "@/components/Elements"
-import { NavItemCreate, NavHeader, NavItems } from "@/components/Nav"
+import {
+  NavItemCreate,
+  NavHeader,
+  NavItems,
+  NavItemUpdate
+} from "@/components/Nav"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
@@ -53,9 +58,13 @@ export const Spaces = (): JSX.Element => {
       )}
       <NavItems
         resourcesQuery={spacesQuery}
-        schema={schema}
-        maxLength={255}
-        updateResourceQuery={useUpdateSpace}
+        navItemUpdate={
+          <NavItemUpdate
+            schema={schema}
+            maxLength={255}
+            actionResource={useUpdateSpace}
+          />
+        }
         resourcesUrl="spaces"
         icon="space"
         dropDown={<DropDownSpace deleteToggle={openWithDelete} />}

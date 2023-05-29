@@ -2,17 +2,22 @@ import { type Schema } from "zod"
 
 import { Icon, Spinner } from "@/components/Elements"
 import { Form } from "@/components/Form"
-import { type UseMutationResult } from "@tanstack/react-query"
 
-interface NavItemUpdateProps {
-  resourceId?: number
-  actionResource: UseMutationResult
+interface NavItemUpdateBaseProps {
+  actionResource: () => void
   schema?: Schema
   maxLength?: number
+}
+
+export interface NavitemUpadteResourceDataProps {
+  resourceId?: number
   defaultValue?: string
   placeholder?: string
   toggle: () => void
 }
+
+type NavItemUpdateProps = NavItemUpdateBaseProps &
+  NavitemUpadteResourceDataProps
 
 export const NavItemUpdate = ({
   resourceId,
