@@ -17,7 +17,7 @@ export const NavItem = ({
   label,
   dropDown = undefined
 }: NavItemProps): JSX.Element => {
-  const dropDownWitoResourceId = React.cloneElement(dropDown, {
+  const dropDownWithResourceId = React.cloneElement(dropDown, {
     resourceId,
     label
   })
@@ -33,7 +33,7 @@ export const NavItem = ({
         </Link>
         {dropDown !== undefined && (
           <div className="absolute w-max inset-y-0 right-2 top-1 h-6 opacity-0 invisible group-hover:visible opacity-100">
-            {dropDownWitoResourceId}
+            {dropDownWithResourceId}
           </div>
         )}
       </li>
