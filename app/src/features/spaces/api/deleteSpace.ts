@@ -14,7 +14,7 @@ interface UseDeleteSpaceOptions {
   config?: MutationConfig<typeof deleteSpace>
 }
 
-export const useDeleteSpace = ({ config }: UseDeleteSpaceOptions) => {
+export const useDeleteSpace = ({ config }: UseDeleteSpaceOptions = {}) => {
   const { addToast } = useToastStore()
   return useMutation({
     onMutate: async (deletedSpace) => {

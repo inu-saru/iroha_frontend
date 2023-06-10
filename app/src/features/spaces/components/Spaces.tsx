@@ -36,7 +36,9 @@ export const Spaces = (): JSX.Element => {
     closeWith: closeWithDelete,
     isOpen: isOpenDelete
   } = useDisclosure()
-  const deleteSpaceMutation = useDeleteSpace({})
+  const createSpaceMutation = useCreateSpace()
+  const updateSpaceMutation = useUpdateSpace()
+  const deleteSpaceMutation = useDeleteSpace()
 
   return (
     <>
@@ -48,7 +50,7 @@ export const Spaces = (): JSX.Element => {
       {isOpen && (
         <div ref={ref}>
           <NavItemCreate
-            actionResource={useCreateSpace}
+            createResourceMutation={createSpaceMutation}
             schema={schema}
             maxLength={255}
             placeholder="新しいスペース"
@@ -62,7 +64,7 @@ export const Spaces = (): JSX.Element => {
           <NavItemUpdate
             schema={schema}
             maxLength={255}
-            actionResource={useUpdateSpace}
+            updateResourceMutation={updateSpaceMutation}
           />
         }
         resourcesUrl="spaces"
