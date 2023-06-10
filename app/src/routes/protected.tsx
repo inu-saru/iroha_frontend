@@ -9,6 +9,10 @@ const { Dashboard } = lazyImport(
   async () => await import("@/features/misc"),
   "Dashboard"
 )
+const { Vocabularies } = lazyImport(
+  async () => await import("@/features/vocabularies/routes/vocabularies"),
+  "Vocabularies"
+)
 
 const App = (): JSX.Element => {
   return (
@@ -30,7 +34,10 @@ export const protectedRoutes = [
   {
     path: "/app",
     element: <App />,
-    children: [{ path: "", element: <Dashboard /> }]
+    children: [
+      { path: "spaces/:spaceId", element: <Vocabularies /> },
+      { path: "", element: <Dashboard /> }
+    ]
   },
   { path: "/auth/*", element: <Navigate to="/app" /> }
 ]
