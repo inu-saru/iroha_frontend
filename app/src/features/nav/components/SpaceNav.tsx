@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom"
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Icon, Link } from "@/components/Elements"
+import { lazyImport } from "@/utils/lazyImport"
+const { Sections } = lazyImport(
+  async () => await import("@/features/sections/components/Sections"),
+  "Sections"
+)
 
 export const SpaceNav = (): JSX.Element => {
   const { spaceId } = useParams<{ spaceId: string }>()
@@ -19,6 +24,7 @@ export const SpaceNav = (): JSX.Element => {
         </Link>
         <p className="text-h300 text-primary-300">{spaceName}</p>
       </div>
+      <Sections spaceId={spaceId} />
     </div>
   )
 }
