@@ -27,6 +27,7 @@ export const updateSection = async ({
 let thisSpaceId: string
 
 interface UseUpdateSectionOptions {
+  spaceId: string
   config?: MutationConfig<typeof updateSection>
 }
 

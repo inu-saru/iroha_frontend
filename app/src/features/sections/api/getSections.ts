@@ -13,8 +13,8 @@ export const getSections = async (spaceId: string): Promise<Section[]> => {
 type QueryFnType = typeof getSections
 
 interface UseSectionsOptions {
-  config?: QueryConfig<QueryFnType>
   spaceId: string
+  config?: QueryConfig<QueryFnType>
 }
 
 export const useSections = ({ config, spaceId }: UseSectionsOptions) => {

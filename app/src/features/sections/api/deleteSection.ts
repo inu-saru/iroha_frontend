@@ -15,6 +15,7 @@ export const deleteSection = async ({ sectionId }: { sectionId: string }) => {
 let thisSpaceId: string
 
 interface UseDeleteSectionOptions {
+  spaceId: string
   config?: MutationConfig<typeof deleteSection>
 }
 

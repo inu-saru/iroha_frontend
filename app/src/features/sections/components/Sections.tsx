@@ -22,8 +22,12 @@ const schema = z.object({
   name: z.string().min(1, "Required")
 })
 
-export const Sections = (spaceId: object): JSX.Element => {
-  const sectionsQuery = useSections(spaceId)
+interface SectionsProps {
+  spaceId: string
+}
+
+export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
+  const sectionsQuery = useSections({ spaceId })
   const [isOpen, toggle] = useToggle(false)
   const ref = useRef(null)
   useClickAway(ref, () => {
@@ -36,9 +40,9 @@ export const Sections = (spaceId: object): JSX.Element => {
     closeWith: closeWithDelete,
     isOpen: isOpenDelete
   } = useDisclosure()
-  const createSectionMutation = useCreateSection(spaceId)
-  const updateSectionMutation = useUpdateSection(spaceId)
-  const deleteSectionMutation = useDeleteSection(spaceId)
+  const createSectionMutation = useCreateSection({ spaceId })
+  const updateSectionMutation = useUpdateSection({ spaceId })
+  const deleteSectionMutation = useDeleteSection({ spaceId })
 
   return (
     <>
@@ -67,7 +71,7 @@ export const Sections = (spaceId: object): JSX.Element => {
             updateResourceMutation={updateSectionMutation}
           />
         }
-        resourcesUrl={`/app/spaces/${spaceId.spaceId}/sections`}
+        resourcesUrl={`/app/spaces/${spaceId}/sections`}
         icon="section"
         dropDown={<DropDownSection deleteToggle={openWithDelete} />}
       />
