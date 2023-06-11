@@ -12,7 +12,7 @@ interface NavItemProps {
 
 export const NavItem = ({
   resourceId,
-  to = "./",
+  to = "/app",
   icon,
   label,
   dropDown = undefined

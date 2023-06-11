@@ -67,7 +67,7 @@ export const Spaces = (): JSX.Element => {
             updateResourceMutation={updateSpaceMutation}
           />
         }
-        resourcesUrl="spaces"
+        resourcesUrl="/app/spaces"
         icon="space"
         dropDown={<DropDownSpace deleteToggle={openWithDelete} />}
       />

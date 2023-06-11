@@ -15,7 +15,7 @@ export const SpaceNav = (): JSX.Element => {
   return (
     <div className="w-56 border-r border-natural-40 h-screen bg-white">
       <div className="p-2 border-b border-natural-40">
-        <Link to={"../"} className="block">
+        <Link to={"/app"} className="block">
           <Icon
             className="float-left mr-2"
             bgColor="white"

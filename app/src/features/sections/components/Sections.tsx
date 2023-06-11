@@ -67,7 +67,7 @@ export const Sections = (spaceId: object): JSX.Element => {
             updateResourceMutation={updateSectionMutation}
           />
         }
-        resourcesUrl="sections"
+        resourcesUrl={`/app/spaces/${spaceId.spaceId}/sections`}
         icon="section"
         dropDown={<DropDownSection deleteToggle={openWithDelete} />}
       />
