@@ -8,7 +8,7 @@ import { type Section } from "../types"
 
 export interface UpdateSectionDTO {
   data: {
-    body: string
+    name: string
   }
   spaceId: string
   resourceId: string
@@ -42,31 +42,44 @@ export const useUpdateSection = ({
     onMutate: async (updatingSection: any) => {
       await queryClient.cancelQueries([
         `spaces/${spaceId}/sections`,
-        updatingSection?.resourceId
+        `${updatingSection?.resourceId}`
       ])
 
       const previousSection = queryClient.getQueryData<Section>([
-        `spaces/${spaceId}/sections`,
-        updatingSection?.resourceId
+        "section",
+        `${updatingSection?.resourceId}`
+      ])
+
+      queryClient.setQueryData(["section", `${updatingSection?.resourceId}`], {
+        ...previousSection,
+        ...updatingSection.data,
+        id: updatingSection.resourceId
+      })
+
+      const previousSections = queryClient.getQueryData<Section>([
+        `spaces/${spaceId}/sections`
       ])
 
       queryClient.setQueryData(
-        [`spaces/${spaceId}/sections`, updatingSection?.resourceId],
+        [`spaces/${spaceId}/sections`, `${updatingSection?.resourceId}`],
         {
-          ...previousSection,
+          ...previousSections,
           ...updatingSection.data,
           id: updatingSection.resourceId
         }
       )
 
-      return { previousSection }
+      return { previousSection, previousSections }
     },
     onError: (_, __, context: any) => {
       if (context?.previousSection) {
         queryClient.setQueryData(
-          [`spaces/${spaceId}/sections`, context.previousSection.id],
+          [`section`, `${context.previousSection.id}`],
           context.previousSection
         )
+      }
+      if (context?.previousSections) {
+        queryClient.setQueryData([`spaces/${spaceId}/sections`])
       }
     },
     onSuccess: (data) => {
