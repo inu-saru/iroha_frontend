@@ -17,7 +17,7 @@ export const ContentLayoutInSpace = ({
       <Head title={title} />
       <div className="flex">
         <SpaceNav />
-        <div className="p-8">{children}</div>
+        <div className="flex-1">{children}</div>
       </div>
     </>
   )
