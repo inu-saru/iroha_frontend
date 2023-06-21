@@ -10,8 +10,12 @@ export const getSection = async ({
   sectionId
 }: {
   spaceId: string
-  sectionId: string
-}): Promise<Section> => {
+  sectionId: string | null
+}): Promise<Section | null> => {
+  if (sectionId === null) {
+    return null
+  }
+
   const response = await axios.get(
     `/api/v1/spaces/${spaceId}/sections/${sectionId}`
   )
@@ -21,7 +25,8 @@ export const getSection = async ({
 type QueryFnType = typeof getSection
 
 interface UseSectionOptions {
-  sectionId: string
+  spaceId: string
+  sectionId: string | null
   config?: QueryConfig<QueryFnType>
 }
 
