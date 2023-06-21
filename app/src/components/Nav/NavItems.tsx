@@ -11,7 +11,7 @@ import {
 interface NavItemsProps {
   resourcesQuery: UseQueryResult
   navItemUpdate: React.ReactElement
-  resourcesUrl: string
+  resourcesUrl: (resourceId: string) => string
   icon?: string
   dropDown?: JSX.Element
 }
@@ -69,7 +69,7 @@ export const NavItems = ({
                 ) : (
                   <NavItem
                     resourceId={resource.id}
-                    to={`${resourcesUrl}/${resource.id}`}
+                    to={resourcesUrl(resource.id)}
                     icon={icon}
                     label={resource.name}
                     dropDown={methods.dropDownWitoEditToggle}

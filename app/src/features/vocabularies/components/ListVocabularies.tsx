@@ -9,13 +9,14 @@ export const ListVocabularies = (): JSX.Element => {
   }>()
   const sectionsQuery = useVocabularies({ spaceId })
 
+  const resourcesUrl = (resourceId: string): string => {
+    return `/app/spaces/${spaceId}/vocabularies/${resourceId}`
+  }
+
   return (
     <>
       <ListHeaderSection />
-      <ListItems
-        resourcesQuery={sectionsQuery}
-        resourcesUrl={`/app/spaces/${spaceId}/vocabularies`}
-      />
+      <ListItems resourcesQuery={sectionsQuery} resourcesUrl={resourcesUrl} />
     </>
   )
 }
