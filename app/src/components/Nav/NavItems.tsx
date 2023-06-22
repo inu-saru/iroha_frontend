@@ -34,7 +34,7 @@ export const NavItems = ({
   if (!resourcesQuery?.data?.length) {
     return (
       <div className="text-h300 flex justify-center items-center flex-col">
-        <p>{`No ${resourcesUrl} Found`}</p>
+        <p>{`No Resource Found`}</p>
       </div>
     )
   }
@@ -69,7 +69,7 @@ export const NavItems = ({
                 ) : (
                   <NavItem
                     resourceId={resource.id}
-                    to={`./${resourcesUrl}/${resource.id}`}
+                    to={`${resourcesUrl}/${resource.id}`}
                     icon={icon}
                     label={resource.name}
                     dropDown={methods.dropDownWitoEditToggle}

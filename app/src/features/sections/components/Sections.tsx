@@ -10,20 +10,24 @@ import {
   NavItemUpdate
 } from "@/components/Nav"
 
-import { useSpaces } from "../api/getSpaces"
-import { DropDownSpace } from "./DropDownSpace"
-import { useCreateSpace } from "../api/createSpace"
-import { useUpdateSpace } from "../api/updateSpace"
+import { useSections } from "../api/getSections"
+import { DropDownSection } from "./DropDownSection"
+import { useCreateSection } from "../api/createSection"
+import { useUpdateSection } from "../api/updateSection"
 import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDisclosure } from "@/hooks/useDisclosure"
-import { useDeleteSpace } from "../api/deleteSpace"
+import { useDeleteSection } from "../api/deleteSection"
 
 const schema = z.object({
   name: z.string().min(1, "Required")
 })
 
-export const Spaces = (): JSX.Element => {
-  const spacesQuery = useSpaces()
+interface SectionsProps {
+  spaceId: string
+}
+
+export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
+  const sectionsQuery = useSections({ spaceId })
   const [isOpen, toggle] = useToggle(false)
   const ref = useRef(null)
   useClickAway(ref, () => {
@@ -36,13 +40,13 @@ export const Spaces = (): JSX.Element => {
     closeWith: closeWithDelete,
     isOpen: isOpenDelete
   } = useDisclosure()
-  const createSpaceMutation = useCreateSpace()
-  const updateSpaceMutation = useUpdateSpace()
-  const deleteSpaceMutation = useDeleteSpace()
+  const createSectionMutation = useCreateSection({ spaceId })
+  const updateSectionMutation = useUpdateSection({ spaceId })
+  const deleteSectionMutation = useDeleteSection({ spaceId })
 
   return (
     <>
-      <NavHeader title="スペース">
+      <NavHeader title="セクション">
         <div onClick={toggle}>
           <Icon variant="add" bgColor="white" />
         </div>
@@ -50,26 +54,26 @@ export const Spaces = (): JSX.Element => {
       {isOpen && (
         <div ref={ref}>
           <NavItemCreate
-            createResourceMutation={createSpaceMutation}
+            createResourceMutation={createSectionMutation}
             schema={schema}
             maxLength={255}
-            placeholder="新しいスペース"
+            placeholder="新しいセクション"
             toggle={toggle}
           />
         </div>
       )}
       <NavItems
-        resourcesQuery={spacesQuery}
+        resourcesQuery={sectionsQuery}
         navItemUpdate={
           <NavItemUpdate
             schema={schema}
             maxLength={255}
-            updateResourceMutation={updateSpaceMutation}
+            updateResourceMutation={updateSectionMutation}
           />
         }
-        resourcesUrl="/app/spaces"
-        icon="space"
-        dropDown={<DropDownSpace deleteToggle={openWithDelete} />}
+        resourcesUrl={`/app/spaces/${spaceId}/sections`}
+        icon="section"
+        dropDown={<DropDownSection deleteToggle={openWithDelete} />}
       />
       <ConfirmationDialog
         isOpen={isOpenDelete}
@@ -77,8 +81,8 @@ export const Spaces = (): JSX.Element => {
         confirmButton={
           <Button
             onClick={async () => {
-              await deleteSpaceMutation.mutateAsync({
-                spaceId: targetData.spaceId
+              await deleteSectionMutation.mutateAsync({
+                sectionId: targetData.sectionId
               })
               closeWithDelete()
             }}
@@ -86,7 +90,7 @@ export const Spaces = (): JSX.Element => {
             削除
           </Button>
         }
-        title={"スペースの削除"}
+        title={"セクションの削除"}
         body={`${targetData.label}を削除しますか？`}
       />
     </>

@@ -2,9 +2,16 @@ import { type Schema } from "zod"
 
 import { Icon, Spinner } from "@/components/Elements"
 import { Form } from "@/components/Form"
+import { type UseMutationResult } from "@tanstack/react-query"
+import { type AxiosError } from "axios"
 
 interface NavItemCreateProps {
-  actionResource: () => void
+  createResourceMutation: UseMutationResult<
+    any,
+    AxiosError<unknown, any>,
+    any,
+    unknown
+  >
   schema?: Schema
   maxLength?: number
   placeholder?: string
@@ -12,22 +19,19 @@ interface NavItemCreateProps {
 }
 
 export const NavItemCreate = ({
-  actionResource,
+  createResourceMutation,
   schema,
   maxLength = 255,
   placeholder = "",
   toggle
 }: NavItemCreateProps): JSX.Element => {
-  const actionResouceMutation = actionResource()
   const onSubmit = async (data: any): Promise<void> => {
-    await actionResouceMutation.mutateAsync({
-      data
-    })
+    await createResourceMutation.mutateAsync({ data })
     toggle()
   }
   return (
     <div className="flex items-center pl-2 h-8 bg-primary-20">
-      {actionResouceMutation.isLoading ? (
+      {createResourceMutation.isLoading ? (
         <Spinner />
       ) : (
         <Icon variant="addActive" className="mr-1" />

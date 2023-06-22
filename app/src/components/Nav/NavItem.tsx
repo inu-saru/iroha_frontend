@@ -12,19 +12,25 @@ interface NavItemProps {
 
 export const NavItem = ({
   resourceId,
-  to = "./",
+  to = "/app",
   icon,
   label,
   dropDown = undefined
 }: NavItemProps): JSX.Element => {
-  const dropDownWithResourceId = React.cloneElement(dropDown, {
-    resourceId,
-    label
-  })
+  const dropDownWithResourceId =
+    dropDown !== undefined
+      ? React.cloneElement(dropDown, {
+          resourceId,
+          label
+        })
+      : undefined
 
   return (
     <>
-      <li key={resourceId} className="h-8 hover:bg-primary-20 relative group">
+      <li
+        key={resourceId}
+        className="h-8 hover:bg-primary-20 relative group list-none"
+      >
         <Link to={to} className="block py-1 px-2 truncate">
           <Icon className="float-left" variant={icon} />
           <span className="ml-1 text-h200 text-natural-900 overflow-hidden">
