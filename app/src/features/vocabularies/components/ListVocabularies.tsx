@@ -1,4 +1,4 @@
-import { ListItems } from "@/components/List"
+import { ListFilter, ListItems } from "@/components/List"
 import { ListHeaderSection } from "@/features/sections/components/ListHeaderSection"
 import { useParams, useSearchParams } from "react-router-dom"
 import { useVocabularies } from "../api/getVocabularies"
@@ -21,6 +21,7 @@ export const ListVocabularies = (): JSX.Element => {
 
   return (
     <>
+      <ListFilter config={config} setSearchParams={setSearchParams} />
       <ListHeaderSection />
       <ListItems
         resourcesQuery={vocabulariesQuery}
