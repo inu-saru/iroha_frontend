@@ -32,7 +32,7 @@ export const ListItems = ({
   return (
     <>
       <div className="h-screen bg-white">
-        <ul className="border-r border-natural-40">
+        <ul>
           {resourcesQuery.data.map((resource, index) => (
             <div key={index}>
               <ListItem resource={resource} to={resourcesUrl(resource.id)} />
