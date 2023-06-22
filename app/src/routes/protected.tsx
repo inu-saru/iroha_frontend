@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom"
 import { Spinner } from "@/components/Elements"
 import { MainLayout } from "@/components/Layout"
 import { lazyImport } from "@/utils/lazyImport"
+import { Vocabulary } from "@/features/vocabularies/routes/Vocabulary"
 
 const { Dashboard } = lazyImport(
   async () => await import("@/features/misc"),
@@ -35,6 +36,10 @@ export const protectedRoutes = [
     path: "/app",
     element: <App />,
     children: [
+      {
+        path: "spaces/:spaceId/vocabularies/:vocabularyId",
+        element: <Vocabulary />
+      },
       { path: "spaces/:spaceId/vocabularies", element: <Vocabularies /> },
       { path: "", element: <Dashboard /> }
     ]
