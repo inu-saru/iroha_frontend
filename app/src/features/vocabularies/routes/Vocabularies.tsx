@@ -1,10 +1,11 @@
 import { ContentLayoutInSpace } from "@/components/Layout/ContentLayoutInSpace"
+import { ListVocabularies } from "../components/ListVocabularies"
 
 export const Vocabularies = (): JSX.Element => {
   return (
     <>
       <ContentLayoutInSpace title="ボキャブラリー一覧">
-        <h1>vocabularies</h1>
+        <ListVocabularies />
       </ContentLayoutInSpace>
     </>
   )

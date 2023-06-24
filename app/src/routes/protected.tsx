@@ -35,6 +35,10 @@ export const protectedRoutes = [
     path: "/app",
     element: <App />,
     children: [
+      {
+        path: "spaces/:spaceId/sections/:sectionId",
+        element: <Vocabularies />
+      },
       { path: "spaces/:spaceId", element: <Vocabularies /> },
       { path: "", element: <Dashboard /> }
     ]
