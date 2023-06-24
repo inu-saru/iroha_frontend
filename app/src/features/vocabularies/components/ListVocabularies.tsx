@@ -16,7 +16,7 @@ export const ListVocabularies = (): JSX.Element => {
   const vocabulariesQuery = useVocabularies({ config, spaceId })
 
   const resourcesUrl = (resourceId: string): string => {
-    return `/app/spaces/${spaceId}/vocabularies/${resourceId}`
+    return `/app/spaces/${spaceId}/vocabularies/${resourceId}?${searchParams.toString()}`
   }
 
   return (
