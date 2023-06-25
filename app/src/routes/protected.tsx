@@ -5,6 +5,7 @@ import { Spinner } from "@/components/Elements"
 import { MainLayout } from "@/components/Layout"
 import { lazyImport } from "@/utils/lazyImport"
 import { Vocabulary } from "@/features/vocabularies/routes/Vocabulary"
+import { VocabularyCreate } from "@/features/vocabularies/routes/VocabularyCreate"
 
 const { Dashboard } = lazyImport(
   async () => await import("@/features/misc"),
@@ -36,6 +37,10 @@ export const protectedRoutes = [
     path: "/app",
     element: <App />,
     children: [
+      {
+        path: "spaces/:spaceId/vocabularies/new",
+        element: <VocabularyCreate />
+      },
       {
         path: "spaces/:spaceId/vocabularies/:vocabularyId",
         element: <Vocabulary />
