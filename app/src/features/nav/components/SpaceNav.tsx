@@ -28,7 +28,7 @@ export const SpaceNav = (): JSX.Element => {
       <NavItem
         resourceId="all"
         label="全てのセクション"
-        to={`/app/spaces/${spaceId}`}
+        to={`/app/spaces/${spaceId}/vocabularies`}
         icon="all"
       />
       <Sections spaceId={spaceId} />

@@ -1,18 +1,18 @@
 import { ListHeader } from "@/components/List"
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { useSection } from "../api/getSection"
 
 export const ListHeaderSection = (): JSX.Element => {
-  const { spaceId, sectionId } = useParams<{
+  const { spaceId } = useParams<{
     spaceId: string
-    sectionId: string
   }>()
+  const [searchParams] = useSearchParams()
+  const sectionId = searchParams.get("sid") ?? null
 
-  const sectionQuery =
-    sectionId !== undefined ? useSection({ spaceId, sectionId }) : undefined
+  const sectionQuery = useSection({ spaceId, sectionId })
 
   const label =
-    sectionQuery !== undefined ? sectionQuery.data?.name : "全てのセクション"
+    sectionQuery.data !== null ? sectionQuery.data?.name : "全てのセクション"
 
   return (
     <>

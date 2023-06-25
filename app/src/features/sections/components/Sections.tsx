@@ -44,6 +44,10 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
   const updateSectionMutation = useUpdateSection({ spaceId })
   const deleteSectionMutation = useDeleteSection({ spaceId })
 
+  const resourcesUrl = (resourceId: string): string => {
+    return `/app/spaces/${spaceId}/vocabularies?sid=${resourceId}`
+  }
+
   return (
     <>
       <NavHeader title="セクション">
@@ -71,7 +75,7 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
             updateResourceMutation={updateSectionMutation}
           />
         }
-        resourcesUrl={`/app/spaces/${spaceId}/sections`}
+        resourcesUrl={resourcesUrl}
         icon="section"
         dropDown={<DropDownSection deleteToggle={openWithDelete} />}
       />

@@ -6,7 +6,7 @@ import { ListFooter } from "./ListFooter"
 
 interface NavItemsProps {
   resourcesQuery: UseQueryResult
-  resourcesUrl: string
+  resourcesUrl: (resourceId: string) => string
 }
 
 export const ListItems = ({
@@ -35,10 +35,7 @@ export const ListItems = ({
         <ul className="border-r border-natural-40">
           {resourcesQuery.data.map((resource, index) => (
             <div key={index}>
-              <ListItem
-                resource={resource}
-                to={`${resourcesUrl}/${resource.id}`}
-              />
+              <ListItem resource={resource} to={resourcesUrl(resource.id)} />
             </div>
           ))}
         </ul>

@@ -40,6 +40,10 @@ export const Spaces = (): JSX.Element => {
   const updateSpaceMutation = useUpdateSpace()
   const deleteSpaceMutation = useDeleteSpace()
 
+  const resourcesUrl = (resourceId: string): string => {
+    return `/app/spaces/${resourceId}/vocabularies`
+  }
+
   return (
     <>
       <NavHeader title="スペース">
@@ -67,7 +71,7 @@ export const Spaces = (): JSX.Element => {
             updateResourceMutation={updateSpaceMutation}
           />
         }
-        resourcesUrl="/app/spaces"
+        resourcesUrl={resourcesUrl}
         icon="space"
         dropDown={<DropDownSpace deleteToggle={openWithDelete} />}
       />

@@ -6,9 +6,12 @@ import { type ExtractFnReturnType, type QueryConfig } from "@/lib/react-query"
 import { type Vocabulary } from "../types"
 
 export const getVocabularies = async (
-  spaceId: string
+  spaceId: string,
+  config: object
 ): Promise<Vocabulary[]> => {
-  const response = await axios.get(`/api/v1/spaces/${spaceId}/vocabularies`)
+  const response = await axios.get(`/api/v1/spaces/${spaceId}/vocabularies`, {
+    params: { ...config }
+  })
   return response.data
 }
 
@@ -25,7 +28,7 @@ export const useVocabularies = ({
 }: UseVocabulariesOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: [`spaces/${spaceId}/vocabularies`],
-    queryFn: async () => await getVocabularies(spaceId)
+    queryKey: [`spaces/${spaceId}/vocabularies`, config],
+    queryFn: async () => await getVocabularies(spaceId, config)
   })
 }
