@@ -33,7 +33,7 @@ export const useVocabulary = ({
 }: UseVocabularyOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ["vocabulary", vocabularyId],
+    queryKey: [`spaces/${spaceId}/vocabulary`, vocabularyId],
     queryFn: async () => await getVocabulary({ spaceId, vocabularyId })
   })
 }
