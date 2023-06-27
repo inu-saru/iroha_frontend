@@ -42,18 +42,21 @@ export const useUpdateSection = ({
     onMutate: async (updatingSection: any) => {
       // section
       await queryClient.cancelQueries([
-        "section",
+        `spaces/${spaceId}/section`,
         `${updatingSection?.resourceId}`
       ])
       const previousSection = queryClient.getQueryData<Section>([
-        "section",
+        `spaces/${spaceId}/section`,
         `${updatingSection?.resourceId}`
       ])
-      queryClient.setQueryData(["section", `${updatingSection?.resourceId}`], {
-        ...previousSection,
-        ...updatingSection.data,
-        id: updatingSection.resourceId
-      })
+      queryClient.setQueryData(
+        [`spaces/${spaceId}/section`, `${updatingSection?.resourceId}`],
+        {
+          ...previousSection,
+          ...updatingSection.data,
+          id: updatingSection.resourceId
+        }
+      )
 
       // sections
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
