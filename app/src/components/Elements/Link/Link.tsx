@@ -1,12 +1,6 @@
 import clsx from "clsx"
 import { Link as RouterLink, type LinkProps } from "react-router-dom"
 
-import { WEB_URL } from "@/config"
-
-const targetURL = (to: string): string => {
-  return `${WEB_URL}${to}`
-}
-
 export const Link = ({
   className,
   children,
@@ -16,7 +10,7 @@ export const Link = ({
   return (
     <RouterLink
       className={clsx("text-indigo-600 hover:text-indigo-900", className)}
-      to={targetURL(to)}
+      to={to}
       {...props}
     >
       {children}
