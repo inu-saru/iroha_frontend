@@ -1,3 +1,5 @@
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+
 import { DropDown } from "@/components/DropDown"
 import { DropDownItem } from "@/components/DropDown/DropDownItem"
 import { Icon } from "@/components/Elements"
@@ -11,12 +13,20 @@ export const DropDownVocabulary = ({
   resourceId,
   label
 }: DropDownVocabularyProps): JSX.Element => {
+  const { spaceId } = useParams<{
+    spaceId: string
+  }>()
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+
   return (
     <DropDown trigger={<Icon variant="moreHoriz" bgColor="white" />}>
       <DropDownItem
         label="編集"
         handleClick={() => {
-          console.log(`WIP edit id: ${resourceId}, ${label}`)
+          navigate(
+            `/app/spaces/${spaceId}/vocabularies/${resourceId}/edit?${searchParams.toString()}`
+          )
         }}
       />
       <DropDownItem
