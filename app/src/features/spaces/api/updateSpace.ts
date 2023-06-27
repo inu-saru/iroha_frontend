@@ -17,7 +17,8 @@ export const updateSpace = async ({
   data,
   resourceId
 }: UpdateSpaceDTO): Promise<Space> => {
-  return await axios.patch(`/api/v1/spaces/${resourceId}`, data)
+  const response = await axios.patch(`/api/v1/spaces/${resourceId}`, data)
+  return response.data
 }
 
 interface UseUpdateSpaceOptions {
@@ -29,27 +30,20 @@ export const useUpdateSpace = ({ config }: UseUpdateSpaceOptions = {}) => {
 
   return useMutation({
     onMutate: async (updatingSpace: any) => {
-      await queryClient.cancelQueries(["spaces", updatingSpace?.resourceId])
+      await queryClient.cancelQueries(["spaces"])
+      const previousSpaces = queryClient.getQueryData<Space>(["spaces"])
+      const tempUpdatedSpaces = previousSpaces?.map((space) =>
+        space.id === updatingSpace?.resourceId
+          ? { ...space, ...updatingSpace.data }
+          : space
+      )
+      queryClient.setQueryData(["spaces"], tempUpdatedSpaces)
 
-      const previousSpace = queryClient.getQueryData<Space>([
-        "spaces",
-        updatingSpace?.resourceId
-      ])
-
-      queryClient.setQueryData(["spaces", updatingSpace?.resourceId], {
-        ...previousSpace,
-        ...updatingSpace.data,
-        id: updatingSpace.resourceId
-      })
-
-      return { previousSpace }
+      return { previousSpaces }
     },
     onError: (_, __, context: any) => {
-      if (context?.previousSpace) {
-        queryClient.setQueryData(
-          ["spaces", context.previousSpace.id],
-          context.previousSpace
-        )
+      if (context?.previousSpaces) {
+        queryClient.setQueryData(["spaces"], context.previousSpaces)
       }
     },
     onSuccess: (data) => {
