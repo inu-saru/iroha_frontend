@@ -15,6 +15,10 @@ const { Vocabularies } = lazyImport(
   async () => await import("@/features/vocabularies/routes/vocabularies"),
   "Vocabularies"
 )
+const { VocabularyUpdate } = lazyImport(
+  async () => await import("@/features/vocabularies/routes/VocabularyUpdate"),
+  "VocabularyUpdate"
+)
 
 const App = (): JSX.Element => {
   return (
@@ -40,6 +44,10 @@ export const protectedRoutes = [
       {
         path: "spaces/:spaceId/vocabularies/new",
         element: <VocabularyCreate />
+      },
+      {
+        path: "spaces/:spaceId/vocabularies/:vocabularyId/edit",
+        element: <VocabularyUpdate />
       },
       {
         path: "spaces/:spaceId/vocabularies/:vocabularyId",
