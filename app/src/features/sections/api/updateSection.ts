@@ -40,33 +40,37 @@ export const useUpdateSection = ({
 
   return useMutation({
     onMutate: async (updatingSection: any) => {
+      // section
       await queryClient.cancelQueries([
-        `spaces/${spaceId}/sections`,
+        `spaces/${spaceId}/section`,
         `${updatingSection?.resourceId}`
       ])
-
       const previousSection = queryClient.getQueryData<Section>([
-        "section",
+        `spaces/${spaceId}/section`,
         `${updatingSection?.resourceId}`
       ])
-
-      queryClient.setQueryData(["section", `${updatingSection?.resourceId}`], {
-        ...previousSection,
-        ...updatingSection.data,
-        id: updatingSection.resourceId
-      })
-
-      const previousSections = queryClient.getQueryData<Section>([
-        `spaces/${spaceId}/sections`
-      ])
-
       queryClient.setQueryData(
-        [`spaces/${spaceId}/sections`, `${updatingSection?.resourceId}`],
+        [`spaces/${spaceId}/section`, `${updatingSection?.resourceId}`],
         {
-          ...previousSections,
+          ...previousSection,
           ...updatingSection.data,
           id: updatingSection.resourceId
         }
+      )
+
+      // sections
+      await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
+      const previousSections = queryClient.getQueryData<Section>([
+        `spaces/${spaceId}/sections`
+      ])
+      const tempUpdatedSections = previousSections?.map((section) =>
+        section.id === updatingSection?.resourceId
+          ? { ...section, ...updatingSection.data }
+          : section
+      )
+      queryClient.setQueryData(
+        [`spaces/${spaceId}/sections`],
+        tempUpdatedSections
       )
 
       return { previousSection, previousSections }
@@ -79,7 +83,10 @@ export const useUpdateSection = ({
         )
       }
       if (context?.previousSections) {
-        queryClient.setQueryData([`spaces/${spaceId}/sections`])
+        queryClient.setQueryData(
+          [`spaces/${spaceId}/sections`],
+          context.previousSections
+        )
       }
     },
     onSuccess: (data) => {

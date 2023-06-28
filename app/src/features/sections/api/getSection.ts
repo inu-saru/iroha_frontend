@@ -37,7 +37,7 @@ export const useSection = ({
 }: UseSectionOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ["section", sectionId],
+    queryKey: [`spaces/${spaceId}/section`, sectionId],
     queryFn: async () => await getSection({ spaceId, sectionId })
   })
 }
