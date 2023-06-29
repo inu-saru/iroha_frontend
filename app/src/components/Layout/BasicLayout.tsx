@@ -2,17 +2,17 @@ import * as React from "react"
 
 import { Head } from "../Head"
 
-interface ContentLayoutProps {
+interface BasicLayoutProps {
   children: React.ReactNode
   title: string
   nav: React.ReactElement
 }
 
-export const ContentLayout = ({
+export const BasicLayout = ({
   title,
   nav,
   children
-}: ContentLayoutProps): JSX.Element => {
+}: BasicLayoutProps): JSX.Element => {
   return (
     <>
       <Head title={title} />
