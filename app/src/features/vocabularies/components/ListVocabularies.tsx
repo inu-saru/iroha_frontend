@@ -21,12 +21,18 @@ export const ListVocabularies = (): JSX.Element => {
 
   return (
     <>
-      <ListFilter config={config} setSearchParams={setSearchParams} />
-      <ListHeaderSection />
-      <ListItems
-        resourcesQuery={vocabulariesQuery}
-        resourcesUrl={resourcesUrl}
-      />
+      <div className="flex flex-col h-screen border-r border-natural-40">
+        <div>
+          <ListFilter config={config} setSearchParams={setSearchParams} />
+          <ListHeaderSection />
+        </div>
+        <div className="flex-1 overflow-y-auto bg-white">
+          <ListItems
+            resourcesQuery={vocabulariesQuery}
+            resourcesUrl={resourcesUrl}
+          />
+        </div>
+      </div>
     </>
   )
 }

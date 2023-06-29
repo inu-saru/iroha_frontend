@@ -19,10 +19,8 @@ export const ContentLayoutShow = ({
     <>
       <Head title={title} />
       <div className="flex">
-        {nav}
-        <div className="flex-initial w-80 border-r border-natural-40">
-          {list}
-        </div>
+        <div className="w-56 h-screen overflow-auto">{nav}</div>
+        <div className="w-80 h-screen overflow-auto">{list}</div>
         <div className="flex-1">{children}</div>
       </div>
     </>

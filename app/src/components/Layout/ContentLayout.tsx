@@ -16,8 +16,10 @@ export const ContentLayout = ({
     <>
       <Head title={title} />
       <div className="flex">
-        <Nav />
-        <div className="p-8">{children}</div>
+        <div className="w-56 h-screen overflow-auto">
+          <Nav />
+        </div>
+        <div className="flex-1">{children}</div>
       </div>
     </>
   )
