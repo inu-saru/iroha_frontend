@@ -1,4 +1,4 @@
-import { ContentLayoutShow } from "@/components/Layout/ContentLayoutShow"
+import { ContentLayout } from "@/components/Layout"
 import { SpaceNav } from "@/features/nav"
 import { ContentElementVocabulary } from "../components/ContentElementVocabulary"
 import { ListVocabularies } from "../components/ListVocabularies"
@@ -6,13 +6,13 @@ import { ListVocabularies } from "../components/ListVocabularies"
 export const Vocabulary = (): JSX.Element => {
   return (
     <>
-      <ContentLayoutShow
+      <ContentLayout
         title="ボキャブラリー詳細"
         nav={<SpaceNav />}
         list={<ListVocabularies />}
       >
         <ContentElementVocabulary />
-      </ContentLayoutShow>
+      </ContentLayout>
     </>
   )
 }
