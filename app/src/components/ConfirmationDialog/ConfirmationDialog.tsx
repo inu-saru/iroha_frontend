@@ -48,7 +48,7 @@ export const ConfirmationDialog = ({
             )}
           </div>
 
-          <div className="mt-4 ml-16 flex space-x-2 justify-end">
+          <div className="mt-4 ml-16 flex space-x-4 justify-end">
             <Button
               type="button"
               variant="secondary"
