@@ -30,8 +30,10 @@ export const ContentElement = ({
   return (
     <>
       <div className="bg-white p-8 border-b border-natural-40 relative group break-all">
-        <div className="mb-4">{resourceQuery.data?.en}</div>
-        <div>{resourceQuery.data?.ja}</div>
+        <div className="mb-4 text-h400">{resourceQuery.data?.en}</div>
+        <div className="ext-middle text-natural-700">
+          {resourceQuery.data?.ja}
+        </div>
         {dropDown !== undefined && (
           <div className="absolute w-max inset-y-0 right-8 top-8 h-6 opacity-0 invisible group-hover:visible opacity-100">
             {dropDownWithResourceId}
