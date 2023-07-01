@@ -43,7 +43,7 @@ export const ConfirmationDialog = ({
             </DialogTitle>
             {body !== "" && (
               <div>
-                <p className="text-sm text-natural-900">{body}</p>
+                <p className="text-sm text-natural-900 break-all">{body}</p>
               </div>
             )}
           </div>

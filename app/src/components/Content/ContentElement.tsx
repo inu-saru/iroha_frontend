@@ -29,7 +29,7 @@ export const ContentElement = ({
 
   return (
     <>
-      <div className="bg-white p-8 border-b border-natural-40 relative group">
+      <div className="bg-white p-8 border-b border-natural-40 relative group break-all">
         <div className="mb-4">{resourceQuery.data?.en}</div>
         <div>{resourceQuery.data?.ja}</div>
         {dropDown !== undefined && (
