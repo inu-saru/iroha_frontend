@@ -17,6 +17,7 @@ import { useUpdateSection } from "../api/updateSection"
 import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDisclosure } from "@/hooks/useDisclosure"
 import { useDeleteSection } from "../api/deleteSection"
+import { useSearchParams } from "react-router-dom"
 
 const schema = z.object({
   name: z.string().min(1, "Required")
@@ -47,6 +48,8 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
   const resourcesUrl = (resourceId: string): string => {
     return `/app/spaces/${spaceId}/vocabularies?sid=${resourceId}`
   }
+  const [searchParams] = useSearchParams()
+  const activeResourceId = searchParams.get("sid") ?? null
 
   return (
     <>
@@ -67,6 +70,7 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
         </div>
       )}
       <NavItems
+        activeResourceId={activeResourceId}
         resourcesQuery={sectionsQuery}
         navItemUpdate={
           <NavItemUpdate
