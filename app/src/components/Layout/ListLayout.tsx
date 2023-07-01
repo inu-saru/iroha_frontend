@@ -18,7 +18,7 @@ export const ListLayout = ({
       <Head title={title} />
       <div className="flex">
         <div className="w-56 h-screen overflow-auto">{nav}</div>
-        <div className="flex-1">{children}</div>
+        <div className="w-80 flex-1">{children}</div>
       </div>
     </>
   )

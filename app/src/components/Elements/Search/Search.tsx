@@ -23,7 +23,7 @@ export const Search = ({
   }
 
   return (
-    <div className="flex items-center pl-2 h-8 rounded-sm bg-white border border-natural-40 w-56">
+    <div className="flex items-center pl-2 h-8 rounded-sm bg-white border border-natural-40 w-56 max-md:w-48">
       <Icon variant="search" className="mr-1" />
 
       <div className="w-full pr-2">
