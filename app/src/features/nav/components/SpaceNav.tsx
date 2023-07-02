@@ -16,7 +16,7 @@ export const SpaceNav = (): JSX.Element => {
   const navigate = useNavigate()
 
   return (
-    <div className="w-56 border-r border-natural-40 h-screen bg-white">
+    <div className="border-r border-natural-40 h-screen bg-white overflow-y-auto">
       <div className="p-2 border-b border-natural-40">
         <Link to={"/app"} className="block">
           <Icon

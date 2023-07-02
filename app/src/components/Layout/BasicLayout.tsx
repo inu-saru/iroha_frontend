@@ -2,27 +2,22 @@ import * as React from "react"
 
 import { Head } from "../Head"
 
-interface ContentLayoutShowProps {
+interface BasicLayoutProps {
   children: React.ReactNode
   title: string
   nav: React.ReactElement
-  list: React.ReactElement
 }
 
-export const ContentLayoutShow = ({
+export const BasicLayout = ({
   title,
   nav,
-  list,
   children
-}: ContentLayoutShowProps): JSX.Element => {
+}: BasicLayoutProps): JSX.Element => {
   return (
     <>
       <Head title={title} />
       <div className="flex">
-        {nav}
-        <div className="flex-initial w-80 border-r border-natural-40">
-          {list}
-        </div>
+        <div className="w-56 h-screen overflow-auto">{nav}</div>
         <div className="flex-1">{children}</div>
       </div>
     </>
