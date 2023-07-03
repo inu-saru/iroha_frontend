@@ -1,4 +1,4 @@
-import { Link } from "../Elements"
+import { NavLink } from "react-router-dom"
 
 interface ListItemProps {
   resource: object
@@ -12,14 +12,19 @@ export const ListItem = ({
   return (
     <>
       <li className="bg-white border-b border-natural-40 hover:bg-primary-20">
-        <Link to={to} className="block p-4">
+        <NavLink
+          to={to}
+          className={({ isActive }) =>
+            isActive ? "block p-4 bg-primary-30" : "block p-4"
+          }
+        >
           <div className="text-h300 text-natural-900 truncate">
             {resource.en}
           </div>
           <div className="mt-2 text-middle text-natural-700 truncate">
             {resource.ja}
           </div>
-        </Link>
+        </NavLink>
       </li>
     </>
   )

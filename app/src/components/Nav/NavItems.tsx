@@ -9,6 +9,7 @@ import {
 } from "@/components/Nav"
 
 interface NavItemsProps {
+  activeResourceId: string
   resourcesQuery: UseQueryResult
   navItemUpdate: React.ReactElement
   resourcesUrl: (resourceId: string) => string
@@ -17,6 +18,7 @@ interface NavItemsProps {
 }
 
 export const NavItems = ({
+  activeResourceId,
   resourcesQuery,
   navItemUpdate,
   resourcesUrl,
@@ -69,6 +71,7 @@ export const NavItems = ({
                 ) : (
                   <NavItem
                     resourceId={resource.id}
+                    isActive={activeResourceId === `${resource.id}`}
                     to={resourcesUrl(resource.id)}
                     icon={icon}
                     label={resource.name}

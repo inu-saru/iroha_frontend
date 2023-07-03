@@ -38,6 +38,7 @@ export const SpaceNav = (): JSX.Element => {
         新規作成
       </Button>
       <NavItem
+        isActive={searchParams.get("sid") === null}
         resourceId="all"
         label="全てのセクション"
         to={`/app/spaces/${spaceId}/vocabularies`}

@@ -1,9 +1,11 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import { Icon } from "../Elements"
+import clsx from "clsx"
+
+import { Icon, Link } from "../Elements"
 
 interface NavItemProps {
   resourceId: string
+  isActive?: boolean
   to?: string
   icon?: string
   label: string
@@ -12,6 +14,7 @@ interface NavItemProps {
 
 export const NavItem = ({
   resourceId,
+  isActive = false,
   to = "/app",
   icon,
   label,
@@ -31,7 +34,13 @@ export const NavItem = ({
         key={resourceId}
         className="h-8 hover:bg-primary-20 relative group list-none"
       >
-        <Link to={to} className="block py-1 px-2 truncate">
+        <Link
+          to={to}
+          className={clsx(
+            "block py-1 px-2 truncate",
+            isActive && "bg-primary-30"
+          )}
+        >
           <Icon className="float-left" variant={icon} />
           <span className="ml-1 text-h200 text-natural-900 overflow-hidden">
             {label}
