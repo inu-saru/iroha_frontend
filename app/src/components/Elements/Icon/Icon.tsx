@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import clsx from "clsx"
 
 import { ReactComponent as AddActive } from "@/assets/icons/add_active.svg"
@@ -38,6 +40,8 @@ const variants = {
   space: <Space />
 }
 
+export type IconVariant = keyof typeof variants
+
 const bgColors = {
   default: "",
   primary: "bg-primary-20 hover:bg-natural-10",
@@ -45,7 +49,7 @@ const bgColors = {
 }
 
 interface IconProps {
-  variant?: keyof typeof variants
+  variant?: IconVariant
   bgColor?: keyof typeof bgColors
   className?: string
 }

@@ -2,13 +2,14 @@ import { type Schema } from "zod"
 
 import { Icon } from "@/components/Elements"
 import { Form } from "@/components/Form"
+import { type VocabularySearchParams } from "@/features/vocabularies/types"
 
 interface SearchProps {
   schema?: Schema
   maxLength?: number
   placeholder?: string
-  config?: object
-  setSearchParams: () => void
+  config?: VocabularySearchParams
+  setSearchParams: (config: VocabularySearchParams) => void
 }
 
 export const Search = ({

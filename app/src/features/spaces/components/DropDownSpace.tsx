@@ -2,11 +2,16 @@ import { DropDown } from "@/components/DropDown"
 import { DropDownItem } from "@/components/DropDown/DropDownItem"
 import { Icon } from "@/components/Elements"
 
+interface ConfirmationDialogSpaceProps {
+  spaceId: string
+  label: string
+}
+
 interface DropDownSpaceProps {
   resourceId: string
   label: string
   editToggle: () => void
-  deleteToggle: () => void
+  deleteToggle: (props: ConfirmationDialogSpaceProps) => void
 }
 
 export const DropDownSpace = (methods: DropDownSpaceProps): JSX.Element => {
@@ -20,7 +25,7 @@ export const DropDownSpace = (methods: DropDownSpaceProps): JSX.Element => {
       />
       <DropDownItem
         label="削除"
-        handleClick={async () => {
+        handleClick={() => {
           methods.deleteToggle({
             spaceId: methods.resourceId,
             label: methods.label
