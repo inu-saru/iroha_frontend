@@ -92,7 +92,7 @@ export const useUpdateSection = ({
     onSuccess: (data) => {
       queryClient.refetchQueries([`spaces/${spaceId}/sections`, data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを更新しました。"
       })
     },

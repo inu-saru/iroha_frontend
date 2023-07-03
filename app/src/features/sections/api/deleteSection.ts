@@ -53,7 +53,7 @@ export const useDeleteSection = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/sections`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを削除しました。"
       })
     },

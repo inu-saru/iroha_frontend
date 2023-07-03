@@ -98,7 +98,7 @@ export const useUpdateVocabulary = ({
     onSuccess: (data) => {
       queryClient.refetchQueries([`spaces/${spaceId}/vocabularies`, data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "ボキャブラリーを更新しました。"
       })
     },

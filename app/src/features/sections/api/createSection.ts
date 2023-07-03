@@ -62,7 +62,7 @@ export const useCreateSection = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/sections`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを作成しました。"
       })
     },

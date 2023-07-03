@@ -66,7 +66,7 @@ export const useCreateVocabulary = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/vocabularies`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "ボキャブラリーを作成しました。"
       })
     },

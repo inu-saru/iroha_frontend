@@ -62,7 +62,7 @@ export const useDeleteVocabulary = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/vocabularies`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "ボキャブラリーを削除しました。"
       })
     },

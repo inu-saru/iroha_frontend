@@ -49,7 +49,7 @@ export const useUpdateSpace = ({ config }: UseUpdateSpaceOptions = {}) => {
     onSuccess: (data) => {
       queryClient.refetchQueries(["spaces", data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "スペースを更新しました。"
       })
     },
