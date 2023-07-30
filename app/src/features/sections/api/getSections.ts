@@ -5,7 +5,9 @@ import { type ExtractFnReturnType, type QueryConfig } from "@/lib/react-query"
 
 import { type Section } from "../types"
 
-export const getSections = async (spaceId: string): Promise<Section[]> => {
+export const getSections = async (
+  spaceId: string | undefined
+): Promise<Section[]> => {
   const response = await axios.get(`/api/v1/spaces/${spaceId}/sections`)
   return response.data
 }
@@ -13,7 +15,7 @@ export const getSections = async (spaceId: string): Promise<Section[]> => {
 type QueryFnType = typeof getSections
 
 interface UseSectionsOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: QueryConfig<QueryFnType>
 }
 

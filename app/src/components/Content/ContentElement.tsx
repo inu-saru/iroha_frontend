@@ -1,9 +1,10 @@
 import { type UseQueryResult } from "@tanstack/react-query"
 import React from "react"
 import { Spinner } from "../Elements"
+import { type Vocabulary } from "@/features/vocabularies/types"
 
 interface ContentElementProps {
-  resourceQuery: UseQueryResult
+  resourceQuery: UseQueryResult<Vocabulary>
   dropDown?: JSX.Element | undefined
 }
 

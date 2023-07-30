@@ -9,8 +9,8 @@ import {
 } from "@/components/Nav"
 
 interface NavItemsProps {
-  activeResourceId: string
-  resourcesQuery: UseQueryResult
+  activeResourceId?: string
+  resourcesQuery: UseQueryResult<any[], unknown>
   navItemUpdate: React.ReactElement
   resourcesUrl: (resourceId: string) => string
   icon?: IconVariant

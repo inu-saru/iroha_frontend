@@ -25,7 +25,7 @@ export const createVocabulary = async ({
 let thisSpaceId: string
 
 interface UseCreateVocabularyOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof createVocabulary>
 }
 
@@ -34,7 +34,7 @@ export const useCreateVocabulary = ({
   spaceId
 }: UseCreateVocabularyOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId
+  thisSpaceId = spaceId ?? ""
 
   return useMutation({
     onMutate: async (newVocabulary) => {

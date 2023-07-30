@@ -20,7 +20,7 @@ export interface NavitemUpadteResourceDataProps {
   resourceId?: number
   defaultValue?: string
   placeholder?: string
-  toggle: () => void
+  toggle?: () => void
 }
 
 type NavItemUpdateProps = NavItemUpdateBaseProps &
@@ -33,7 +33,7 @@ export const NavItemUpdate = ({
   maxLength = 255,
   defaultValue = "",
   placeholder = "",
-  toggle
+  toggle = () => {}
 }: NavItemUpdateProps): JSX.Element => {
   const onSubmit = async (data: any): Promise<void> => {
     await updateResourceMutation.mutateAsync({ data, resourceId })

@@ -33,7 +33,7 @@ export const Form = <
 }: FormProps<TFormValues, Schema>): JSX.Element => {
   const methods = useForm<TFormValues>({
     ...options,
-    resolver: schema != null && zodResolver(schema)
+    resolver: schema && zodResolver(schema)
   })
   return (
     <form

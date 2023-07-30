@@ -19,7 +19,7 @@ export const deleteVocabulary = async ({
 let thisSpaceId: string
 
 interface UseDeleteVocabularyOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof deleteVocabulary>
 }
 
@@ -34,7 +34,7 @@ export const useDeleteVocabulary = ({
         `spaces/${spaceId}/vocabularies`,
         config
       ])
-      thisSpaceId = spaceId
+      thisSpaceId = spaceId ?? ""
 
       const previousVocabularies = queryClient.getQueryData<Vocabulary[]>([
         `spaces/${spaceId}/vocabularies`,

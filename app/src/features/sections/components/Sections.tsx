@@ -24,7 +24,7 @@ const schema = z.object({
 })
 
 interface SectionsProps {
-  spaceId: string
+  spaceId: string | undefined
 }
 
 export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {

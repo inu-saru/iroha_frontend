@@ -5,6 +5,7 @@ import { ContentHeader } from "@/components/Content"
 import { Button } from "@/components/Elements"
 import { Form, Input } from "@/components/Form"
 import { useCreateVocabulary } from "../api/createVocabulary"
+import { type SearchParams } from "@/types"
 
 const schema = z.object({
   en: z.string().min(1, { message: "1文字以上入力する必要があります。" }),
@@ -17,7 +18,7 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
   }>()
   const [searchParams] = useSearchParams()
   const entries = Array.from(searchParams.entries())
-  const config = {}
+  const config: SearchParams = {}
   for (const [key, value] of entries) {
     config[key] = value
   }
@@ -48,13 +49,13 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
           {({ register, formState }) => (
             <>
               <Input
-                type="en"
+                type="text"
                 label="英語文"
                 error={formState.errors.en}
                 registration={register("en")}
               />
               <Input
-                type="ja"
+                type="text"
                 label="日本語文"
                 error={formState.errors.ja}
                 registration={register("ja")}

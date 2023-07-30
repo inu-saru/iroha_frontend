@@ -6,7 +6,7 @@ import { type ExtractFnReturnType, type QueryConfig } from "@/lib/react-query"
 import { type Vocabulary } from "../types"
 
 export const getVocabularies = async (
-  spaceId: string,
+  spaceId: string | undefined,
   config: object
 ): Promise<Vocabulary[]> => {
   const response = await axios.get(`/api/v1/spaces/${spaceId}/vocabularies`, {
@@ -18,12 +18,12 @@ export const getVocabularies = async (
 type QueryFnType = typeof getVocabularies
 
 interface UseVocabulariesOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: QueryConfig<QueryFnType>
 }
 
 export const useVocabularies = ({
-  config,
+  config = {},
   spaceId
 }: UseVocabulariesOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({

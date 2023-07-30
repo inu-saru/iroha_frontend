@@ -9,8 +9,8 @@ export const getVocabulary = async ({
   spaceId,
   vocabularyId
 }: {
-  spaceId: string
-  vocabularyId: string | null
+  spaceId: string | undefined
+  vocabularyId: string | undefined
 }): Promise<Vocabulary | null> => {
   const response = await axios.get(
     `/api/v1/spaces/${spaceId}/vocabularies/${vocabularyId}`
@@ -21,8 +21,8 @@ export const getVocabulary = async ({
 type QueryFnType = typeof getVocabulary
 
 interface UseVocabularyOptions {
-  spaceId: string
-  vocabularyId: string | null
+  spaceId: string | undefined
+  vocabularyId: string | undefined
   config?: QueryConfig<QueryFnType>
 }
 

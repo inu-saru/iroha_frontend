@@ -8,7 +8,7 @@ import { type Space } from "../types"
 export const getSpace = async ({
   spaceId
 }: {
-  spaceId: string
+  spaceId: string | undefined
 }): Promise<Space> => {
   const response = await axios.get(`/api/v1/spaces/${spaceId}`)
   return response.data
@@ -17,7 +17,7 @@ export const getSpace = async ({
 type QueryFnType = typeof getSpace
 
 interface UseSpaceOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: QueryConfig<QueryFnType>
 }
 

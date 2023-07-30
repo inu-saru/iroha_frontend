@@ -2,6 +2,7 @@ import { ListFilter, ListItems } from "@/components/List"
 import { ListHeaderSection } from "@/features/sections/components/ListHeaderSection"
 import { useParams, useSearchParams } from "react-router-dom"
 import { useVocabularies } from "../api/getVocabularies"
+import { type SearchParams } from "@/types"
 
 export const ListVocabularies = (): JSX.Element => {
   const { spaceId } = useParams<{
@@ -9,7 +10,7 @@ export const ListVocabularies = (): JSX.Element => {
   }>()
   const [searchParams, setSearchParams] = useSearchParams()
   const entries = Array.from(searchParams.entries())
-  const config = {}
+  const config: SearchParams = {}
   for (const [key, value] of entries) {
     config[key] = value
   }

@@ -11,8 +11,8 @@ export interface UpdateVocabularyDTO {
   data: {
     name: string
   }
-  spaceId: string
-  vocabularyId: string
+  spaceId?: string | undefined
+  vocabularyId: string | undefined
 }
 
 export const updateVocabulary = async ({
@@ -29,7 +29,7 @@ export const updateVocabulary = async ({
 let thisSpaceId: string
 
 interface UseUpdateVocabularyOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof updateVocabulary>
 }
 
@@ -38,7 +38,7 @@ export const useUpdateVocabulary = ({
   spaceId
 }: UseUpdateVocabularyOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId
+  thisSpaceId = spaceId ?? ""
 
   return useMutation({
     onMutate: async (updatingVocabulary: any) => {
