@@ -5,7 +5,7 @@ interface InputProps {
   className?: string
   label: string
   registration: Partial<UseFormRegisterReturn>
-  error?: FieldError | undefined
+  error?: FieldError | undefined | any
 }
 
 export const Input = (props: InputProps): JSX.Element => {

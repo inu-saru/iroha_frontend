@@ -60,7 +60,7 @@ export const useUpdateSection = ({
 
       // sections
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
-      const previousSections = queryClient.getQueryData<Section>([
+      const previousSections = queryClient.getQueryData<Section[]>([
         `spaces/${spaceId}/sections`
       ])
       const tempUpdatedSections = previousSections?.map((section) =>

@@ -9,7 +9,7 @@ import {
 } from "@/components/Nav"
 
 interface NavItemsProps {
-  activeResourceId?: string
+  activeResourceId?: string | null
   resourcesQuery: UseQueryResult<any[], unknown>
   navItemUpdate: React.ReactElement
   resourcesUrl: (resourceId: string) => string

@@ -5,7 +5,6 @@ import { type MutationConfig, queryClient } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Vocabulary } from "../types"
-import { Vocabulary } from "../routes/Vocabulary"
 
 export interface UpdateVocabularyDTO {
   data: {

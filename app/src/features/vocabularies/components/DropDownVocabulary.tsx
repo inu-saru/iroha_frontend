@@ -5,8 +5,8 @@ import { DropDownItem } from "@/components/DropDown/DropDownItem"
 import { Icon } from "@/components/Elements"
 
 interface DropDownVocabularyProps {
-  resourceId: string
-  label: string
+  resourceId?: string
+  label?: string
   deleteToggle: (data: object) => void
 }
 

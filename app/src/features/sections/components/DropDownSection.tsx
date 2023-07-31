@@ -9,27 +9,32 @@ interface ConfirmationDialogSectionProps {
 }
 
 interface DropDownSectionProps {
-  resourceId: string
-  label: string
-  editToggle: () => void
+  resourceId?: string
+  label?: string
+  editToggle?: () => void
   deleteToggle: (props: ConfirmationDialogSectionProps) => void
 }
 
-export const DropDownSection = (methods: DropDownSectionProps): JSX.Element => {
+export const DropDownSection = ({
+  resourceId = "",
+  label = "",
+  editToggle = () => {},
+  deleteToggle
+}: DropDownSectionProps): JSX.Element => {
   return (
     <DropDown trigger={<Icon variant="moreHoriz" bgColor="primary" />}>
       <DropDownItem
         label="編集"
         handleClick={() => {
-          methods.editToggle()
+          editToggle()
         }}
       />
       <DropDownItem
         label="削除"
         handleClick={() => {
-          methods.deleteToggle({
-            sectionId: methods.resourceId,
-            label: methods.label
+          deleteToggle({
+            sectionId: resourceId,
+            label
           })
         }}
       />

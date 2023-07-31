@@ -4,7 +4,7 @@ import { Spinner } from "../Elements"
 import { type Vocabulary } from "@/features/vocabularies/types"
 
 interface ContentElementProps {
-  resourceQuery: UseQueryResult<Vocabulary>
+  resourceQuery: UseQueryResult<Vocabulary | null, unknown>
   dropDown?: JSX.Element | undefined
 }
 
