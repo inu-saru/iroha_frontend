@@ -12,7 +12,7 @@ const { Dashboard } = lazyImport(
   "Dashboard"
 )
 const { Vocabularies } = lazyImport(
-  async () => await import("@/features/vocabularies/routes/vocabularies"),
+  async () => await import("@/features/vocabularies/routes/Vocabularies"),
   "Vocabularies"
 )
 const { VocabularyUpdate } = lazyImport(
