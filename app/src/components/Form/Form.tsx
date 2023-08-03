@@ -3,11 +3,13 @@ import clsx from "clsx"
 import {
   useForm,
   type UseFormReturn,
-  type SubmitHandler
+  type SubmitHandler,
+  type FieldValues,
+  type UseFormProps
 } from "react-hook-form"
 import { type ZodType, type ZodTypeDef } from "zod"
 
-interface FormProps<TFormValues, Schema> {
+interface FormProps<TFormValues extends FieldValues, Schema> {
   onSubmit: SubmitHandler<TFormValues>
   children: (methods: UseFormReturn<TFormValues>) => React.ReactNode
   className?: string
@@ -31,7 +33,7 @@ export const Form = <
 }: FormProps<TFormValues, Schema>): JSX.Element => {
   const methods = useForm<TFormValues>({
     ...options,
-    resolver: schema != null && zodResolver(schema)
+    resolver: schema && zodResolver(schema)
   })
   return (
     <form

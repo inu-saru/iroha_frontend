@@ -4,13 +4,17 @@ import {
   loginWithEmailAndPassword,
   type LoginCredentialsDTO
 } from "@/features/auth/api/login"
+import {
+  registerWithEmailAndPassword,
+  type RegisterCredentialsDTO
+} from "@/features/auth/api/register"
 
 import storage from "@/utils/storage"
 import { type AuthUser } from "@/features/auth/types"
 import { getAuthUser } from "@/features/auth/api/getAuthUser"
 import { deleteAuthToken } from "@/features/auth/api/deleteAuthToken"
 
-const handleUserResponse = (data: AxiosResponse<AuthUser>): any => {
+const handleUserResponse = (data: any): any => {
   const jwt = data?.headers?.get("authorization")
   storage.setToken(jwt)
   return data.data
@@ -30,8 +34,10 @@ const loginFn = async (data: LoginCredentialsDTO): Promise<AuthUser> => {
   return user
 }
 
-const registerFn = (): void => {
-  console.log("WIP registerFn")
+const registerFn = async (data: RegisterCredentialsDTO): Promise<AuthUser> => {
+  const response = await registerWithEmailAndPassword(data)
+  const user = handleUserResponse(response)
+  return user
 }
 
 const logoutFn = async (): Promise<void> => {

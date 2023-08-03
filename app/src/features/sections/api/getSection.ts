@@ -9,7 +9,7 @@ export const getSection = async ({
   spaceId,
   sectionId
 }: {
-  spaceId: string
+  spaceId: string | undefined
   sectionId: string | null
 }): Promise<Section | null> => {
   if (sectionId === null) {
@@ -25,7 +25,7 @@ export const getSection = async ({
 type QueryFnType = typeof getSection
 
 interface UseSectionOptions {
-  spaceId: string
+  spaceId: string | undefined
   sectionId: string | null
   config?: QueryConfig<QueryFnType>
 }

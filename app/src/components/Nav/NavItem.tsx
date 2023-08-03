@@ -1,13 +1,13 @@
 import React from "react"
 import clsx from "clsx"
 
-import { Icon, Link } from "../Elements"
+import { Icon, type IconVariant, Link } from "../Elements"
 
 interface NavItemProps {
   resourceId: string
   isActive?: boolean
   to?: string
-  icon?: string
+  icon?: IconVariant
   label: string
   dropDown?: JSX.Element | undefined
 }

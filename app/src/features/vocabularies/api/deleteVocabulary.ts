@@ -5,7 +5,6 @@ import { type MutationConfig, queryClient } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Vocabulary } from "../types"
-import { Vocabulary } from "../routes/Vocabulary"
 
 export const deleteVocabulary = async ({
   vocabularyId
@@ -20,7 +19,7 @@ export const deleteVocabulary = async ({
 let thisSpaceId: string
 
 interface UseDeleteVocabularyOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof deleteVocabulary>
 }
 
@@ -35,7 +34,7 @@ export const useDeleteVocabulary = ({
         `spaces/${spaceId}/vocabularies`,
         config
       ])
-      thisSpaceId = spaceId
+      thisSpaceId = spaceId ?? ""
 
       const previousVocabularies = queryClient.getQueryData<Vocabulary[]>([
         `spaces/${spaceId}/vocabularies`,
@@ -62,7 +61,7 @@ export const useDeleteVocabulary = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/vocabularies`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "ボキャブラリーを削除しました。"
       })
     },

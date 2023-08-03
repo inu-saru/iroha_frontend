@@ -2,28 +2,39 @@ import { DropDown } from "@/components/DropDown"
 import { DropDownItem } from "@/components/DropDown/DropDownItem"
 import { Icon } from "@/components/Elements"
 
-interface DropDownSpaceProps {
-  resourceId: string
-  label: string
-  editToggle: () => void
-  deleteToggle: () => void
+// TODO: resourceIdに変更してConfirmationDialogPropsにリファクタリングすること
+interface ConfirmationDialogSpaceProps {
+  spaceId: string | undefined
+  label: string | undefined
 }
 
-export const DropDownSpace = (methods: DropDownSpaceProps): JSX.Element => {
+interface DropDownSpaceProps {
+  resourceId?: string
+  label?: string
+  editToggle?: () => void
+  deleteToggle: (props: ConfirmationDialogSpaceProps) => void
+}
+
+export const DropDownSpace = ({
+  resourceId = "",
+  label = "",
+  editToggle = () => {},
+  deleteToggle
+}: DropDownSpaceProps): JSX.Element => {
   return (
     <DropDown trigger={<Icon variant="moreHoriz" bgColor="primary" />}>
       <DropDownItem
         label="編集"
         handleClick={() => {
-          methods.editToggle()
+          editToggle()
         }}
       />
       <DropDownItem
         label="削除"
-        handleClick={async () => {
-          methods.deleteToggle({
-            spaceId: methods.resourceId,
-            label: methods.label
+        handleClick={() => {
+          deleteToggle({
+            spaceId: resourceId,
+            label
           })
         }}
       />

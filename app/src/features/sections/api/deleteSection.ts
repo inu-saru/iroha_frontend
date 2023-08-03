@@ -15,7 +15,7 @@ export const deleteSection = async ({ sectionId }: { sectionId: string }) => {
 let thisSpaceId: string
 
 interface UseDeleteSectionOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof deleteSection>
 }
 
@@ -27,7 +27,7 @@ export const useDeleteSection = ({
   return useMutation({
     onMutate: async (deletedSection) => {
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
-      thisSpaceId = spaceId
+      thisSpaceId = spaceId ?? ""
 
       const previousSections = queryClient.getQueryData<Section[]>([
         `spaces/${spaceId}/sections`
@@ -53,7 +53,7 @@ export const useDeleteSection = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/sections`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを削除しました。"
       })
     },

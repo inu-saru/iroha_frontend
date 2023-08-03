@@ -3,3 +3,5 @@ export interface BaseEntity {
   createdAt: string
   updatedAt: string
 }
+
+export type SearchParams = Record<string, string>

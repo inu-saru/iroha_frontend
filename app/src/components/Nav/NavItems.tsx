@@ -1,7 +1,7 @@
 import React from "react"
 import { type UseQueryResult } from "@tanstack/react-query"
 
-import { Spinner } from "@/components/Elements"
+import { type IconVariant, Spinner } from "@/components/Elements"
 import {
   NavItem,
   NavItemSwitch,
@@ -9,11 +9,11 @@ import {
 } from "@/components/Nav"
 
 interface NavItemsProps {
-  activeResourceId: string
-  resourcesQuery: UseQueryResult
+  activeResourceId?: string | null
+  resourcesQuery: UseQueryResult<any[], unknown>
   navItemUpdate: React.ReactElement
   resourcesUrl: (resourceId: string) => string
-  icon?: string
+  icon?: IconVariant
   dropDown?: JSX.Element
 }
 

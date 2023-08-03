@@ -10,7 +10,7 @@ export interface UpdateSectionDTO {
   data: {
     name: string
   }
-  spaceId: string
+  spaceId: string | undefined
   resourceId: string
 }
 
@@ -27,7 +27,7 @@ export const updateSection = async ({
 let thisSpaceId: string
 
 interface UseUpdateSectionOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof updateSection>
 }
 
@@ -36,7 +36,7 @@ export const useUpdateSection = ({
   spaceId
 }: UseUpdateSectionOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId
+  thisSpaceId = spaceId ?? ""
 
   return useMutation({
     onMutate: async (updatingSection: any) => {
@@ -60,7 +60,7 @@ export const useUpdateSection = ({
 
       // sections
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
-      const previousSections = queryClient.getQueryData<Section>([
+      const previousSections = queryClient.getQueryData<Section[]>([
         `spaces/${spaceId}/sections`
       ])
       const tempUpdatedSections = previousSections?.map((section) =>
@@ -92,7 +92,7 @@ export const useUpdateSection = ({
     onSuccess: (data) => {
       queryClient.refetchQueries([`spaces/${spaceId}/sections`, data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを更新しました。"
       })
     },

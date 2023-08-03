@@ -5,9 +5,9 @@ import { DropDownItem } from "@/components/DropDown/DropDownItem"
 import { Icon } from "@/components/Elements"
 
 interface DropDownVocabularyProps {
-  resourceId: string
-  label: string
-  deleteToggle: () => void
+  resourceId?: string
+  label?: string
+  deleteToggle: (data: object) => void
 }
 
 export const DropDownVocabulary = ({
@@ -33,7 +33,7 @@ export const DropDownVocabulary = ({
       />
       <DropDownItem
         label="削除"
-        handleClick={async () => {
+        handleClick={() => {
           deleteToggle({
             vocabularyId: resourceId,
             label

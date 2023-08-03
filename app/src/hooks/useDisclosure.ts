@@ -2,7 +2,7 @@ import * as React from "react"
 
 export const useDisclosure = (initial = false) => {
   const [isOpen, setIsOpen] = React.useState(initial)
-  const [targetData, setTargetData] = React.useState({})
+  const [targetData, setTargetData] = React.useState<any>({})
 
   const open = React.useCallback(() => {
     setIsOpen(true)

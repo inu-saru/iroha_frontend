@@ -31,7 +31,7 @@ export const useUpdateSpace = ({ config }: UseUpdateSpaceOptions = {}) => {
   return useMutation({
     onMutate: async (updatingSpace: any) => {
       await queryClient.cancelQueries(["spaces"])
-      const previousSpaces = queryClient.getQueryData<Space>(["spaces"])
+      const previousSpaces = queryClient.getQueryData<Space[]>(["spaces"])
       const tempUpdatedSpaces = previousSpaces?.map((space) =>
         space.id === updatingSpace?.resourceId
           ? { ...space, ...updatingSpace.data }
@@ -49,7 +49,7 @@ export const useUpdateSpace = ({ config }: UseUpdateSpaceOptions = {}) => {
     onSuccess: (data) => {
       queryClient.refetchQueries(["spaces", data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "スペースを更新しました。"
       })
     },

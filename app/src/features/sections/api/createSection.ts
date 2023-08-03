@@ -25,7 +25,7 @@ export const createSection = async ({
 let thisSpaceId: string
 
 interface UseCreateSectionOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof createSection>
 }
 
@@ -34,7 +34,7 @@ export const useCreateSection = ({
   spaceId
 }: UseCreateSectionOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId
+  thisSpaceId = spaceId ?? ""
 
   return useMutation({
     onMutate: async (newSection) => {
@@ -62,7 +62,7 @@ export const useCreateSection = ({
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/sections`])
       addToast({
-        type: "success",
+        variant: "success",
         title: "セクションを作成しました。"
       })
     },

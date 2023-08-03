@@ -8,6 +8,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useDeleteVocabulary } from "../api/deleteVocabulary"
 import { useVocabulary } from "../api/getVocabulary"
 import { DropDownVocabulary } from "./DropDownVocabulary"
+import { type SearchParams } from "@/types"
 
 export const ContentElementVocabulary = (): JSX.Element => {
   const { spaceId, vocabularyId } = useParams<{
@@ -16,7 +17,7 @@ export const ContentElementVocabulary = (): JSX.Element => {
   }>()
   const [searchParams] = useSearchParams()
   const entries = Array.from(searchParams.entries())
-  const config = {}
+  const config: SearchParams = {}
   for (const [key, value] of entries) {
     config[key] = value
   }

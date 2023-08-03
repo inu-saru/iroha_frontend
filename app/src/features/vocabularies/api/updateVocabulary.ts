@@ -5,14 +5,13 @@ import { type MutationConfig, queryClient } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Vocabulary } from "../types"
-import { Vocabulary } from "../routes/Vocabulary"
 
 export interface UpdateVocabularyDTO {
   data: {
     name: string
   }
-  spaceId: string
-  vocabularyId: string
+  spaceId?: string | undefined
+  vocabularyId: string | undefined
 }
 
 export const updateVocabulary = async ({
@@ -29,7 +28,7 @@ export const updateVocabulary = async ({
 let thisSpaceId: string
 
 interface UseUpdateVocabularyOptions {
-  spaceId: string
+  spaceId: string | undefined
   config?: MutationConfig<typeof updateVocabulary>
 }
 
@@ -38,7 +37,7 @@ export const useUpdateVocabulary = ({
   spaceId
 }: UseUpdateVocabularyOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId
+  thisSpaceId = spaceId ?? ""
 
   return useMutation({
     onMutate: async (updatingVocabulary: any) => {
@@ -98,7 +97,7 @@ export const useUpdateVocabulary = ({
     onSuccess: (data) => {
       queryClient.refetchQueries([`spaces/${spaceId}/vocabularies`, data.id])
       addToast({
-        type: "success",
+        variant: "success",
         title: "ボキャブラリーを更新しました。"
       })
     },

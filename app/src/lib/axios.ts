@@ -8,9 +8,8 @@ export const axios = Axios.create({
   baseURL: API_URL
 })
 
-const authRequestInterceptor = (
-  config: AxiosRequestConfig
-): AxiosRequestConfig => {
+const authRequestInterceptor = (config: AxiosRequestConfig): any => {
+  config.headers = config.headers ?? {}
   const token = storage.getToken()
   if (token) {
     config.headers.authorization = `${token}`

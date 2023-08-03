@@ -6,3 +6,8 @@ export type Vocabulary = {
   ja: string
   section_id: number
 } & BaseEntity
+
+export interface VocabularySearchParams {
+  q?: string
+  sid?: string
+}

@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom"
+import { type Vocabulary } from "@/features/vocabularies/types"
 
 interface ListItemProps {
-  resource: object
+  resource: Vocabulary
   to?: string
 }
 

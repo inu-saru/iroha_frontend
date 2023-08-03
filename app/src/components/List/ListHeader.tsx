@@ -1,5 +1,5 @@
 interface ListHeaderProps {
-  label: string
+  label: string | undefined
 }
 
 export const ListHeader = ({ label }: ListHeaderProps): JSX.Element => {

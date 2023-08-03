@@ -5,7 +5,7 @@ import { ListItem } from "./ListItem"
 import { ListFooter } from "./ListFooter"
 
 interface NavItemsProps {
-  resourcesQuery: UseQueryResult
+  resourcesQuery: UseQueryResult<any[], unknown>
   resourcesUrl: (resourceId: string) => string
 }
 
