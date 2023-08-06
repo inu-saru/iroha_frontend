@@ -1,4 +1,4 @@
-import { type AxiosError } from "axios"
+import { AxiosResponse, type AxiosError } from "axios"
 import {
   QueryClient,
   type UseQueryOptions,
@@ -31,3 +31,21 @@ export type MutationConfig<MutationFnType extends (...args: any) => any> =
     AxiosError,
     Parameters<MutationFnType>[0]
   >
+
+export interface PagenateResponse {
+  resources: any[]
+  currentPage: number
+  totalPages: number
+  totalCount: number
+}
+
+export const pagenateResponse = (
+  response: AxiosResponse<any, any>
+): PagenateResponse => {
+  return {
+    resources: response.data,
+    currentPage: Number(response.headers["current-page"]),
+    totalPages: Number(response.headers["total-pages"]),
+    totalCount: Number(response.headers["total-count"])
+  }
+}
