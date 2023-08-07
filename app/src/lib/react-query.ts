@@ -32,6 +32,11 @@ export type MutationConfig<MutationFnType extends (...args: any) => any> =
     Parameters<MutationFnType>[0]
   >
 
+export interface InfiniteQueryData {
+  pages: PagenateResponse[]
+  pageParams: any
+}
+
 export interface PagenateResponse {
   resources: any[]
   currentPage: number
