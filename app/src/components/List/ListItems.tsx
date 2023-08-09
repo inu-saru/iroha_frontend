@@ -4,6 +4,8 @@ import { Spinner } from "@/components/Elements"
 import { ListItem } from "./ListItem"
 import { ListFooter } from "./ListFooter"
 import { type PagenateResponse } from "@/lib/react-query"
+import React from "react"
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 
 interface NavItemsProps {
   resourcesQuery: UseInfiniteQueryResult<PagenateResponse, unknown>
@@ -14,6 +16,13 @@ export const ListItems = ({
   resourcesQuery,
   resourcesUrl
 }: NavItemsProps): JSX.Element => {
+  const loadMoreButtonRef = React.useRef<HTMLButtonElement>(null)
+  useIntersectionObserver({
+    target: loadMoreButtonRef,
+    onIntersect: resourcesQuery.fetchNextPage,
+    enabled: resourcesQuery.hasNextPage
+  })
+
   if (resourcesQuery.isLoading) {
     return (
       <div className="py-4 w-full flex justify-center items-center">
@@ -41,9 +50,11 @@ export const ListItems = ({
           ))
         )}
       </ul>
-      {/* TODO: WIP scrollで発火するように変更する */}
       {resourcesQuery.hasNextPage && (
-        <button onClick={async () => await resourcesQuery.fetchNextPage()}>
+        <button
+          ref={loadMoreButtonRef}
+          onClick={async () => await resourcesQuery.fetchNextPage()}
+        >
           {resourcesQuery.isFetchingNextPage ? "isLoading..." : "Load"}
         </button>
       )}
