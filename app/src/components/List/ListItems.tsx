@@ -64,7 +64,10 @@ export const ListItems = ({
           )}
         </div>
       )}
-      <ListFooter count={`${resourcesQuery.data?.pages[0].totalCount}`} />
+      <ListFooter
+        count={`${resourcesQuery.data?.pages[0].totalCount}`}
+        isLoading={resourcesQuery.isFetchingNextPage}
+      />
     </>
   )
 }
