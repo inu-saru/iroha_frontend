@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  queryClient,
+  InfiniteQueryData
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Vocabulary } from "../types"
@@ -36,16 +40,27 @@ export const useDeleteVocabulary = ({
       ])
       thisSpaceId = spaceId ?? ""
 
-      const previousVocabularies = queryClient.getQueryData<Vocabulary[]>([
+      const previousVocabularies = queryClient.getQueryData<InfiniteQueryData>([
         `spaces/${spaceId}/vocabularies`,
         config
       ])
 
+      const newPagesArray =
+        previousVocabularies?.pages.map((page) => {
+          return {
+            ...page,
+            resources: page.resources.filter((vocabulary) => {
+              return vocabulary.id !== deletedVocabulary.vocabularyId
+            })
+          }
+        }) ?? []
+
       queryClient.setQueryData(
         [`spaces/${spaceId}/vocabularies`, config],
-        previousVocabularies?.filter(
-          (vocabulary) => vocabulary.id !== deletedVocabulary.vocabularyId
-        )
+        (previousVocabularies: any) => ({
+          pages: newPagesArray,
+          pageParams: previousVocabularies?.pageParams
+        })
       )
 
       return { previousVocabularies }

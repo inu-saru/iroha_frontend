@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  queryClient,
+  InfiniteQueryData
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Vocabulary } from "../types"
@@ -64,18 +68,27 @@ export const useUpdateVocabulary = ({
         `spaces/${spaceId}/vocabularies`,
         config
       ])
-      const previousVocabularies = queryClient.getQueryData<Vocabulary[]>([
+      const previousVocabularies = queryClient.getQueryData<InfiniteQueryData>([
         `spaces/${spaceId}/vocabularies`,
         config
       ])
-      const tempUpdatedVocabularies = previousVocabularies?.map((vocabulary) =>
-        `${vocabulary.id}` === updatingVocabulary?.vocabularyId
-          ? { ...vocabulary, ...updatingVocabulary.data }
-          : vocabulary
-      )
+      const newPagesArray =
+        previousVocabularies?.pages.map((page) => {
+          return {
+            ...page,
+            resources: page.resources.map((vocabulary) => {
+              return `${vocabulary.id}` === updatingVocabulary?.vocabularyId
+                ? { ...vocabulary, ...updatingVocabulary.data }
+                : vocabulary
+            })
+          }
+        }) ?? []
       queryClient.setQueryData(
         [`spaces/${spaceId}/vocabularies`, config],
-        tempUpdatedVocabularies
+        (previousVocabularies: any) => ({
+          pages: newPagesArray,
+          pageParams: previousVocabularies?.pageParams
+        })
       )
 
       return { previousVocabulary, previousVocabularies }

@@ -5,3 +5,7 @@ export interface BaseEntity {
 }
 
 export type SearchParams = Record<string, string>
+
+export type Merge<T> = {
+  [K in keyof T]: T[K]
+}
