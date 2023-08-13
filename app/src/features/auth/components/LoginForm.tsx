@@ -44,7 +44,11 @@ export const LoginForm = ({ onSuccess }: LoginFormProps): JSX.Element => {
               error={formState.errors.password}
               registration={register("password")}
             />
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full"
+              type="submit"
+              isLoading={login.isLoading}
+            >
               ログイン
             </Button>
             <Link to="/auth/password_reset" className="block">
