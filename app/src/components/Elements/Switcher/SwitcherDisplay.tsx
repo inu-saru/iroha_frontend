@@ -3,7 +3,7 @@ import { useClickAway, useToggle } from "react-use"
 
 interface MethodsProps {
   isOpen: boolean
-  ref: React.MutableRefObject<null>
+  clickAway: React.MutableRefObject<null>
   toggle: () => void
 }
 
@@ -15,13 +15,13 @@ export const SwitcherDisplay = ({
   children
 }: NavItemSwitchProps): JSX.Element => {
   const [isOpen, toggle] = useToggle(false)
-  const ref = useRef(null)
-  useClickAway(ref, () => {
+  const clickAway = useRef(null)
+  useClickAway(clickAway, () => {
     toggle()
   })
   const methods = {
     isOpen,
-    ref,
+    clickAway,
     toggle
   }
 

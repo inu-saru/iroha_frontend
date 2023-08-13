@@ -1,14 +1,8 @@
-import { useRef } from "react"
-import { useClickAway, useToggle } from "react-use"
 import { z } from "zod"
 
-import { Button, Icon } from "@/components/Elements"
-import {
-  NavItemCreate,
-  NavHeader,
-  NavItems,
-  NavItemUpdate
-} from "@/components/Nav"
+import { Button, Icon, SwitcherDisplay } from "@/components/Elements"
+import { NavHeader, NavItems, NavItemUpdate } from "@/components/Nav"
+import { NavItemCreateSpace } from "./NavItemCreateSpace"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
@@ -24,12 +18,6 @@ const schema = z.object({
 
 export const Spaces = (): JSX.Element => {
   const spacesQuery = useSpaces()
-  const [isOpen, toggle] = useToggle(false)
-  const ref = useRef(null)
-  useClickAway(ref, () => {
-    toggle()
-  })
-
   const {
     targetData,
     openWith: openWithDelete,
@@ -46,22 +34,25 @@ export const Spaces = (): JSX.Element => {
 
   return (
     <>
-      <NavHeader title="スペース">
-        <div onClick={toggle}>
-          <Icon variant="add" bgColor="white" />
-        </div>
-      </NavHeader>
-      {isOpen && (
-        <div ref={ref}>
-          <NavItemCreate
-            createResourceMutation={createSpaceMutation}
-            schema={schema}
-            maxLength={255}
-            placeholder="新しいスペース"
-            toggle={toggle}
-          />
-        </div>
-      )}
+      <SwitcherDisplay>
+        {(methods) => (
+          <>
+            <NavHeader title="スペース">
+              <div onClick={methods.toggle}>
+                <Icon variant="add" bgColor="white" />
+              </div>
+            </NavHeader>
+            {methods.isOpen && (
+              <div ref={methods.clickAway}>
+                <NavItemCreateSpace
+                  createSpaceMutation={createSpaceMutation}
+                  toggle={methods.toggle}
+                />
+              </div>
+            )}
+          </>
+        )}
+      </SwitcherDisplay>
       <NavItems
         resourcesQuery={spacesQuery}
         navItemUpdate={
