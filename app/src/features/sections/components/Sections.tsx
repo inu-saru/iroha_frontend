@@ -1,6 +1,11 @@
 import { z } from "zod"
 
-import { Button, Icon, SwitcherDisplay } from "@/components/Elements"
+import {
+  Button,
+  Icon,
+  SwitcherDialog,
+  SwitcherDisplay
+} from "@/components/Elements"
 import { NavHeader, NavItems, NavItemUpdate } from "@/components/Nav"
 import { NavItemCreateSection } from "./NavItemCreateSection"
 
@@ -9,7 +14,6 @@ import { DropDownSection } from "./DropDownSection"
 import { useCreateSection } from "../api/createSection"
 import { useUpdateSection } from "../api/updateSection"
 import { ConfirmationDialog } from "@/components/ConfirmationDialog"
-import { useDisclosure } from "@/hooks/useDisclosure"
 import { useDeleteSection } from "../api/deleteSection"
 import { useSearchParams } from "react-router-dom"
 
@@ -23,12 +27,6 @@ interface SectionsProps {
 
 export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
   const sectionsQuery = useSections({ spaceId })
-  const {
-    targetData,
-    openWith: openWithDelete,
-    closeWith: closeWithDelete,
-    isOpen: isOpenDelete
-  } = useDisclosure()
   const createSectionMutation = useCreateSection({ spaceId })
   const updateSectionMutation = useUpdateSection({ spaceId })
   const deleteSectionMutation = useDeleteSection({ spaceId })
@@ -60,38 +58,44 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
           </>
         )}
       </SwitcherDisplay>
-      <NavItems
-        activeResourceId={activeResourceId}
-        resourcesQuery={sectionsQuery}
-        navItemUpdate={
-          <NavItemUpdate
-            schema={schema}
-            maxLength={255}
-            updateResourceMutation={updateSectionMutation}
-          />
-        }
-        resourcesUrl={resourcesUrl}
-        icon="section"
-        dropDown={<DropDownSection deleteToggle={openWithDelete} />}
-      />
-      <ConfirmationDialog
-        isOpen={isOpenDelete}
-        close={closeWithDelete}
-        confirmButton={
-          <Button
-            onClick={async () => {
-              await deleteSectionMutation.mutateAsync({
-                sectionId: targetData.sectionId
-              })
-              closeWithDelete()
-            }}
-          >
-            削除
-          </Button>
-        }
-        title={"セクションの削除"}
-        body={`${targetData.label}を削除しますか？`}
-      />
+      <SwitcherDialog>
+        {(methods) => (
+          <>
+            <NavItems
+              activeResourceId={activeResourceId}
+              resourcesQuery={sectionsQuery}
+              navItemUpdate={
+                <NavItemUpdate
+                  schema={schema}
+                  maxLength={255}
+                  updateResourceMutation={updateSectionMutation}
+                />
+              }
+              resourcesUrl={resourcesUrl}
+              icon="section"
+              dropDown={<DropDownSection deleteToggle={methods.openWith} />}
+            />
+            <ConfirmationDialog
+              isOpen={methods.isOpen}
+              close={methods.closeWith}
+              confirmButton={
+                <Button
+                  onClick={async () => {
+                    await deleteSectionMutation.mutateAsync({
+                      sectionId: methods.targetData.sectionId
+                    })
+                    methods.closeWith()
+                  }}
+                >
+                  削除
+                </Button>
+              }
+              title={"セクションの削除"}
+              body={`${methods.targetData.label}を削除しますか？`}
+            />
+          </>
+        )}
+      </SwitcherDialog>
     </>
   )
 }
