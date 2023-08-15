@@ -1,12 +1,12 @@
 import React from "react"
 import { type UseQueryResult } from "@tanstack/react-query"
 
-import { type IconVariant, Spinner } from "@/components/Elements"
 import {
-  NavItem,
-  NavItemSwitch,
-  type NavitemUpadteResourceDataProps
-} from "@/components/Nav"
+  type IconVariant,
+  Spinner,
+  SwitcherDisplay
+} from "@/components/Elements"
+import { NavItem, type NavitemUpadteResourceDataProps } from "@/components/Nav"
 
 interface NavItemsProps {
   activeResourceId?: string | null
@@ -71,11 +71,11 @@ export const NavItems = ({
     <ul>
       {resourcesQuery.data.map((resource, index) => (
         <div key={index}>
-          <NavItemSwitch>
+          <SwitcherDisplay>
             {(methods) => (
               <>
-                {methods.isSwitched ? (
-                  <div ref={methods.ref}>
+                {methods.isOpen ? (
+                  <div ref={methods.clickAway}>
                     {navItemUpdateWith({
                       resourceId: resource.id,
                       defaultValue: resource.name,
@@ -97,7 +97,7 @@ export const NavItems = ({
                 )}
               </>
             )}
-          </NavItemSwitch>
+          </SwitcherDisplay>
         </div>
       ))}
     </ul>

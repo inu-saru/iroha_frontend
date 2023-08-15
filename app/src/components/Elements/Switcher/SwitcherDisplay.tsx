@@ -7,13 +7,13 @@ interface MethodsProps {
   toggle: () => void
 }
 
-interface NavItemSwitchProps {
+interface SwitcherDisplayProps {
   children: (methods: MethodsProps) => React.ReactNode
 }
 
 export const SwitcherDisplay = ({
   children
-}: NavItemSwitchProps): JSX.Element => {
+}: SwitcherDisplayProps): JSX.Element => {
   const [isOpen, toggle] = useToggle(false)
   const clickAway = useRef(null)
   useClickAway(clickAway, () => {
