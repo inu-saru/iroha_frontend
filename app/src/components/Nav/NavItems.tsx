@@ -53,11 +53,25 @@ export const NavItems = ({
     })
   }
 
+  interface dropDownWitoEditToggleProps {
+    dropDown: JSX.Element | undefined
+    toggle: () => void
+  }
+
+  const dropDownWitoEditToggle = ({
+    dropDown,
+    toggle
+  }: dropDownWitoEditToggleProps): React.ReactElement | undefined => {
+    return dropDown != null
+      ? React.cloneElement(dropDown, { editToggle: toggle })
+      : undefined
+  }
+
   return (
     <ul>
       {resourcesQuery.data.map((resource, index) => (
         <div key={index}>
-          <NavItemSwitch dropDown={dropDown}>
+          <NavItemSwitch>
             {(methods) => (
               <>
                 {methods.isSwitched ? (
@@ -75,7 +89,10 @@ export const NavItems = ({
                     to={resourcesUrl(resource.id)}
                     icon={icon}
                     label={resource.name}
-                    dropDown={methods.dropDownWitoEditToggle}
+                    dropDown={dropDownWitoEditToggle({
+                      dropDown,
+                      toggle: methods.toggle
+                    })}
                   />
                 )}
               </>
