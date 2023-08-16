@@ -1,18 +1,13 @@
-import {
-  Button,
-  Icon,
-  SwitcherDialog,
-  SwitcherDisplay
-} from "@/components/Elements"
+import { Icon, SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSection } from "./NavItemCreateSection"
 import { NavItemUpdateSection } from "./NavItemUpdateSection"
+import { ConfirmationDialogSection } from "./ConfirmationDialogSection"
 
 import { useSections } from "../api/getSections"
 import { DropDownSection } from "./DropDownSection"
 import { useCreateSection } from "../api/createSection"
 import { useUpdateSection } from "../api/updateSection"
-import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDeleteSection } from "../api/deleteSection"
 import { useSearchParams } from "react-router-dom"
 
@@ -68,23 +63,12 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
               icon="section"
               dropDown={<DropDownSection deleteToggle={methods.openWith} />}
             />
-            <ConfirmationDialog
+            <ConfirmationDialogSection
+              resourceId={methods.targetData.sectionId}
+              label={methods.targetData.label}
+              deleteSectionMutation={deleteSectionMutation}
               isOpen={methods.isOpen}
               close={methods.closeWith}
-              confirmButton={
-                <Button
-                  onClick={async () => {
-                    await deleteSectionMutation.mutateAsync({
-                      sectionId: methods.targetData.sectionId
-                    })
-                    methods.closeWith()
-                  }}
-                >
-                  削除
-                </Button>
-              }
-              title={"セクションの削除"}
-              body={`${methods.targetData.label}を削除しますか？`}
             />
           </>
         )}
