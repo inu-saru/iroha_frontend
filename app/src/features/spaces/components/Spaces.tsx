@@ -1,13 +1,12 @@
-import { z } from "zod"
-
 import {
   Button,
   Icon,
   SwitcherDialog,
   SwitcherDisplay
 } from "@/components/Elements"
-import { NavHeader, NavItems, NavItemUpdate } from "@/components/Nav"
+import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSpace } from "./NavItemCreateSpace"
+import { NavItemUpdateSpace } from "./NavItemUpdateSpace"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
@@ -15,10 +14,6 @@ import { useCreateSpace } from "../api/createSpace"
 import { useUpdateSpace } from "../api/updateSpace"
 import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDeleteSpace } from "../api/deleteSpace"
-
-const schema = z.object({
-  name: z.string().min(1, "Required")
-})
 
 export const Spaces = (): JSX.Element => {
   const spacesQuery = useSpaces()
@@ -57,11 +52,7 @@ export const Spaces = (): JSX.Element => {
             <NavItems
               resourcesQuery={spacesQuery}
               navItemUpdate={
-                <NavItemUpdate
-                  schema={schema}
-                  maxLength={255}
-                  updateResourceMutation={updateSpaceMutation}
-                />
+                <NavItemUpdateSpace updateSpaceMutation={updateSpaceMutation} />
               }
               resourcesUrl={resourcesUrl}
               icon="space"
