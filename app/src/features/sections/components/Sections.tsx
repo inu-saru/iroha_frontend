@@ -1,13 +1,12 @@
-import { z } from "zod"
-
 import {
   Button,
   Icon,
   SwitcherDialog,
   SwitcherDisplay
 } from "@/components/Elements"
-import { NavHeader, NavItems, NavItemUpdate } from "@/components/Nav"
+import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSection } from "./NavItemCreateSection"
+import { NavItemUpdateSection } from "./NavItemUpdateSection"
 
 import { useSections } from "../api/getSections"
 import { DropDownSection } from "./DropDownSection"
@@ -16,10 +15,6 @@ import { useUpdateSection } from "../api/updateSection"
 import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDeleteSection } from "../api/deleteSection"
 import { useSearchParams } from "react-router-dom"
-
-const schema = z.object({
-  name: z.string().min(1, "Required")
-})
 
 interface SectionsProps {
   spaceId: string | undefined
@@ -65,10 +60,8 @@ export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
               activeResourceId={activeResourceId}
               resourcesQuery={sectionsQuery}
               navItemUpdate={
-                <NavItemUpdate
-                  schema={schema}
-                  maxLength={255}
-                  updateResourceMutation={updateSectionMutation}
+                <NavItemUpdateSection
+                  updateSectionMutation={updateSectionMutation}
                 />
               }
               resourcesUrl={resourcesUrl}
