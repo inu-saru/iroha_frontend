@@ -1,18 +1,13 @@
-import {
-  Button,
-  Icon,
-  SwitcherDialog,
-  SwitcherDisplay
-} from "@/components/Elements"
+import { Icon, SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSpace } from "./NavItemCreateSpace"
 import { NavItemUpdateSpace } from "./NavItemUpdateSpace"
+import { ConfirmationDialogSpace } from "./ConfirmationDialogSpace"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
 import { useCreateSpace } from "../api/createSpace"
 import { useUpdateSpace } from "../api/updateSpace"
-import { ConfirmationDialog } from "@/components/ConfirmationDialog"
 import { useDeleteSpace } from "../api/deleteSpace"
 
 export const Spaces = (): JSX.Element => {
@@ -58,23 +53,12 @@ export const Spaces = (): JSX.Element => {
               icon="space"
               dropDown={<DropDownSpace deleteToggle={methods.openWith} />}
             />
-            <ConfirmationDialog
+            <ConfirmationDialogSpace
+              resourceId={methods.targetData.spaceId}
+              label={methods.targetData.label}
+              deleteSpaceMutation={deleteSpaceMutation}
               isOpen={methods.isOpen}
               close={methods.closeWith}
-              confirmButton={
-                <Button
-                  onClick={async () => {
-                    await deleteSpaceMutation.mutateAsync({
-                      spaceId: methods.targetData.spaceId
-                    })
-                    methods.closeWith()
-                  }}
-                >
-                  削除
-                </Button>
-              }
-              title={"スペースの削除"}
-              body={`${methods.targetData.label}を削除しますか？`}
             />
           </>
         )}
