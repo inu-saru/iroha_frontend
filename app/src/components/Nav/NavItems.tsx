@@ -1,12 +1,12 @@
 import React from "react"
 import { type UseQueryResult } from "@tanstack/react-query"
 
-import { type IconVariant, Spinner } from "@/components/Elements"
 import {
-  NavItem,
-  NavItemSwitch,
-  type NavitemUpadteResourceDataProps
-} from "@/components/Nav"
+  type IconVariant,
+  Spinner,
+  SwitcherDisplay
+} from "@/components/Elements"
+import { NavItem, type NavitemUpadteResourceDataProps } from "@/components/Nav"
 
 interface NavItemsProps {
   activeResourceId?: string | null
@@ -53,15 +53,29 @@ export const NavItems = ({
     })
   }
 
+  interface dropDownWitoEditToggleProps {
+    dropDown: JSX.Element | undefined
+    toggle: () => void
+  }
+
+  const dropDownWitoEditToggle = ({
+    dropDown,
+    toggle
+  }: dropDownWitoEditToggleProps): React.ReactElement | undefined => {
+    return dropDown != null
+      ? React.cloneElement(dropDown, { editToggle: toggle })
+      : undefined
+  }
+
   return (
     <ul>
       {resourcesQuery.data.map((resource, index) => (
         <div key={index}>
-          <NavItemSwitch dropDown={dropDown}>
+          <SwitcherDisplay>
             {(methods) => (
               <>
-                {methods.isSwitched ? (
-                  <div ref={methods.ref}>
+                {methods.isOpen ? (
+                  <div ref={methods.clickAway}>
                     {navItemUpdateWith({
                       resourceId: resource.id,
                       defaultValue: resource.name,
@@ -75,12 +89,15 @@ export const NavItems = ({
                     to={resourcesUrl(resource.id)}
                     icon={icon}
                     label={resource.name}
-                    dropDown={methods.dropDownWitoEditToggle}
+                    dropDown={dropDownWitoEditToggle({
+                      dropDown,
+                      toggle: methods.toggle
+                    })}
                   />
                 )}
               </>
             )}
-          </NavItemSwitch>
+          </SwitcherDisplay>
         </div>
       ))}
     </ul>

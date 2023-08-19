@@ -1,41 +1,17 @@
-import { useRef } from "react"
-import { useClickAway, useToggle } from "react-use"
-import { z } from "zod"
-
-import { Button, Icon } from "@/components/Elements"
-import {
-  NavItemCreate,
-  NavHeader,
-  NavItems,
-  NavItemUpdate
-} from "@/components/Nav"
+import { Icon, SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
+import { NavHeader, NavItems } from "@/components/Nav"
+import { NavItemCreateSpace } from "./NavItemCreateSpace"
+import { NavItemUpdateSpace } from "./NavItemUpdateSpace"
+import { ConfirmationDialogSpace } from "./ConfirmationDialogSpace"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
 import { useCreateSpace } from "../api/createSpace"
 import { useUpdateSpace } from "../api/updateSpace"
-import { ConfirmationDialog } from "@/components/ConfirmationDialog"
-import { useDisclosure } from "@/hooks/useDisclosure"
 import { useDeleteSpace } from "../api/deleteSpace"
-
-const schema = z.object({
-  name: z.string().min(1, "Required")
-})
 
 export const Spaces = (): JSX.Element => {
   const spacesQuery = useSpaces()
-  const [isOpen, toggle] = useToggle(false)
-  const ref = useRef(null)
-  useClickAway(ref, () => {
-    toggle()
-  })
-
-  const {
-    targetData,
-    openWith: openWithDelete,
-    closeWith: closeWithDelete,
-    isOpen: isOpenDelete
-  } = useDisclosure()
   const createSpaceMutation = useCreateSpace()
   const updateSpaceMutation = useUpdateSpace()
   const deleteSpaceMutation = useDeleteSpace()
@@ -46,53 +22,47 @@ export const Spaces = (): JSX.Element => {
 
   return (
     <>
-      <NavHeader title="スペース">
-        <div onClick={toggle}>
-          <Icon variant="add" bgColor="white" />
-        </div>
-      </NavHeader>
-      {isOpen && (
-        <div ref={ref}>
-          <NavItemCreate
-            createResourceMutation={createSpaceMutation}
-            schema={schema}
-            maxLength={255}
-            placeholder="新しいスペース"
-            toggle={toggle}
-          />
-        </div>
-      )}
-      <NavItems
-        resourcesQuery={spacesQuery}
-        navItemUpdate={
-          <NavItemUpdate
-            schema={schema}
-            maxLength={255}
-            updateResourceMutation={updateSpaceMutation}
-          />
-        }
-        resourcesUrl={resourcesUrl}
-        icon="space"
-        dropDown={<DropDownSpace deleteToggle={openWithDelete} />}
-      />
-      <ConfirmationDialog
-        isOpen={isOpenDelete}
-        close={closeWithDelete}
-        confirmButton={
-          <Button
-            onClick={async () => {
-              await deleteSpaceMutation.mutateAsync({
-                spaceId: targetData.spaceId
-              })
-              closeWithDelete()
-            }}
-          >
-            削除
-          </Button>
-        }
-        title={"スペースの削除"}
-        body={`${targetData.label}を削除しますか？`}
-      />
+      <SwitcherDisplay>
+        {(methods) => (
+          <>
+            <NavHeader title="スペース">
+              <div onClick={methods.toggle}>
+                <Icon variant="add" bgColor="white" />
+              </div>
+            </NavHeader>
+            {methods.isOpen && (
+              <div ref={methods.clickAway}>
+                <NavItemCreateSpace
+                  createSpaceMutation={createSpaceMutation}
+                  toggle={methods.toggle}
+                />
+              </div>
+            )}
+          </>
+        )}
+      </SwitcherDisplay>
+      <SwitcherDialog>
+        {(methods) => (
+          <>
+            <NavItems
+              resourcesQuery={spacesQuery}
+              navItemUpdate={
+                <NavItemUpdateSpace updateSpaceMutation={updateSpaceMutation} />
+              }
+              resourcesUrl={resourcesUrl}
+              icon="space"
+              dropDown={<DropDownSpace deleteToggle={methods.openWith} />}
+            />
+            <ConfirmationDialogSpace
+              resourceId={methods.targetData.spaceId}
+              label={methods.targetData.label}
+              deleteSpaceMutation={deleteSpaceMutation}
+              isOpen={methods.isOpen}
+              close={methods.closeWith}
+            />
+          </>
+        )}
+      </SwitcherDialog>
     </>
   )
 }
