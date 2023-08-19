@@ -1,7 +1,6 @@
 import { type Schema } from "zod"
 
-import { Icon } from "@/components/Elements"
-import { Form } from "@/components/Form"
+import { Form, Icon } from "@/components/Elements"
 import { type VocabularySearchParams } from "@/features/vocabularies/types"
 
 interface SearchProps {

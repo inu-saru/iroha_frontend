@@ -2,8 +2,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { z } from "zod"
 
 import { ContentHeader } from "@/components/Content"
-import { Button } from "@/components/Elements"
-import { Form, Input } from "@/components/Form"
+import { Button, Form, Input } from "@/components/Elements"
 import { useCreateVocabulary } from "../api/createVocabulary"
 import { type SearchParams } from "@/types"
 

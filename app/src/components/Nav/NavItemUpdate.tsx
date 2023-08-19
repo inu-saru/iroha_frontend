@@ -1,7 +1,6 @@
 import { type Schema } from "zod"
 
-import { Icon, Spinner } from "@/components/Elements"
-import { Form } from "@/components/Form"
+import { Form, Icon, Spinner } from "@/components/Elements"
 import { type UseMutationResult } from "@tanstack/react-query"
 import { type AxiosError } from "axios"
 
