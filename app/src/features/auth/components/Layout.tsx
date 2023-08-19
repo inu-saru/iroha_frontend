@@ -1,9 +1,7 @@
 import * as React from "react"
 
 // import logo from "@/assets/logo.svg"
-import { Head } from "@/components/Head"
-import { Base } from "@/components/Elements/Base"
-import { Link } from "@/components/Elements"
+import { Base, Head } from "@/components/Elements"
 
 interface LayoutProps {
   children: React.ReactNode

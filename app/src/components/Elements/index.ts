@@ -1,6 +1,7 @@
 export * from "./Base"
 export * from "./Button"
 export * from "./DropDown"
+export * from "./Head"
 export * from "./Link"
 export * from "./Search"
 export * from "./Spinner"
