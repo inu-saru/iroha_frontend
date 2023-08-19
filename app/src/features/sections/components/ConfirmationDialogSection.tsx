@@ -2,7 +2,7 @@ import { type UseMutationResult } from "@tanstack/react-query"
 import { type AxiosError } from "axios"
 
 import { Button } from "@/components/Elements"
-import { ConfirmationDialog } from "@/components/ConfirmationDialog"
+import { ConfirmationDialog } from "@/components/Dialog"
 
 interface ConfirmationDialogSectionProps {
   deleteSectionMutation: UseMutationResult<

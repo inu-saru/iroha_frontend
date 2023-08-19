@@ -1,4 +1,4 @@
-import { ConfirmationDialog } from "@/components/ConfirmationDialog"
+import { ConfirmationDialog } from "@/components/Dialog"
 import { ContentHeader } from "@/components/Content"
 import { ContentElement } from "@/components/Content/ContentElement"
 import { Button } from "@/components/Elements"
