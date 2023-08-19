@@ -8,7 +8,7 @@ const { Sections } = lazyImport(
   "Sections"
 )
 
-export const SpaceNav = (): JSX.Element => {
+export const InnerSpaceNav = (): JSX.Element => {
   const { spaceId } = useParams<{ spaceId: string }>()
   const spacesQuery = useSpace({ spaceId })
   const [searchParams] = useSearchParams()

@@ -1,5 +1,5 @@
 import { ContentLayout } from "@/components/Layout"
-import { SpaceNav } from "@/features/nav"
+import { InnerSpaceNav } from "@/features/misc/components/InnerSpaceNav"
 import { ContentElementVocabulary } from "../components/ContentElementVocabulary"
 import { ListVocabularies } from "../components/ListVocabularies"
 
@@ -8,7 +8,7 @@ export const Vocabulary = (): JSX.Element => {
     <>
       <ContentLayout
         title="ボキャブラリー詳細"
-        nav={<SpaceNav />}
+        nav={<InnerSpaceNav />}
         list={<ListVocabularies />}
       >
         <ContentElementVocabulary />
