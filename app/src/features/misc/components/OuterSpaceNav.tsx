@@ -1,4 +1,4 @@
-import { Spaces } from "@/features/spaces"
+import { NavSpaces } from "@/features/spaces"
 
 export const OuterSpaceNav = (): JSX.Element => {
   return (
@@ -6,7 +6,7 @@ export const OuterSpaceNav = (): JSX.Element => {
       <div className="p-2 border-b border-natural-40">
         <p className="text-h300 text-primary-300">logo</p>
       </div>
-      <Spaces />
+      <NavSpaces />
     </div>
   )
 }
