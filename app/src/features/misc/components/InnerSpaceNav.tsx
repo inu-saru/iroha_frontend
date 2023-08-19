@@ -3,9 +3,9 @@ import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
 import { lazyImport } from "@/utils/lazyImport"
 import { NavItem } from "@/components/Nav"
-const { Sections } = lazyImport(
-  async () => await import("@/features/sections/components/Sections"),
-  "Sections"
+const { NavSections } = lazyImport(
+  async () => await import("@/features/sections"),
+  "NavSections"
 )
 
 export const InnerSpaceNav = (): JSX.Element => {
@@ -44,7 +44,7 @@ export const InnerSpaceNav = (): JSX.Element => {
         to={`/app/spaces/${spaceId}/vocabularies`}
         icon="all"
       />
-      <Sections spaceId={spaceId} />
+      <NavSections spaceId={spaceId} />
     </div>
   )
 }
