@@ -1,7 +1,6 @@
 import * as z from "zod"
 
-import { Form, Input } from "@/components/Form"
-import { Button, Link } from "@/components/Elements"
+import { Button, Form, Input, Link } from "@/components/Elements"
 import { useLogin } from "@/lib/auth"
 
 const schema = z.object({

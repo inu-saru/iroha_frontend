@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import { Button } from "@/components/Elements/Button"
-import { Dialog, DialogTitle } from "@/components/Dialog"
+import { Button } from "@/components/Elements"
+import { Dialog, DialogTitle } from "./Dialog"
 
 export interface ConfirmationDialogProps {
   isOpen: boolean

@@ -15,7 +15,7 @@ interface SectionsProps {
   spaceId: string | undefined
 }
 
-export const Sections = ({ spaceId }: SectionsProps): JSX.Element => {
+export const NavSections = ({ spaceId }: SectionsProps): JSX.Element => {
   const sectionsQuery = useSections({ spaceId })
   const createSectionMutation = useCreateSection({ spaceId })
   const updateSectionMutation = useUpdateSection({ spaceId })

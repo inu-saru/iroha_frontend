@@ -1,6 +1,6 @@
 import { Button } from "@/components/Elements/Button"
 import { BasicLayout } from "@/components/Layout"
-import { Nav } from "@/features/nav"
+import { OuterSpaceNav } from "@/features/misc/components/OuterSpaceNav"
 import { useLogout } from "@/lib/auth"
 
 export const Dashboard = (): JSX.Element => {
@@ -8,7 +8,7 @@ export const Dashboard = (): JSX.Element => {
 
   return (
     <>
-      <BasicLayout title="ダッシュボード" nav={<Nav />}>
+      <BasicLayout title="ダッシュボード" nav={<OuterSpaceNav />}>
         <h1>dashboard</h1>
         <Button
           disabled={logout.isLoading}

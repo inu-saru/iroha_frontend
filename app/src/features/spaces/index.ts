@@ -1,1 +1,1 @@
-export * from "./components/Spaces"
+export * from "./components/NavSpaces"

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Head } from "../Head"
+import { Head } from "@/components/Elements"
 
 interface ContentLayoutProps {
   children: React.ReactNode

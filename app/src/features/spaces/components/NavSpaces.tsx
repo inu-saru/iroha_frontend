@@ -10,7 +10,7 @@ import { useCreateSpace } from "../api/createSpace"
 import { useUpdateSpace } from "../api/updateSpace"
 import { useDeleteSpace } from "../api/deleteSpace"
 
-export const Spaces = (): JSX.Element => {
+export const NavSpaces = (): JSX.Element => {
   const spacesQuery = useSpaces()
   const createSpaceMutation = useCreateSpace()
   const updateSpaceMutation = useUpdateSpace()

@@ -1,6 +1,4 @@
-import { DropDown } from "@/components/DropDown"
-import { DropDownItem } from "@/components/DropDown/DropDownItem"
-import { Icon } from "@/components/Elements"
+import { DropDown, DropDownItem, Icon } from "@/components/Elements"
 
 // TODO: resourceIdに変更してConfirmationDialogPropsにリファクタリングすること
 interface ConfirmationDialogSectionProps {
