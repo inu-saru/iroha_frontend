@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
 import { lazyImport } from "@/utils/lazyImport"
@@ -7,11 +7,11 @@ const { NavSections } = lazyImport(
   async () => await import("@/features/sections"),
   "NavSections"
 )
+import { useUrlParams } from "@/lib/useUrlParams"
 
 export const InnerSpaceNav = (): JSX.Element => {
-  const { spaceId } = useParams<{ spaceId: string }>()
+  const { spaceId, searchParams } = useUrlParams()
   const spacesQuery = useSpace({ spaceId })
-  const [searchParams] = useSearchParams()
   const spaceName = spacesQuery.data?.name
   const navigate = useNavigate()
 
@@ -44,7 +44,7 @@ export const InnerSpaceNav = (): JSX.Element => {
         to={`/app/spaces/${spaceId}/vocabularies`}
         icon="all"
       />
-      <NavSections spaceId={spaceId} />
+      <NavSections />
     </div>
   )
 }

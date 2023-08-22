@@ -1,28 +1,20 @@
+import { useNavigate } from "react-router-dom"
+
 import { ConfirmationDialog } from "@/components/Dialog"
 import { ContentHeader } from "@/components/Content"
 import { ContentElement } from "@/components/Content/ContentElement"
 import { Button, SwitcherDialog } from "@/components/Elements"
 
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useDeleteVocabulary } from "../api/deleteVocabulary"
 import { useVocabulary } from "../api/getVocabulary"
 import { DropDownVocabulary } from "./DropDownVocabulary"
-import { type SearchParams } from "@/types"
+import { useUrlParams } from "@/lib/useUrlParams"
 
 export const ContentElementVocabulary = (): JSX.Element => {
-  const { spaceId, vocabularyId } = useParams<{
-    spaceId: string
-    vocabularyId: string
-  }>()
-  const [searchParams] = useSearchParams()
-  const entries = Array.from(searchParams.entries())
-  const config: SearchParams = {}
-  for (const [key, value] of entries) {
-    config[key] = value
-  }
-  const navigate = useNavigate()
+  const { spaceId, vocabularyId, searchParams, config } = useUrlParams()
   const vocabularyQuery = useVocabulary({ spaceId, vocabularyId })
   const deleteVocabularyMutation = useDeleteVocabulary({ config, spaceId })
+  const navigate = useNavigate()
 
   return (
     <>

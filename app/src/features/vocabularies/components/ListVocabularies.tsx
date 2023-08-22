@@ -1,19 +1,11 @@
 import { ListFilter, ListItems } from "@/components/List"
 import { ListHeaderSection } from "@/features/sections/components/ListHeaderSection"
-import { useParams, useSearchParams } from "react-router-dom"
+
 import { useVocabularies } from "../api/getVocabularies"
-import { type SearchParams } from "@/types"
+import { useUrlParams } from "@/lib/useUrlParams"
 
 export const ListVocabularies = (): JSX.Element => {
-  const { spaceId } = useParams<{
-    spaceId: string
-  }>()
-  const [searchParams, setSearchParams] = useSearchParams()
-  const entries = Array.from(searchParams.entries())
-  const config: SearchParams = {}
-  for (const [key, value] of entries) {
-    config[key] = value
-  }
+  const { spaceId, searchParams, config, setSearchParams } = useUrlParams()
   const vocabulariesQuery = useVocabularies({ config, spaceId })
 
   const resourcesUrl = (resourceId: string): string => {
