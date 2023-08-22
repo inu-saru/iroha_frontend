@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom"
+
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
-import { lazyImport } from "@/utils/lazyImport"
 import { NavItem } from "@/components/Nav"
-const { NavSections } = lazyImport(
-  async () => await import("@/features/sections"),
-  "NavSections"
-)
+import { NavSections } from "@/features/sections"
+
 import { useUrlParams } from "@/lib/useUrlParams"
 
 export const InnerSpaceNav = (): JSX.Element => {
