@@ -1,7 +1,15 @@
 import { useParams, useSearchParams } from "react-router-dom"
 import { type SearchParams } from "@/types"
 
-export const useUrlParams = () => {
+interface UrlParams {
+  spaceId: string | undefined
+  vocabularyId: string | undefined
+  searchParams: URLSearchParams
+  config: object
+  setSearchParams: () => void
+}
+
+export const useUrlParams = (): UrlParams => {
   const { spaceId, vocabularyId } = useParams<{
     spaceId: string
     vocabularyId: string | undefined
