@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { DropDown } from "./DropDown"
-import { Default as DropDownItem } from "./DropDownItem.stories"
+import { DropDownItem } from "./DropDownItem"
+import { Icon } from "../Icon/Icon"
 import React from "react"
 
 const meta = {
-  title: "Components/Elements/DropDown",
+  title: "Components/Elements/DropDown/DropDown",
   component: DropDown,
   parameters: {
     layout: "centered"
@@ -18,7 +19,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    children: <DropDownItem label="ss" />
+  render: () => {
+    return (
+      <div className="h-40">
+        <DropDown trigger={<Icon variant="moreHoriz" />}>
+          <DropDownItem label="Item1" />
+          <DropDownItem label="Item2" />
+        </DropDown>
+      </div>
+    )
   }
 }

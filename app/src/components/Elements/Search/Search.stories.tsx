@@ -1,22 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
-import { DropDownItem } from "./DropDownItem"
+import { Search } from "./Search"
 
 const meta = {
-  title: "Components/Elements/DropDown/DropDownItem",
-  component: DropDownItem,
+  title: "Components/Elements/Search",
+  component: Search,
   parameters: {
     layout: "centered"
   },
   tags: ["autodocs"],
   argTypes: {}
-} satisfies Meta<typeof DropDownItem>
+} satisfies Meta<typeof Search>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    label: "label"
-  }
+  args: {}
 }
