@@ -9,13 +9,10 @@ import { DropDownSection } from "./DropDownSection"
 import { useCreateSection } from "../api/createSection"
 import { useUpdateSection } from "../api/updateSection"
 import { useDeleteSection } from "../api/deleteSection"
-import { useSearchParams } from "react-router-dom"
+import { useUrlParams } from "@/lib/useUrlParams"
 
-interface SectionsProps {
-  spaceId: string | undefined
-}
-
-export const NavSections = ({ spaceId }: SectionsProps): JSX.Element => {
+export const NavSections = (): JSX.Element => {
+  const { spaceId, searchParams } = useUrlParams()
   const sectionsQuery = useSections({ spaceId })
   const createSectionMutation = useCreateSection({ spaceId })
   const updateSectionMutation = useUpdateSection({ spaceId })
@@ -24,7 +21,6 @@ export const NavSections = ({ spaceId }: SectionsProps): JSX.Element => {
   const resourcesUrl = (resourceId: string): string => {
     return `/app/spaces/${spaceId}/vocabularies?sid=${resourceId}`
   }
-  const [searchParams] = useSearchParams()
   const activeResourceId = searchParams.get("sid") ?? null
 
   return (

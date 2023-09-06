@@ -1,6 +1,8 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { DropDown, DropDownItem, Icon } from "@/components/Elements"
+
+import { useUrlParams } from "@/lib/useUrlParams"
 
 interface DropDownVocabularyProps {
   resourceId?: string
@@ -13,10 +15,7 @@ export const DropDownVocabulary = ({
   label,
   deleteToggle
 }: DropDownVocabularyProps): JSX.Element => {
-  const { spaceId } = useParams<{
-    spaceId: string
-  }>()
-  const [searchParams] = useSearchParams()
+  const { spaceId, searchParams } = useUrlParams()
   const navigate = useNavigate()
 
   return (

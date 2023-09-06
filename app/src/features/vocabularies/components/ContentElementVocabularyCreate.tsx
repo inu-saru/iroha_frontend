@@ -1,10 +1,11 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
 import { ContentHeader } from "@/components/Content"
 import { Button, Form, Input } from "@/components/Elements"
+
 import { useCreateVocabulary } from "../api/createVocabulary"
-import { type SearchParams } from "@/types"
+import { useUrlParams } from "@/lib/useUrlParams"
 
 const schema = z.object({
   en: z.string().min(1, { message: "1文字以上入力する必要があります。" }),
@@ -12,15 +13,7 @@ const schema = z.object({
 })
 
 export const ContentElementVocabularyCreate = (): JSX.Element => {
-  const { spaceId } = useParams<{
-    spaceId: string
-  }>()
-  const [searchParams] = useSearchParams()
-  const entries = Array.from(searchParams.entries())
-  const config: SearchParams = {}
-  for (const [key, value] of entries) {
-    config[key] = value
-  }
+  const { spaceId, searchParams, config } = useUrlParams()
   const createVocabularyMutation = useCreateVocabulary({ config, spaceId })
   const navigate = useNavigate()
 
