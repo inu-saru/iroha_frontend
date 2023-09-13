@@ -25,7 +25,8 @@ export const ContentElementVocabulary = (): JSX.Element => {
         {(methods) => (
           <>
             <ContentElement
-              resourceQuery={vocabularyQuery}
+              resourceData={vocabularyQuery.data}
+              isLoading={vocabularyQuery.isLoading}
               dropDown={<DropDownVocabulary deleteToggle={methods.openWith} />}
             />
             <ConfirmationDialog
