@@ -42,7 +42,11 @@ export const NavItemUpdate = ({
   }
   return (
     <div className="flex items-center pl-2 h-8 bg-primary-20">
-      {isLoading ? <Spinner /> : <Icon variant="editActive" className="mr-1" />}
+      {isLoading ? (
+        <Spinner size="sm" />
+      ) : (
+        <Icon variant="editActive" className="mr-1" />
+      )}
       <div className="w-full pr-2 box-border border-b border-primary-200">
         <Form onSubmit={onSubmit} schema={schema}>
           {({ register, formState }) => (
