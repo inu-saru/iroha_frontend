@@ -25,7 +25,8 @@ export const NavItemCreateSection = ({
   return (
     <>
       <NavItemCreate
-        createResourceMutation={createSectionMutation}
+        mutateAsync={createSectionMutation.mutateAsync}
+        isLoading={createSectionMutation.isLoading}
         schema={schema}
         maxLength={255}
         placeholder="新しいセクション"

@@ -30,7 +30,8 @@ export const NavItemUpdateSection = ({
   return (
     <>
       <NavItemUpdate
-        updateResourceMutation={updateSectionMutation}
+        mutateAsync={updateSectionMutation.mutateAsync}
+        isLoading={updateSectionMutation.isLoading}
         schema={schema}
         maxLength={255}
         resourceId={resourceId}

@@ -30,7 +30,8 @@ export const NavItemUpdateSpace = ({
   return (
     <>
       <NavItemUpdate
-        updateResourceMutation={updateSpaceMutation}
+        mutateAsync={updateSpaceMutation.mutateAsync}
+        isLoading={updateSpaceMutation.isLoading}
         schema={schema}
         maxLength={255}
         resourceId={resourceId}

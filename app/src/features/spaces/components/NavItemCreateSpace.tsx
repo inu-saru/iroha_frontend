@@ -25,7 +25,8 @@ export const NavItemCreateSpace = ({
   return (
     <>
       <NavItemCreate
-        createResourceMutation={createSpaceMutation}
+        mutateAsync={createSpaceMutation.mutateAsync}
+        isLoading={createSpaceMutation.isLoading}
         schema={schema}
         maxLength={255}
         placeholder="新しいスペース"
