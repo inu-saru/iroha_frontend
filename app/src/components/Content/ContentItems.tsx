@@ -6,13 +6,13 @@ import { type PagenateResponse } from "@/lib/react-query"
 import React from "react"
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 
-interface NavItemsProps {
+interface ContentItemsProps {
   resourcesQuery: UseInfiniteQueryResult<PagenateResponse, unknown>
 }
 
 export const ContentItems = ({
   resourcesQuery
-}: NavItemsProps): JSX.Element => {
+}: ContentItemsProps): JSX.Element => {
   const loadMoreButtonRef = React.useRef<HTMLButtonElement>(null)
   useIntersectionObserver({
     target: loadMoreButtonRef,
