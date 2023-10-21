@@ -17,7 +17,7 @@ export const Vocabulary = (): JSX.Element => {
         <div className="flex flex-col h-screen">
           <ContentHeaderVocabulary />
           <ContentElementVocabulary />
-          <div className="flex-1 overflow-y-auto bg-white">
+          <div className="flex-1 overflow-y-auto">
             <ContentItemsRelationship />
           </div>
           <ContentFooterRelationship />

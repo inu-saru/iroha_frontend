@@ -73,7 +73,7 @@ export const ContentItemRelationshipUpdate = ({
 
   return (
     <>
-      <div className="bg-white px-8 py-4 border-b border-natural-40">
+      <div className="px-8 py-4 border-b border-natural-40">
         <Form
           onSubmit={onSubmit}
           options={{
