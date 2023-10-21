@@ -1,35 +1,18 @@
 import { type UseInfiniteQueryResult } from "@tanstack/react-query"
 
-import { Spinner, SwitcherDisplay } from "@/components/Elements"
-import { ContentItem } from "./ContentItem"
+import { Spinner } from "@/components/Elements"
 import { type PagenateResponse } from "@/lib/react-query"
 import React from "react"
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 
-interface dropDownWithEditToggleProps {
-  dropDown: JSX.Element | undefined
-  toggle: () => void
-}
-
-const dropDownWithEditToggle = ({
-  dropDown,
-  toggle
-}: dropDownWithEditToggleProps): React.ReactElement | undefined => {
-  return dropDown != null
-    ? React.cloneElement(dropDown, { editToggle: toggle })
-    : undefined
-}
-
 interface ContentItemsProps {
   resourcesQuery: UseInfiniteQueryResult<PagenateResponse, unknown>
-  contentItemUpdate: React.ReactElement
-  dropDown?: JSX.Element
+  contentItem: React.ReactElement
 }
 
 export const ContentItems = ({
   resourcesQuery,
-  contentItemUpdate,
-  dropDown
+  contentItem
 }: ContentItemsProps): JSX.Element => {
   const loadMoreButtonRef = React.useRef<HTMLButtonElement>(null)
   useIntersectionObserver({
@@ -38,14 +21,8 @@ export const ContentItems = ({
     enabled: resourcesQuery.hasNextPage
   })
 
-  const contentItemUpdateWith = ({
-    resource,
-    toggle
-  }: any): React.ReactElement => {
-    return React.cloneElement(contentItemUpdate, {
-      resource,
-      toggle
-    })
+  const contentItemWith = ({ resource }: any): React.ReactElement => {
+    return React.cloneElement(contentItem, resource)
   }
 
   if (resourcesQuery.isLoading) {
@@ -62,30 +39,9 @@ export const ContentItems = ({
         {resourcesQuery.data?.pages.map((page) =>
           page.resources.map((resource, index) => (
             <div key={index}>
-              <SwitcherDisplay>
-                {(methods) => (
-                  <>
-                    {methods.isOpen ? (
-                      <div>
-                        {contentItemUpdateWith({
-                          resource,
-                          toggle: methods.toggle
-                        })}
-                      </div>
-                    ) : (
-                      <ContentItem
-                        resourceId={resource.id}
-                        original={resource.en}
-                        translation={resource.ja}
-                        dropDown={dropDownWithEditToggle({
-                          dropDown,
-                          toggle: methods.toggle
-                        })}
-                      />
-                    )}
-                  </>
-                )}
-              </SwitcherDisplay>
+              {contentItemWith({
+                resource
+              })}
             </div>
           ))
         )}

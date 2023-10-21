@@ -2,8 +2,7 @@ import { useRelationships } from "../api/getRelationships"
 import { ContentItems } from "@/components/Content/ContentItems"
 import { useUrlParams } from "@/lib/useUrlParams"
 
-import { ContentItemRelationshipUpdate } from "./ContentItemRelationshipUpdate"
-import { DropDownRelationship } from "./DropDownRelationship"
+import { ContentItemRelationship } from "./ContentItemRelationship"
 
 export const ContentItemsRelationship = (): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
@@ -13,8 +12,7 @@ export const ContentItemsRelationship = (): JSX.Element => {
     <>
       <ContentItems
         resourcesQuery={relationshipQuery}
-        contentItemUpdate={<ContentItemRelationshipUpdate />}
-        dropDown={<DropDownRelationship />}
+        contentItem={<ContentItemRelationship />}
       />
     </>
   )

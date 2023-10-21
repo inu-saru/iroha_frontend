@@ -18,11 +18,10 @@ const schema = z.object({
   ja: z.string().min(0)
 })
 
-// TODO: 「ContentItemRelationshipUpdateProps | any」の' | any'については削除できるようにしたい
 export const ContentItemRelationshipUpdate = ({
   resource,
   toggle
-}: ContentItemRelationshipUpdateProps | any): JSX.Element => {
+}: ContentItemRelationshipUpdateProps): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
 
   const vocabularyQuery = useVocabulary({ spaceId, vocabularyId: resource.id })
