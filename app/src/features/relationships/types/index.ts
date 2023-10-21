@@ -12,3 +12,8 @@ export type RelationshipAsset = {
   language_type: string
   positions: [number]
 } & BaseEntity
+
+export type Follow = {
+  relationship_id: string
+  positions: string
+} & Vocabulary

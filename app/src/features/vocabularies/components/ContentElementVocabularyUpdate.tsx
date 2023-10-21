@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
 import { ContentHeader } from "@/components/Content"
-import { Button, Form, Input } from "@/components/Elements"
+import { Button, Form, Input, Spinner } from "@/components/Elements"
 
 import { useUpdateVocabulary } from "../api/updateVocabulary"
 import { useVocabulary } from "../api/getVocabulary"
@@ -33,6 +33,14 @@ export const ContentElementVocabularyUpdate = (): JSX.Element => {
       `/app/spaces/${spaceId}/vocabularies/${
         vocabulary.id
       }?${searchParams.toString()}`
+    )
+  }
+
+  if (vocabularyQuery.isLoading) {
+    return (
+      <div className="py-4 w-full flex justify-center items-center">
+        <Spinner />
+      </div>
     )
   }
 
