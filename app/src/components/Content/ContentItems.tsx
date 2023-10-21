@@ -41,7 +41,7 @@ export const ContentItems = ({
   const contentItemUpdateWith = ({
     resource,
     toggle
-  }: NavitemUpadteResourceDataProps): React.ReactElement => {
+  }: any): React.ReactElement => {
     return React.cloneElement(contentItemUpdate, {
       resource,
       toggle
