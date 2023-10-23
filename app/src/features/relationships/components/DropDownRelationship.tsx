@@ -1,20 +1,16 @@
 import { DropDown, DropDownItem, Icon } from "@/components/Elements"
-
-interface ConfirmationDialogRelationshipProps {
-  relationshipId: string
-  label: string
-}
+import { Follow } from "../types"
 
 interface DropDownRelationshipProps {
-  resourceId?: string
-  label?: string
+  resource: Follow
   editToggle?: () => void
+  deleteToggle?: (data: object) => void
 }
 
 export const DropDownRelationship = ({
-  resourceId = "",
-  label = "",
-  editToggle = () => {}
+  resource,
+  editToggle = () => {},
+  deleteToggle = () => {}
 }: DropDownRelationshipProps): JSX.Element => {
   return (
     <DropDown trigger={<Icon variant="moreHoriz" bgColor="white" />}>
@@ -24,7 +20,15 @@ export const DropDownRelationship = ({
           editToggle()
         }}
       />
-      <DropDownItem label="関連語から削除" />
+      <DropDownItem
+        label="関連語から削除"
+        handleClick={() => {
+          deleteToggle({
+            label: resource.en,
+            relationshipId: resource.relationship_id
+          })
+        }}
+      />
     </DropDown>
   )
 }
