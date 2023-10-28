@@ -17,3 +17,10 @@ export type Follow = {
   relationship_id: string
   positions: string
 } & Vocabulary
+
+export type WipRelationship = {
+  followed: Vocabulary
+  follower: Vocabulary
+  language_type: string
+  positions: [number]
+} & BaseEntity
