@@ -18,8 +18,7 @@ export const DialogRelationshipDelete = ({
   const { spaceId, vocabularyId, config } = useUrlParams()
   const deleteRelationshipMutation = useDeleteRelationship({
     spaceId,
-    vocabularyId,
-    config
+    config: { ...config, followed_id: vocabularyId }
   })
 
   return (
