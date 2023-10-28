@@ -12,7 +12,6 @@ import {
 
 export const getRelationships = async (
   spaceId: string | undefined,
-  vocabularyId: string | undefined,
   config: object
 ): Promise<PagenateResponse> => {
   const response = await axios.get(`/api/v1/spaces/${spaceId}/relationships`, {
@@ -25,13 +24,11 @@ type QueryFnType = typeof getRelationships
 
 interface UseRelationshipsOptions {
   spaceId: string | undefined
-  vocabularyId: string | undefined
   config?: QueryConfig<QueryFnType> | object
 }
 
 export const useRelationships = ({
   spaceId,
-  vocabularyId,
   config = {}
 }: UseRelationshipsOptions): UseInfiniteQueryResult<
   PagenateResponse,
@@ -40,7 +37,7 @@ export const useRelationships = ({
   return useInfiniteQuery({
     queryKey: [`spaces/${spaceId}/relationships`, config],
     queryFn: async ({ pageParam = 1 }) =>
-      await getRelationships(spaceId, vocabularyId, {
+      await getRelationships(spaceId, {
         ...config,
         page: pageParam
       }),

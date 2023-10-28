@@ -8,7 +8,6 @@ export const ContentItemsRelationship = (): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
   const relationshipsQuery = useRelationships({
     spaceId,
-    vocabularyId,
     config: { ...config, followed_id: vocabularyId }
   })
 
