@@ -4,7 +4,7 @@ import { Button, Form, Input, Spinner } from "@/components/Elements"
 
 import { useUpdateRelationship } from "../api/updateRelationship"
 import { useUrlParams } from "@/lib/useUrlParams"
-import { useVocabulary } from "@/features/vocabularies/api/getVocabulary"
+import { useRelationship } from "../api/getRelationship"
 
 import { type Follow } from "../types"
 
@@ -24,7 +24,10 @@ export const ContentItemRelationshipUpdate = ({
 }: ContentItemRelationshipUpdateProps): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
 
-  const vocabularyQuery = useVocabulary({ spaceId, vocabularyId: resource.id })
+  const relationshipQuery = useRelationship({
+    spaceId,
+    relationshipId: resource.id
+  })
 
   const updateRelationshipMutation = useUpdateRelationship({
     spaceId,
@@ -36,7 +39,7 @@ export const ContentItemRelationshipUpdate = ({
   const onSubmit = async (data: any): Promise<void> => {
     const vocabularyUpdateParams = {
       method: "PUT",
-      url: `/api/v1/spaces/${spaceId}/vocabularies/${resource.id}`,
+      url: `/api/v1/spaces/${spaceId}/vocabularies/${resource.follower.id}`,
       body: {
         vocabulary: {
           en: data.en,
@@ -46,7 +49,7 @@ export const ContentItemRelationshipUpdate = ({
     }
     const relationshipUpdateParams = {
       method: "PUT",
-      url: `/api/v1/spaces/${spaceId}/relationships/${resource.relationship_id}`,
+      url: `/api/v1/spaces/${spaceId}/relationships/${resource.id}`,
       body: {
         relationship: {
           positions: []
@@ -54,7 +57,7 @@ export const ContentItemRelationshipUpdate = ({
       }
     }
     const output = {
-      requests: [vocabularyUpdateParams]
+      requests: [vocabularyUpdateParams, relationshipUpdateParams]
     }
 
     await updateRelationshipMutation.mutateAsync({
@@ -63,7 +66,7 @@ export const ContentItemRelationshipUpdate = ({
     toggle()
   }
 
-  if (vocabularyQuery.isLoading) {
+  if (relationshipQuery.isLoading) {
     return (
       <div className="py-4 w-full flex justify-center items-center">
         <Spinner />
@@ -78,8 +81,8 @@ export const ContentItemRelationshipUpdate = ({
           onSubmit={onSubmit}
           options={{
             defaultValues: {
-              en: vocabularyQuery.data?.en,
-              ja: vocabularyQuery.data?.ja
+              en: relationshipQuery.data?.follower.en,
+              ja: relationshipQuery.data?.follower.ja
             }
           }}
           schema={schema}
