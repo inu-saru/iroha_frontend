@@ -8,7 +8,7 @@ import {
 } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
-import { WipRelationship, type Relationship } from "../types"
+import { type Relationship, type BatchRelationship } from "../types"
 
 export interface UpdateRelationshipDTO {
   data: any
@@ -16,7 +16,7 @@ export interface UpdateRelationshipDTO {
 
 export const updateRelationship = async ({
   data
-}: UpdateRelationshipDTO): Promise<Relationship> => {
+}: UpdateRelationshipDTO): Promise<BatchRelationship> => {
   const response = await axios.post(`/api/v1/batch`, data)
   return response.data
 }
@@ -26,7 +26,7 @@ let thisSpaceId: string
 interface UseUpdateRelationshipOptions {
   spaceId: string | undefined
   vocabularyId: string | undefined
-  resource: WipRelationship
+  resource: Relationship
   config?: MutationConfig<typeof updateRelationship>
 }
 
@@ -124,7 +124,7 @@ export const useUpdateRelationship = ({
         `spaces/${spaceId}/relationship`,
         updatingRelationshipId
       ])
-      const previousRelationship = queryClient.getQueryData<WipRelationship>([
+      const previousRelationship = queryClient.getQueryData<Relationship>([
         `spaces/${spaceId}/relationship`,
         updatingRelationshipId
       ])

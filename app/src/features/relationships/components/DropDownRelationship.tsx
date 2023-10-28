@@ -1,8 +1,8 @@
 import { DropDown, DropDownItem, Icon } from "@/components/Elements"
-import { Follow } from "../types"
+import { Relationship } from "../types"
 
 interface DropDownRelationshipProps {
-  resource: Follow
+  resource: Relationship
   editToggle?: () => void
   deleteToggle?: (data: object) => void
 }

@@ -4,11 +4,11 @@ import { SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { DropDownRelationship } from "./DropDownRelationship"
 import { ContentItemRelationshipUpdate } from "./ContentItemRelationshipUpdate"
 import { DialogRelationshipDelete } from "./DialogRelationshipDelete"
-import { type WipRelationship } from "../types"
+import { type Relationship } from "../types"
 
-// TODO: 「resource: WipRelationship | any」の' | any'については削除できるようにしたい
+// TODO: 「resource: Relationship | any」の' | any'については削除できるようにしたい
 export const ContentItemRelationship = (
-  resource: WipRelationship | any
+  resource: Relationship | any
 ): JSX.Element => {
   return (
     <>

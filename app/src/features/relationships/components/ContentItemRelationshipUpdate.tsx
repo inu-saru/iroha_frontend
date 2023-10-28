@@ -6,10 +6,10 @@ import { useUpdateRelationship } from "../api/updateRelationship"
 import { useUrlParams } from "@/lib/useUrlParams"
 import { useRelationship } from "../api/getRelationship"
 
-import { type Follow } from "../types"
+import { type Relationship } from "../types"
 
 interface ContentItemRelationshipUpdateProps {
-  resource: Follow
+  resource: Relationship
   toggle: () => void
 }
 

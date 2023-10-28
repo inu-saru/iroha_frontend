@@ -8,7 +8,7 @@ import {
 } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
-import { type Relationship } from "../types"
+import { type BatchRelationship } from "../types"
 
 export interface CreateRelationshipDTO {
   data: any
@@ -16,7 +16,7 @@ export interface CreateRelationshipDTO {
 
 export const createRelationship = async ({
   data
-}: CreateRelationshipDTO): Promise<Relationship> => {
+}: CreateRelationshipDTO): Promise<BatchRelationship> => {
   const response = await axios.post(`/api/v1/batch`, data)
   return response.data
 }

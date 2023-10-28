@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { axios } from "@/lib/axios"
 import { type ExtractFnReturnType, type QueryConfig } from "@/lib/react-query"
 
-import { type WipRelationship } from "../types"
+import { type Relationship } from "../types"
 
 export const getRelationship = async ({
   spaceId,
@@ -11,7 +11,7 @@ export const getRelationship = async ({
 }: {
   spaceId: string | undefined
   relationshipId: string | undefined
-}): Promise<WipRelationship | null> => {
+}): Promise<Relationship | null> => {
   const response = await axios.get(
     `/api/v1/spaces/${spaceId}/relationships/${relationshipId}`
   )
