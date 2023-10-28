@@ -22,7 +22,7 @@ let thisSpaceId: string
 
 interface UseDeleteVocabularyOptions {
   spaceId: string | undefined
-  config?: MutationConfig<typeof deleteRelationship>
+  config?: MutationConfig<typeof deleteRelationship> | object
 }
 
 export const useDeleteRelationship = ({

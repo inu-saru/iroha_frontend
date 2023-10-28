@@ -26,7 +26,7 @@ type QueryFnType = typeof getRelationships
 interface UseRelationshipsOptions {
   spaceId: string | undefined
   vocabularyId: string | undefined
-  config?: QueryConfig<QueryFnType>
+  config?: QueryConfig<QueryFnType> | object
 }
 
 export const useRelationships = ({
