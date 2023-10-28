@@ -8,8 +8,6 @@ import {
 } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
-import { type Vocabulary } from "../types"
-
 export const deleteVocabulary = async ({
   vocabularyId
 }: {

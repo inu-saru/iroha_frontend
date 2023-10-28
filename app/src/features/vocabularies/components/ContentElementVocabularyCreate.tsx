@@ -36,7 +36,7 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
       <ContentHeader
         to={`/app/spaces/${spaceId}/vocabularies?${searchParams.toString()}`}
       />
-      <div className="p-8 bg-white border-b border-natural-40">
+      <div className="p-8 border-b border-natural-40">
         <Form onSubmit={onSubmit} schema={schema}>
           {({ register, formState }) => (
             <>

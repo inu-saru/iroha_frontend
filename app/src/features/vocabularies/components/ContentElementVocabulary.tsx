@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
 import { ConfirmationDialog } from "@/components/Dialog"
-import { ContentHeader } from "@/components/Content"
 import { ContentElement } from "@/components/Content/ContentElement"
 import { Button, SwitcherDialog } from "@/components/Elements"
 
@@ -18,9 +17,6 @@ export const ContentElementVocabulary = (): JSX.Element => {
 
   return (
     <>
-      <ContentHeader
-        to={`/app/spaces/${spaceId}/vocabularies?${searchParams.toString()}`}
-      />
       <SwitcherDialog>
         {(methods) => (
           <>
