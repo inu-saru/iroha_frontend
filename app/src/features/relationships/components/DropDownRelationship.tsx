@@ -1,8 +1,8 @@
 import { DropDown, DropDownItem, Icon } from "@/components/Elements"
-import { Follow } from "../types"
+import { Relationship } from "../types"
 
 interface DropDownRelationshipProps {
-  resource: Follow
+  resource: Relationship
   editToggle?: () => void
   deleteToggle?: (data: object) => void
 }
@@ -24,8 +24,8 @@ export const DropDownRelationship = ({
         label="関連語から削除"
         handleClick={() => {
           deleteToggle({
-            label: resource.en,
-            relationshipId: resource.relationship_id
+            label: resource.follower.en,
+            relationshipId: resource.id
           })
         }}
       />

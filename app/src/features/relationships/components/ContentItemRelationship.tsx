@@ -4,11 +4,11 @@ import { SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { DropDownRelationship } from "./DropDownRelationship"
 import { ContentItemRelationshipUpdate } from "./ContentItemRelationshipUpdate"
 import { DialogRelationshipDelete } from "./DialogRelationshipDelete"
-import { type Follow } from "../types"
+import { type Relationship } from "../types"
 
-// TODO: 「resource: Follow | any」の' | any'については削除できるようにしたい
+// TODO: 「resource: Relationship | any」の' | any'については削除できるようにしたい
 export const ContentItemRelationship = (
-  resource: Follow | any
+  resource: Relationship | any
 ): JSX.Element => {
   return (
     <>
@@ -40,9 +40,11 @@ export const ContentItemRelationship = (
                         }
                       >
                         <div className="flex gap-x-8 items-center">
-                          <div className="text-h300 w-full">{resource.en}</div>
+                          <div className="text-h300 w-full">
+                            {resource.follower.en}
+                          </div>
                           <div className="text-middle text-natural-700 w-full">
-                            {resource.ja}
+                            {resource.follower.ja}
                           </div>
                         </div>
                       </ContentItem>

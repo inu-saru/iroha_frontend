@@ -8,7 +8,7 @@ import {
 } from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
-import { type Relationship } from "../types"
+import { type BatchRelationship } from "../types"
 
 export interface CreateRelationshipDTO {
   data: any
@@ -16,7 +16,7 @@ export interface CreateRelationshipDTO {
 
 export const createRelationship = async ({
   data
-}: CreateRelationshipDTO): Promise<Relationship> => {
+}: CreateRelationshipDTO): Promise<BatchRelationship> => {
   const response = await axios.post(`/api/v1/batch`, data)
   return response.data
 }
@@ -39,13 +39,9 @@ export const useCreateRelationship = ({
 
   return useMutation({
     onMutate: async (newRelationship) => {
+      // vocaburaries
       await queryClient.cancelQueries([
         `spaces/${spaceId}/vocabularies`,
-        config
-      ])
-
-      await queryClient.cancelQueries([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
         config
       ])
 
@@ -54,25 +50,8 @@ export const useCreateRelationship = ({
         config
       ])
 
-      const previousFollowers = queryClient.getQueryData<InfiniteQueryData>([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
-        config
-      ])
-
       const newVocabulariesPagesArray =
         previousVocabularies?.pages.map((page, index) => {
-          return index === 0
-            ? {
-                resources: [
-                  newRelationship["data"]["requests"][0]["body"]["vocabulary"],
-                  ...(page.resources || [])
-                ]
-              }
-            : page
-        }) ?? []
-
-      const newFollowersPagesArray =
-        previousFollowers?.pages.map((page, index) => {
           return index === 0
             ? {
                 resources: [
@@ -91,15 +70,48 @@ export const useCreateRelationship = ({
         })
       )
 
+      // relationships
+      await queryClient.cancelQueries([
+        `spaces/${spaceId}/relationships`,
+        { ...config, followed_id: vocabularyId }
+      ])
+
+      const previousRelationships = queryClient.getQueryData<InfiniteQueryData>(
+        [
+          `spaces/${spaceId}/relationships`,
+          { ...config, followed_id: vocabularyId }
+        ]
+      )
+
+      const newPagesRelationshipsArray =
+        previousRelationships?.pages.map((page, index) => {
+          return index === 0
+            ? {
+                resources: [
+                  {
+                    follower:
+                      newRelationship["data"]["requests"][0]["body"][
+                        "vocabulary"
+                      ]
+                  },
+                  ...(page.resources || [])
+                ]
+              }
+            : page
+        }) ?? []
+
       queryClient.setQueryData(
-        [`spaces/${spaceId}/vocabularies/${vocabularyId}/followers`, config],
-        (previousFollowers: any) => ({
-          pages: newFollowersPagesArray,
-          pageParams: previousFollowers?.pageParams
+        [
+          `spaces/${spaceId}/relationships`,
+          { ...config, followed_id: vocabularyId }
+        ],
+        (previousRelationships: any) => ({
+          pages: newPagesRelationshipsArray,
+          pageParams: previousRelationships?.pageParams
         })
       )
 
-      return { previousVocabularies, previousFollowers }
+      return { previousVocabularies, previousRelationships }
     },
     onError: (_, __, context: any) => {
       if (context?.previousVocabularies) {
@@ -108,18 +120,19 @@ export const useCreateRelationship = ({
           context.previousVocabularies
         )
       }
-      if (context?.previousFollowers) {
+      if (context?.previousRelationships) {
         queryClient.setQueryData(
-          [`spaces/${spaceId}/vocabularies/${vocabularyId}/followers`, config],
-          context.previousFollowers
+          [
+            `spaces/${spaceId}/relationships`,
+            { ...config, followed_id: vocabularyId }
+          ],
+          context.previousRelationships
         )
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries([`spaces/${spaceId}/vocabularies`])
-      queryClient.invalidateQueries([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`
-      ])
+      queryClient.invalidateQueries([`spaces/${spaceId}/relationships`])
       addToast({
         variant: "success",
         title: "関連語を作成しました。"

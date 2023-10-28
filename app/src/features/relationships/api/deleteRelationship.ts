@@ -22,13 +22,11 @@ let thisSpaceId: string
 
 interface UseDeleteVocabularyOptions {
   spaceId: string | undefined
-  vocabularyId: string | undefined
-  config?: MutationConfig<typeof deleteRelationship>
+  config?: MutationConfig<typeof deleteRelationship> | object
 }
 
 export const useDeleteRelationship = ({
   spaceId,
-  vocabularyId,
   config
 }: UseDeleteVocabularyOptions) => {
   const { addToast } = useToastStore()
@@ -37,46 +35,43 @@ export const useDeleteRelationship = ({
   return useMutation({
     onMutate: async ({ relationshipId }) => {
       await queryClient.cancelQueries([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
+        `spaces/${spaceId}/relationships`,
         config
       ])
 
-      const previousFollowers = queryClient.getQueryData<InfiniteQueryData>([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
-        config
-      ])
+      const previousRelationships = queryClient.getQueryData<InfiniteQueryData>(
+        [`spaces/${spaceId}/relationships`, config]
+      )
 
       const newPagesArray =
-        previousFollowers?.pages.map((page) => {
+        previousRelationships?.pages.map((page) => {
           return {
             ...page,
-            resources: page.resources.filter((follower) => {
-              return follower.relationship_id !== relationshipId
+            resources: page.resources.filter((relationship) => {
+              return relationship.id !== relationshipId
             })
           }
         }) ?? []
 
       queryClient.setQueryData(
-        [`spaces/${spaceId}/vocabularies/${vocabularyId}/followers`, config],
-        (previousFollowers: any) => ({
+        [`spaces/${spaceId}/relationships`, config],
+        (previousRelationships: any) => ({
           pages: newPagesArray,
-          pageParams: previousFollowers?.pageParams
+          pageParams: previousRelationships?.pageParams
         })
       )
-      return { previousFollowers }
+      return { previousRelationships }
     },
     onError: (_, __, context: any) => {
-      if (context?.previousFollowers) {
+      if (context?.previousRelationships) {
         queryClient.setQueryData(
-          [`spaces/${spaceId}/vocabularies/${vocabularyId}/followers`, config],
-          context.previousFollowers
+          [`spaces/${spaceId}/relationships`, config],
+          context.previousRelationships
         )
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([
-        `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`
-      ])
+      queryClient.invalidateQueries([`spaces/${spaceId}/relationships`])
       addToast({
         variant: "success",
         title: "関連語から削除しました。"

@@ -6,12 +6,15 @@ import { ContentItemRelationship } from "./ContentItemRelationship"
 
 export const ContentItemsRelationship = (): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
-  const relationshipQuery = useRelationships({ spaceId, vocabularyId, config })
+  const relationshipsQuery = useRelationships({
+    spaceId,
+    config: { ...config, followed_id: vocabularyId }
+  })
 
   return (
     <>
       <ContentItems
-        resourcesQuery={relationshipQuery}
+        resourcesQuery={relationshipsQuery}
         contentItem={<ContentItemRelationship />}
       />
     </>

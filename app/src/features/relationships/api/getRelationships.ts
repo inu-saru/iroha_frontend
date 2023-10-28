@@ -12,15 +12,11 @@ import {
 
 export const getRelationships = async (
   spaceId: string | undefined,
-  vocabularyId: string | undefined,
   config: object
 ): Promise<PagenateResponse> => {
-  const response = await axios.get(
-    `/api/v1/spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
-    {
-      params: { ...config }
-    }
-  )
+  const response = await axios.get(`/api/v1/spaces/${spaceId}/relationships`, {
+    params: { ...config }
+  })
   return pagenateResponse(response)
 }
 
@@ -28,25 +24,20 @@ type QueryFnType = typeof getRelationships
 
 interface UseRelationshipsOptions {
   spaceId: string | undefined
-  vocabularyId: string | undefined
-  config?: QueryConfig<QueryFnType>
+  config?: QueryConfig<QueryFnType> | object
 }
 
 export const useRelationships = ({
   spaceId,
-  vocabularyId,
   config = {}
 }: UseRelationshipsOptions): UseInfiniteQueryResult<
   PagenateResponse,
   unknown
 > => {
   return useInfiniteQuery({
-    queryKey: [
-      `spaces/${spaceId}/vocabularies/${vocabularyId}/followers`,
-      config
-    ],
+    queryKey: [`spaces/${spaceId}/relationships`, config],
     queryFn: async ({ pageParam = 1 }) =>
-      await getRelationships(spaceId, vocabularyId, {
+      await getRelationships(spaceId, {
         ...config,
         page: pageParam
       }),
