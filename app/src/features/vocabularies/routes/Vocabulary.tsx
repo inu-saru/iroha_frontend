@@ -4,7 +4,7 @@ import { ContentHeaderVocabulary } from "../components/ContentHeaderVocabulary"
 import { ContentElementVocabulary } from "../components/ContentElementVocabulary"
 import { ListVocabularies } from "../components/ListVocabularies"
 import { ContentItemsRelationship } from "@/features/relationships/components/ContentItemsRelationship"
-import { ContentFooterRelationship } from "@/features/relationships/components/ContentFooterRelationship"
+import { RelationshipContentFooter } from "@/features/relationships/composer/RelationshipContentFooter"
 
 export const Vocabulary = (): JSX.Element => {
   return (
@@ -20,7 +20,7 @@ export const Vocabulary = (): JSX.Element => {
           <div className="flex-1 overflow-y-auto">
             <ContentItemsRelationship />
           </div>
-          <ContentFooterRelationship />
+          <RelationshipContentFooter />
         </div>
       </ContentLayout>
     </>
