@@ -21,7 +21,7 @@ export const DropDown = ({ trigger, children }: DropDownProps): JSX.Element => {
       {on && (
         <ul
           ref={ref}
-          className="z-10 absolute right-0 top-6 bg-white rounded-sm shadow inline-block py-2 text-default text-primary-200 visible opacity-100"
+          className="w-max z-10 absolute right-0 top-6 bg-white rounded-sm shadow inline-block py-2 text-default text-primary-200 visible opacity-100"
         >
           {children}
         </ul>
