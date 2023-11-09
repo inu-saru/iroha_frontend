@@ -1,5 +1,6 @@
 export * from "./Base"
 export * from "./Button"
+export * from "./Chip"
 export * from "./DropDown"
 export * from "./Form"
 export * from "./Head"
