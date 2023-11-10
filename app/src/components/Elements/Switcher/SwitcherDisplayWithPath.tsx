@@ -3,7 +3,7 @@ import { useDisclosure } from "@/hooks/useDisclosure"
 
 interface MethodsProps {
   isOpenOnPath: () => boolean
-  openWithPath: (data: object) => void
+  openWithPath: () => void
   closeWith: () => void
 }
 
