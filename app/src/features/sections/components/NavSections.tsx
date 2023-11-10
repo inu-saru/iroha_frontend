@@ -2,7 +2,7 @@ import { Icon, SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSection } from "./NavItemCreateSection"
 import { NavItemUpdateSection } from "./NavItemUpdateSection"
-import { ConfirmationDialogSection } from "./ConfirmationDialogSection"
+import { DialogSectionDelete } from "./DialogSectionDelete"
 
 import { useSections } from "../api/getSections"
 import { DropDownSection } from "./DropDownSection"
@@ -59,7 +59,7 @@ export const NavSections = (): JSX.Element => {
               icon="section"
               dropDown={<DropDownSection deleteToggle={methods.openWith} />}
             />
-            <ConfirmationDialogSection
+            <DialogSectionDelete
               resourceId={methods.targetData.sectionId}
               label={methods.targetData.label}
               deleteSectionMutation={deleteSectionMutation}
