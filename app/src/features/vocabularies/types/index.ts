@@ -10,4 +10,5 @@ export type Vocabulary = {
 export interface VocabularySearchParams {
   q?: string
   sid?: string
+  vocabulary_type?: string
 }

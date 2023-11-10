@@ -18,8 +18,6 @@ export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       className = "",
       size = "default",
       isActive = false,
-      startIcon,
-      endIcon,
       ...props
     },
     ref
