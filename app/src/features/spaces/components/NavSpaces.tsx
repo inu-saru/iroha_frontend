@@ -2,7 +2,7 @@ import { Icon, SwitcherDialog, SwitcherDisplay } from "@/components/Elements"
 import { NavHeader, NavItems } from "@/components/Nav"
 import { NavItemCreateSpace } from "./NavItemCreateSpace"
 import { NavItemUpdateSpace } from "./NavItemUpdateSpace"
-import { ConfirmationDialogSpace } from "./ConfirmationDialogSpace"
+import { DialogSpaceDelete } from "./DialogSpaceDelete"
 
 import { useSpaces } from "../api/getSpaces"
 import { DropDownSpace } from "./DropDownSpace"
@@ -53,7 +53,7 @@ export const NavSpaces = (): JSX.Element => {
               icon="space"
               dropDown={<DropDownSpace deleteToggle={methods.openWith} />}
             />
-            <ConfirmationDialogSpace
+            <DialogSpaceDelete
               resourceId={methods.targetData.spaceId}
               label={methods.targetData.label}
               deleteSpaceMutation={deleteSpaceMutation}

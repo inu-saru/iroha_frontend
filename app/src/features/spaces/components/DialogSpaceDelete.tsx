@@ -4,7 +4,7 @@ import { type AxiosError } from "axios"
 import { Button } from "@/components/Elements"
 import { ConfirmationDialog } from "@/components/Dialog"
 
-interface ConfirmationDialogSpaceProps {
+interface DialogSpaceDeleteProps {
   deleteSpaceMutation: UseMutationResult<
     any,
     AxiosError<unknown, any>,
@@ -17,13 +17,13 @@ interface ConfirmationDialogSpaceProps {
   close: () => void
 }
 
-export const ConfirmationDialogSpace = ({
+export const DialogSpaceDelete = ({
   resourceId,
   label,
   deleteSpaceMutation,
   isOpen,
   close
-}: ConfirmationDialogSpaceProps): JSX.Element => {
+}: DialogSpaceDeleteProps): JSX.Element => {
   return (
     <ConfirmationDialog
       isOpen={isOpen}
