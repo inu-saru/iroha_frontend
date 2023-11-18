@@ -28,12 +28,23 @@ export const useCreateSpace = ({ config }: UseCreateSpaceOptions = {}) => {
     onMutate: async (newSpace) => {
       await queryClient.cancelQueries(["spaces"])
 
-      const previousSpaces = queryClient.getQueryData<Space[]>(["spaces"])
+      const previousSpaces = queryClient.getQueryData<InfiniteQueryData>([
+        "spaces"
+      ])
 
-      queryClient.setQueryData(
-        ["spaces"],
-        [newSpace.data, ...(previousSpaces || [])]
-      )
+      const newSpacesPagesArray =
+        previousSpaces?.pages.map((page, index) => {
+          return index === 0
+            ? {
+                resources: [newSpace.data, ...(page.resources || [])]
+              }
+            : page
+        }) ?? []
+
+      queryClient.setQueryData(["spaces"], (previousSpaces: any) => ({
+        pages: newSpacesPagesArray,
+        pageParams: previousSpaces?.pageParams
+      }))
 
       return { previousSpaces }
     },
