@@ -1,23 +1,11 @@
 import { DropDown, DropDownItem, Icon } from "@/components/Elements"
-import { Space } from "../types"
-
-// TODO: resourceIdに変更してConfirmationDialogPropsにリファクタリングすること
-interface DialogSpaceDeleteProps {
-  spaceId: string | undefined
-  label: string | undefined
-}
 
 interface DropDownSpaceProps {
-  resource: Space
-  resourceId?: string
-  label?: string
   editToggle?: () => void
-  deleteToggle: (props: DialogSpaceDeleteProps) => void
+  deleteToggle: () => void
 }
 
 export const DropDownSpace = ({
-  resourceId = "",
-  label = "",
   editToggle = () => {},
   deleteToggle
 }: DropDownSpaceProps): JSX.Element => {
@@ -32,10 +20,7 @@ export const DropDownSpace = ({
       <DropDownItem
         label="削除"
         handleClick={() => {
-          deleteToggle({
-            spaceId: resourceId,
-            label
-          })
+          deleteToggle()
         }}
       />
     </DropDown>

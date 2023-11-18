@@ -4,28 +4,30 @@ import { NavItemSpace } from "../components/NavItemSpace"
 import { DropDownSpace } from "../components/DropDownSpace"
 import { NavItemSpaceUpdate } from "../components/NavItemSpaceUpdate"
 import { DialogSpaceDelete } from "../components/DialogSpaceDelete"
-import { type Relationship } from "../types"
+import { type Space } from "../types"
 
-// TODO: 「resource: Relationship | any」の' | any'については削除できるようにしたい
-export const SpaceNavItem = (resource: Relationship | any): JSX.Element => {
+// TODO: 「resource: Space | any」の' | any'については削除できるようにしたい
+export const SpaceNavItem = (resource: Space | any): JSX.Element => {
   return (
     <>
       <SwitcherDialog>
         {(deleteSwitch) => (
           <>
             <DialogSpaceDelete
+              resource={resource}
               isOpen={deleteSwitch.isOpen}
               close={deleteSwitch.closeWith}
-              targetData={deleteSwitch.targetData}
             />
             <SwitcherDisplay>
               {(editSwitch) => (
                 <>
                   {editSwitch.isOpen ? (
-                    <NavItemSpaceUpdate
-                      resource={resource}
-                      toggle={editSwitch.toggle}
-                    />
+                    <div ref={editSwitch.clickAway}>
+                      <NavItemSpaceUpdate
+                        resource={resource}
+                        toggle={editSwitch.toggle}
+                      />
+                    </div>
                   ) : (
                     <>
                       <NavItemSpace

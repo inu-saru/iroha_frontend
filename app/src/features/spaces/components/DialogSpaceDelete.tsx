@@ -1,29 +1,22 @@
-import { type UseMutationResult } from "@tanstack/react-query"
-import { type AxiosError } from "axios"
-
 import { Button } from "@/components/Elements"
 import { ConfirmationDialog } from "@/components/Dialog"
 
+import { useDeleteSpace } from "../api/deleteSpace"
+import { type Space } from "../types"
+
 interface DialogSpaceDeleteProps {
-  deleteSpaceMutation: UseMutationResult<
-    any,
-    AxiosError<unknown, any>,
-    any,
-    unknown
-  >
-  resourceId: number
-  label: string
+  resource: Space
   isOpen: boolean
   close: () => void
 }
 
 export const DialogSpaceDelete = ({
-  resourceId,
-  label,
-  deleteSpaceMutation,
+  resource,
   isOpen,
   close
 }: DialogSpaceDeleteProps): JSX.Element => {
+  const deleteSpaceMutation = useDeleteSpace()
+
   return (
     <ConfirmationDialog
       isOpen={isOpen}
@@ -32,7 +25,7 @@ export const DialogSpaceDelete = ({
         <Button
           onClick={async () => {
             await deleteSpaceMutation.mutateAsync({
-              spaceId: resourceId
+              spaceId: resource.id
             })
             close()
           }}
@@ -41,7 +34,7 @@ export const DialogSpaceDelete = ({
         </Button>
       }
       title={"スペースの削除"}
-      body={`${label}を削除しますか？`}
+      body={`${resource.name}を削除しますか？`}
     />
   )
 }
