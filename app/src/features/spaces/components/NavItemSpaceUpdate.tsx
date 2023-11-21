@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 import { Form, Icon, Spinner } from "@/components/Elements"
-import { NewNavItem } from "@/components/Nav/NewNavItem"
+import { NavItem } from "@/components/Nav"
 
 import { useUrlParams } from "@/lib/useUrlParams"
 import { useUpdateSpace } from "../api/updateSpace"
@@ -50,7 +50,7 @@ export const NavItemSpaceUpdate = ({
 
   return (
     <>
-      <NewNavItem isEditing={true}>
+      <NavItem isEditing={true}>
         <div className="flex items-center px-2">
           {updateSpaceMutation.isLoading ? (
             <Spinner size="sm" />
@@ -71,7 +71,7 @@ export const NavItemSpaceUpdate = ({
             )}
           </Form>
         </div>
-      </NewNavItem>
+      </NavItem>
     </>
   )
 }

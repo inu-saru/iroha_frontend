@@ -1,3 +1,3 @@
 export * from "./NavHeader"
-export * from "./NewNavItem"
-export * from "./NewNavItems"
+export * from "./NavItem"
+export * from "./NavItems"

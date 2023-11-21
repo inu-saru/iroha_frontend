@@ -1,5 +1,5 @@
 import { useSections } from "../api/getSections"
-import { NewNavItems } from "@/components/Nav/NewNavItems"
+import { NavItems } from "@/components/Nav"
 
 import { SectionNavItem } from "../composer/SectionNavItem"
 import { useUrlParams } from "@/lib/useUrlParams"
@@ -12,10 +12,7 @@ export const NavItemsSection = (): JSX.Element => {
 
   return (
     <>
-      <NewNavItems
-        resourcesQuery={sectionsQuery}
-        navItem={<SectionNavItem />}
-      />
+      <NavItems resourcesQuery={sectionsQuery} navItem={<SectionNavItem />} />
     </>
   )
 }

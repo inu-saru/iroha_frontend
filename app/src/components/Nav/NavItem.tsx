@@ -1,18 +1,18 @@
 import clsx from "clsx"
 
-interface NewNavItemProps {
+interface NavItemProps {
   children: React.ReactNode
   isActive?: boolean
   isEditing?: boolean
   dropDown?: JSX.Element
 }
 
-export const NewNavItem = ({
+export const NavItem = ({
   children,
   isActive = false,
   isEditing = false,
   dropDown
-}: NewNavItemProps): JSX.Element => {
+}: NavItemProps): JSX.Element => {
   return (
     <li
       className={clsx(

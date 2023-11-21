@@ -1,5 +1,5 @@
 import { useSpaces } from "../api/getSpaces"
-import { NewNavItems } from "@/components/Nav/NewNavItems"
+import { NavItems } from "@/components/Nav"
 
 import { SpaceNavItem } from "../composer/SpaceNavItem"
 
@@ -8,7 +8,7 @@ export const NavItemsSpace = (): JSX.Element => {
 
   return (
     <>
-      <NewNavItems resourcesQuery={spacesQuery} navItem={<SpaceNavItem />} />
+      <NavItems resourcesQuery={spacesQuery} navItem={<SpaceNavItem />} />
     </>
   )
 }

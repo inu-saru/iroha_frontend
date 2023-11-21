@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
 import { Icon, Link } from "@/components/Elements"
-import { NewNavItem } from "@/components/Nav/NewNavItem"
+import { NavItem } from "@/components/Nav"
 
 import { type Section } from "../types"
 import { useUrlParams } from "@/lib/useUrlParams"
@@ -19,7 +19,7 @@ export const NavItemSection = ({
   const sectionId = searchParams.get("sid") ?? null
 
   return (
-    <NewNavItem dropDown={dropDown} isActive={sectionId === `${resource.id}`}>
+    <NavItem dropDown={dropDown} isActive={sectionId === `${resource.id}`}>
       <Link
         to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}`}
         className={clsx("block py-1 px-2 truncate")}
@@ -29,6 +29,6 @@ export const NavItemSection = ({
           {resource.name}
         </span>
       </Link>
-    </NewNavItem>
+    </NavItem>
   )
 }

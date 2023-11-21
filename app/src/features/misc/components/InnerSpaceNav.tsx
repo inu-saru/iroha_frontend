@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
-import { NewNavItem } from "@/components/Nav/NewNavItem"
+import { NavItem } from "@/components/Nav"
 import { NavItemsSection } from "@/features/sections"
 
 import { useUrlParams } from "@/lib/useUrlParams"
@@ -36,7 +36,7 @@ export const InnerSpaceNav = (): JSX.Element => {
       >
         新規作成
       </Button>
-      <NewNavItem isActive={searchParams.get("sid") === null}>
+      <NavItem isActive={searchParams.get("sid") === null}>
         <Link
           to={`/app/spaces/${spaceId}/vocabularies`}
           className={clsx("block py-1 px-2 truncate")}
@@ -46,7 +46,7 @@ export const InnerSpaceNav = (): JSX.Element => {
             全てのセクション
           </span>
         </Link>
-      </NewNavItem>
+      </NavItem>
       <NavItemsSection />
     </div>
   )

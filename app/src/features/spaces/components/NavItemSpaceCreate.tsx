@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 import { Form, Icon, Spinner } from "@/components/Elements"
-import { NewNavItem } from "@/components/Nav/NewNavItem"
+import { NavItem } from "@/components/Nav"
 
 import { useCreateSpace } from "../api/createSpace"
 
@@ -27,7 +27,7 @@ export const NavItemSpaceCreate = ({
 
   return (
     <>
-      <NewNavItem isEditing={true}>
+      <NavItem isEditing={true}>
         <div className="flex items-center px-2">
           {createSpaceMutation.isLoading ? (
             <Spinner size="sm" />
@@ -47,7 +47,7 @@ export const NavItemSpaceCreate = ({
             )}
           </Form>
         </div>
-      </NewNavItem>
+      </NavItem>
     </>
   )
 }

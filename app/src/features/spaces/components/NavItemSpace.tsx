@@ -1,7 +1,7 @@
 import clsx from "clsx"
 
 import { Icon, Link } from "@/components/Elements"
-import { NewNavItem } from "@/components/Nav/NewNavItem"
+import { NavItem } from "@/components/Nav"
 
 import { type Space } from "../types"
 
@@ -15,7 +15,7 @@ export const NavItemSpace = ({
   dropDown
 }: NavItemSpaceProps): JSX.Element => {
   return (
-    <NewNavItem dropDown={dropDown}>
+    <NavItem dropDown={dropDown}>
       <Link
         to={`/app/spaces/${resource.id}/vocabularies`}
         className={clsx("block py-1 px-2 truncate")}
@@ -25,6 +25,6 @@ export const NavItemSpace = ({
           {resource.name}
         </span>
       </Link>
-    </NewNavItem>
+    </NavItem>
   )
 }
