@@ -15,10 +15,11 @@ export const NavItemSection = ({
   resource,
   dropDown
 }: NavItemSectionProps): JSX.Element => {
-  const { spaceId } = useUrlParams()
+  const { spaceId, searchParams } = useUrlParams()
+  const sectionId = searchParams.get("sid") ?? null
 
   return (
-    <NewNavItem dropDown={dropDown}>
+    <NewNavItem dropDown={dropDown} isActive={sectionId === `${resource.id}`}>
       <Link
         to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}`}
         className={clsx("block py-1 px-2 truncate")}
