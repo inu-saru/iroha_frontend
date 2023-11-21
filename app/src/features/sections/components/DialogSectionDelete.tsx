@@ -1,29 +1,27 @@
-import { type UseMutationResult } from "@tanstack/react-query"
-import { type AxiosError } from "axios"
-
 import { Button } from "@/components/Elements"
 import { ConfirmationDialog } from "@/components/Dialog"
 
+import { useDeleteSection } from "../api/deleteSection"
+import { type Section } from "../types"
+import { useUrlParams } from "@/lib/useUrlParams"
+
 interface DialogSectionDeleteProps {
-  deleteSectionMutation: UseMutationResult<
-    any,
-    AxiosError<unknown, any>,
-    any,
-    unknown
-  >
-  resourceId: number
-  label: string
+  resource: Section
   isOpen: boolean
   close: () => void
 }
 
 export const DialogSectionDelete = ({
-  resourceId,
-  label,
-  deleteSectionMutation,
+  resource,
   isOpen,
   close
 }: DialogSectionDeleteProps): JSX.Element => {
+  const { spaceId, config } = useUrlParams()
+  const deleteSectionMutation = useDeleteSection({
+    spaceId,
+    config
+  })
+
   return (
     <ConfirmationDialog
       isOpen={isOpen}
@@ -32,7 +30,7 @@ export const DialogSectionDelete = ({
         <Button
           onClick={async () => {
             await deleteSectionMutation.mutateAsync({
-              sectionId: resourceId
+              sectionId: resource.id
             })
             close()
           }}
@@ -41,7 +39,7 @@ export const DialogSectionDelete = ({
         </Button>
       }
       title={"セクションの削除"}
-      body={`${label}を削除しますか？`}
+      body={`${resource.name}を削除しますか？`}
     />
   )
 }

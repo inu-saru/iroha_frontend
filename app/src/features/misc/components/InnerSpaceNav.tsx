@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
 import { NavItem } from "@/components/Nav"
-import { NavSections } from "@/features/sections"
+import { NavItemsSection } from "@/features/sections"
 
 import { useUrlParams } from "@/lib/useUrlParams"
 
@@ -42,7 +42,7 @@ export const InnerSpaceNav = (): JSX.Element => {
         to={`/app/spaces/${spaceId}/vocabularies`}
         icon="all"
       />
-      <NavSections />
+      <NavItemsSection />
     </div>
   )
 }

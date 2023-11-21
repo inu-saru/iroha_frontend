@@ -1,1 +1,1 @@
-export * from "./components/NavSections"
+export * from "./components/NavItemsSection"

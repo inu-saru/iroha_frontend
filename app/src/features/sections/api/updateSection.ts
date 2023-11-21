@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  queryClient,
+  InfiniteQueryData
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Section } from "../types"
@@ -60,17 +64,26 @@ export const useUpdateSection = ({
 
       // sections
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
-      const previousSections = queryClient.getQueryData<Section[]>([
+      const previousSections = queryClient.getQueryData<InfiniteQueryData>([
         `spaces/${spaceId}/sections`
       ])
-      const tempUpdatedSections = previousSections?.map((section) =>
-        section.id === updatingSection?.resourceId
-          ? { ...section, ...updatingSection.data }
-          : section
-      )
+      const newSectionsPagesArray =
+        previousSections?.pages.map((page) => {
+          return {
+            ...page,
+            resources: page.resources.map((section) => {
+              return section.id === updatingSection?.resourceId
+                ? { ...section, ...updatingSection.data }
+                : section
+            })
+          }
+        }) ?? []
       queryClient.setQueryData(
         [`spaces/${spaceId}/sections`],
-        tempUpdatedSections
+        (previousSections: any) => ({
+          pages: newSectionsPagesArray,
+          pageParams: previousSections?.pageParams
+        })
       )
 
       return { previousSection, previousSections }
@@ -90,7 +103,8 @@ export const useUpdateSection = ({
       }
     },
     onSuccess: (data) => {
-      queryClient.refetchQueries([`spaces/${spaceId}/sections`, data.id])
+      queryClient.refetchQueries([`spaces/${spaceId}/section`, data.id])
+      queryClient.refetchQueries([`spaces/${spaceId}/sections`])
       addToast({
         variant: "success",
         title: "セクションを更新しました。"
