@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  type InfiniteQueryData,
+  queryClient
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Space } from "../types"
