@@ -17,7 +17,8 @@ export const NavItem = ({
     <li
       className={clsx(
         "h-8 hover:bg-primary-20 relative group list-none",
-        (isActive || isEditing) && "bg-primary-20"
+        isActive && "bg-primary-30",
+        isEditing && "bg-primary-20"
       )}
     >
       {children}
@@ -27,7 +28,7 @@ export const NavItem = ({
         </div>
       )}
       {isEditing && (
-        <div className="ml-8 box-border border-b border-primary-200"></div>
+        <div className="z-10 ml-8 box-border border-b border-primary-200"></div>
       )}
     </li>
   )

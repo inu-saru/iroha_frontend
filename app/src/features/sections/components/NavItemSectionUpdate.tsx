@@ -60,7 +60,7 @@ export const NavItemSectionUpdate = ({
           ) : (
             <Icon variant="editActive" className="mr-1" />
           )}
-          <Form onSubmit={onSubmit} schema={schema}>
+          <Form onSubmit={onSubmit} schema={schema} className="w-full">
             {({ register, formState }) => (
               <>
                 <input
