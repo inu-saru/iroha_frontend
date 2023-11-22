@@ -37,6 +37,7 @@ export const NavItemSectionUpdate = ({
   const onSubmit = async (data: any): Promise<void> => {
     await updateSectionMutation.mutateAsync({
       data,
+      spaceId,
       resourceId: resource.id
     })
     toggle()

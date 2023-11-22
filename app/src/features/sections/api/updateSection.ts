@@ -20,15 +20,14 @@ export interface UpdateSectionDTO {
 
 export const updateSection = async ({
   data,
+  spaceId,
   resourceId
 }: UpdateSectionDTO): Promise<Section> => {
   return await axios.patch(
-    `/api/v1/spaces/${thisSpaceId}/sections/${resourceId}`,
+    `/api/v1/spaces/${spaceId}/sections/${resourceId}`,
     data
   )
 }
-
-let thisSpaceId: string
 
 interface UseUpdateSectionOptions {
   spaceId: string | undefined
@@ -40,10 +39,9 @@ export const useUpdateSection = ({
   spaceId
 }: UseUpdateSectionOptions) => {
   const { addToast } = useToastStore()
-  thisSpaceId = spaceId ?? ""
 
   return useMutation({
-    onMutate: async (updatingSection: any) => {
+    onMutate: async (updatingSection: UpdateSectionDTO) => {
       // section
       await queryClient.cancelQueries([
         `spaces/${spaceId}/section`,
