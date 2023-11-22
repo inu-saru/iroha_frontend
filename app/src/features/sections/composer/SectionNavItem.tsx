@@ -34,9 +34,8 @@ export const SectionNavItem = (resource: Section | any): JSX.Element => {
                         resource={resource}
                         dropDown={
                           <DropDownSection
-                            resource={resource}
                             editToggle={editSwitch.toggle}
-                            deleteToggle={deleteSwitch.openWith}
+                            deleteToggle={deleteSwitch.open}
                           />
                         }
                       />

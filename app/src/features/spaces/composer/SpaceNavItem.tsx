@@ -34,9 +34,8 @@ export const SpaceNavItem = (resource: Space | any): JSX.Element => {
                         resource={resource}
                         dropDown={
                           <DropDownSpace
-                            resource={resource}
                             editToggle={editSwitch.toggle}
-                            deleteToggle={deleteSwitch.openWith}
+                            deleteToggle={deleteSwitch.open}
                           />
                         }
                       />
