@@ -1,4 +1,5 @@
-import { Search } from "@/components/Elements"
+import { Chip, Search } from "@/components/Elements"
+import { type VocabularySearchParams } from "@/features/vocabularies/types"
 import { z } from "zod"
 
 const schema = z.object({
@@ -6,8 +7,8 @@ const schema = z.object({
 })
 
 interface ListFilterProps {
-  config?: object
-  setSearchParams: () => void
+  config?: VocabularySearchParams
+  setSearchParams: (config: VocabularySearchParams) => void
 }
 
 export const ListFilter = ({
@@ -22,6 +23,34 @@ export const ListFilter = ({
           config={config}
           setSearchParams={setSearchParams}
         />
+        <div className="mt-2 flex gap-x-2">
+          <Chip
+            size="small"
+            onClick={() => {
+              const { vocabulary_type, ...other } = config
+              setSearchParams({ ...other })
+            }}
+            isActive={config.vocabulary_type === undefined}
+          >
+            全て
+          </Chip>
+          <Chip
+            onClick={() => {
+              setSearchParams({ ...config, vocabulary_type: "sentence" })
+            }}
+            isActive={config.vocabulary_type === "sentence"}
+          >
+            文章
+          </Chip>
+          <Chip
+            onClick={() => {
+              setSearchParams({ ...config, vocabulary_type: "word" })
+            }}
+            isActive={config.vocabulary_type === "word"}
+          >
+            単語
+          </Chip>
+        </div>
       </div>
     </>
   )

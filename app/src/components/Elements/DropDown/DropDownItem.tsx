@@ -9,7 +9,7 @@ export const DropDownItem = ({
 }: DropDownItemProps): JSX.Element => {
   return (
     <li
-      className="px-4 py-2 w-max hover:bg-primary-20"
+      className="px-4 py-2 w-full hover:bg-primary-20"
       onClick={() => {
         handleClick?.()
       }}

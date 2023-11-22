@@ -10,9 +10,8 @@ const variants = {
 }
 
 const sizes = {
-  default: "py-2 px-4 text-default",
-  small: "py-2 px-4 text-middle",
-  middle: "py-1 px-2 text-small"
+  default: "py-2 px-4 text-middle",
+  small: "py-1 px-2 text-small"
 }
 
 type IconProps =
@@ -45,7 +44,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={clsx(
-          "flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80",
+          "flex justify-center items-center border border-natural-40 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80",
           variants[variant],
           sizes[size],
           className
@@ -54,7 +53,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading && <Spinner size="sm" />}
         {!isLoading && startIcon}
-        <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
+        <span>{props.children}</span>
+        {!isLoading && endIcon}
       </button>
     )
   }
