@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  queryClient,
+  InfiniteQueryData
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Section } from "../types"
@@ -40,13 +44,25 @@ export const useCreateSection = ({
     onMutate: async (newSection) => {
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
 
-      const previousSections = queryClient.getQueryData<Section[]>([
+      const previousSections = queryClient.getQueryData<InfiniteQueryData>([
         `spaces/${spaceId}/sections`
       ])
 
+      const newSectionsPagesArray =
+        previousSections?.pages.map((page, index) => {
+          return index === 0
+            ? {
+                resources: [newSection.data, ...(page.resources || [])]
+              }
+            : page
+        }) ?? []
+
       queryClient.setQueryData(
         [`spaces/${spaceId}/sections`],
-        [newSection.data, ...(previousSections || [])]
+        (previousSections: any) => ({
+          pages: newSectionsPagesArray,
+          pageParams: previousSections?.pageParams
+        })
       )
 
       return { previousSections }
