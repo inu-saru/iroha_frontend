@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useSpace } from "@/features/spaces/api/getSpace"
 import { Button, Icon, Link } from "@/components/Elements"
 import { NavItem } from "@/components/Nav"
-import { NavItemsSection } from "@/features/sections"
+import { NavItemsSection, SectionNavItemHeader } from "@/features/sections"
 
 import { useUrlParams } from "@/lib/useUrlParams"
 
@@ -47,6 +47,7 @@ export const InnerSpaceNav = (): JSX.Element => {
           </span>
         </Link>
       </NavItem>
+      <SectionNavItemHeader />
       <NavItemsSection />
     </div>
   )
