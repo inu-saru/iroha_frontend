@@ -20,7 +20,8 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
   const onSubmit = async (data: any): Promise<void> => {
     const output = {
       ...data,
-      section_id: searchParams.get("sid")
+      section_id: searchParams.get("sid"),
+      vocabulary_type: "sentence"
     }
     const vocabulary = await createVocabularyMutation.mutateAsync({
       data: output
