@@ -1,10 +1,12 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  queryClient,
+  InfiniteQueryData
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
-
-import { type Section } from "../types"
 
 export const deleteSection = async ({ sectionId }: { sectionId: string }) => {
   return await axios.delete(
@@ -29,15 +31,26 @@ export const useDeleteSection = ({
       await queryClient.cancelQueries([`spaces/${spaceId}/sections`])
       thisSpaceId = spaceId ?? ""
 
-      const previousSections = queryClient.getQueryData<Section[]>([
+      const previousSections = queryClient.getQueryData<InfiniteQueryData>([
         `spaces/${spaceId}/sections`
       ])
 
+      const newPagesArray =
+        previousSections?.pages.map((page) => {
+          return {
+            ...page,
+            resources: page.resources.filter((space) => {
+              return space.id !== deletedSection.sectionId
+            })
+          }
+        }) ?? []
+
       queryClient.setQueryData(
         [`spaces/${spaceId}/sections`],
-        previousSections?.filter(
-          (section) => section.id !== deletedSection.sectionId
-        )
+        (previousSections: any) => ({
+          pages: newPagesArray,
+          pageParams: previousSections?.pageParams
+        })
       )
 
       return { previousSections }

@@ -1,7 +1,11 @@
 import { useMutation } from "@tanstack/react-query"
 
 import { axios } from "@/lib/axios"
-import { type MutationConfig, queryClient } from "@/lib/react-query"
+import {
+  type MutationConfig,
+  type InfiniteQueryData,
+  queryClient
+} from "@/lib/react-query"
 import { useToastStore } from "@/stores/toasts"
 
 import { type Space } from "../types"
@@ -28,12 +32,23 @@ export const useCreateSpace = ({ config }: UseCreateSpaceOptions = {}) => {
     onMutate: async (newSpace) => {
       await queryClient.cancelQueries(["spaces"])
 
-      const previousSpaces = queryClient.getQueryData<Space[]>(["spaces"])
+      const previousSpaces = queryClient.getQueryData<InfiniteQueryData>([
+        "spaces"
+      ])
 
-      queryClient.setQueryData(
-        ["spaces"],
-        [newSpace.data, ...(previousSpaces || [])]
-      )
+      const newSpacesPagesArray =
+        previousSpaces?.pages.map((page, index) => {
+          return index === 0
+            ? {
+                resources: [newSpace.data, ...(page.resources || [])]
+              }
+            : page
+        }) ?? []
+
+      queryClient.setQueryData(["spaces"], (previousSpaces: any) => ({
+        pages: newSpacesPagesArray,
+        pageParams: previousSpaces?.pageParams
+      }))
 
       return { previousSpaces }
     },
