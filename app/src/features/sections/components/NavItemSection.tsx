@@ -17,11 +17,15 @@ export const NavItemSection = ({
 }: NavItemSectionProps): JSX.Element => {
   const { spaceId, searchParams } = useUrlParams()
   const sectionId = searchParams.get("sid") ?? null
+  const vocabularyType =
+    searchParams.get("vocabulary_type") != null
+      ? `&vocabulary_type=${searchParams.get("vocabulary_type")}`
+      : ""
 
   return (
     <NavItem dropDown={dropDown} isActive={sectionId === `${resource.id}`}>
       <Link
-        to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}`}
+        to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}${vocabularyType}`}
         className={clsx("block py-1 px-2 truncate")}
       >
         <Icon className="float-left" variant="section" />
