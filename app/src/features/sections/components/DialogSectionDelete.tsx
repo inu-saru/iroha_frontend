@@ -29,10 +29,10 @@ export const DialogSectionDelete = ({
       confirmButton={
         <Button
           onClick={async () => {
+            close()
             await deleteSectionMutation.mutateAsync({
               sectionId: resource.id
             })
-            close()
           }}
         >
           削除

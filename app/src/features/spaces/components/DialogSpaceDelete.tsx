@@ -24,10 +24,10 @@ export const DialogSpaceDelete = ({
       confirmButton={
         <Button
           onClick={async () => {
+            close()
             await deleteSpaceMutation.mutateAsync({
               spaceId: resource.id
             })
-            close()
           }}
         >
           削除
