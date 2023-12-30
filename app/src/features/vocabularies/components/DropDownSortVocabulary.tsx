@@ -6,13 +6,16 @@ export const DropDownSortVocabulary = (): JSX.Element => {
   const { config, searchParams, setSearchParams } = useUrlParams()
 
   const sort = searchParams.get("sort")
+  let icon
   let label
   switch (sort) {
     case "date_asc":
-      label = "日付(昇順)"
+      icon = "sortAsc"
+      label = "日付"
       break
     default:
-      label = "日付(降順)"
+      icon = "sortDesc"
+      label = "日付"
       break
   }
 
@@ -23,7 +26,7 @@ export const DropDownSortVocabulary = (): JSX.Element => {
           className="hover:bg-primary-20 relative group list-none"
           variant="secondary"
           size="small"
-          startIcon={<Icon variant="sortDesc" />}
+          startIcon={<Icon variant={icon} />}
         >
           {label}
         </Button>
