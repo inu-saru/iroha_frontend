@@ -23,7 +23,7 @@ export const DropDownSortVocabulary = (): JSX.Element => {
           className="hover:bg-primary-20 relative group list-none"
           variant="secondary"
           size="small"
-          startIcon={<Icon variant="sort" />}
+          startIcon={<Icon variant="sortDesc" />}
         >
           {label}
         </Button>
