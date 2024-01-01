@@ -6,16 +6,16 @@ export const DropDownSortVocabulary = (): JSX.Element => {
   const { config, searchParams, setSearchParams } = useUrlParams()
 
   const sort = searchParams.get("sort")
-  let icon
-  let label
+  let selectedIcon
+  let selectedLabel
   switch (sort) {
     case "date_asc":
-      icon = "sortAsc"
-      label = "日付"
+      selectedIcon = "sortAsc"
+      selectedLabel = "日付"
       break
     default:
-      icon = "sortDesc"
-      label = "日付"
+      selectedIcon = "sortDesc"
+      selectedLabel = "日付"
       break
   }
 
@@ -26,21 +26,26 @@ export const DropDownSortVocabulary = (): JSX.Element => {
           className="hover:bg-primary-20 relative group list-none"
           variant="secondary"
           size="small"
-          startIcon={<Icon variant={icon} />}
+          startIcon={<Icon variant={selectedIcon} />}
         >
-          {label}
+          {selectedLabel}
         </Button>
       }
     >
       <DropDownItem
-        label="日付(降順)"
+        icon={<Icon variant="sortDesc" />}
+        radioName={"sortVocabulary"}
+        radioChecked={selectedIcon === "sortDesc"}
+        label="日付"
         handleClick={() => {
-          console.log({ ...searchParams })
           setSearchParams({ ...config, sort: "date_desc" })
         }}
       />
       <DropDownItem
-        label="日付(昇順)"
+        icon={<Icon variant="sortAsc" />}
+        radioName={"sortVocabulary"}
+        radioChecked={selectedIcon === "sortAsc"}
+        label="日付"
         handleClick={() => {
           setSearchParams({ ...config, sort: "date_asc" })
         }}
