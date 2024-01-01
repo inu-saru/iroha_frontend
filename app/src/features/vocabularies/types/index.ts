@@ -11,4 +11,5 @@ export interface VocabularySearchParams {
   q?: string
   sid?: string
   vocabulary_type?: string
+  sort?: string
 }

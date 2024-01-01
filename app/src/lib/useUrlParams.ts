@@ -6,7 +6,7 @@ interface UrlParams {
   vocabularyId: string | undefined
   searchParams: URLSearchParams
   config: object
-  setSearchParams: () => void
+  setSearchParams: (confg: any) => void
 }
 
 export const useUrlParams = (): UrlParams => {
