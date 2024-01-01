@@ -1,4 +1,10 @@
-import { Button, DropDown, DropDownItem, Icon } from "@/components/Elements"
+import {
+  Button,
+  DropDown,
+  DropDownItem,
+  Icon,
+  type IconVariant
+} from "@/components/Elements"
 
 import { useUrlParams } from "@/lib/useUrlParams"
 
@@ -6,7 +12,7 @@ export const DropDownSortVocabulary = (): JSX.Element => {
   const { config, searchParams, setSearchParams } = useUrlParams()
 
   const sort = searchParams.get("sort")
-  let selectedIcon
+  let selectedIcon: IconVariant
   let selectedLabel
   switch (sort) {
     case "date_asc":

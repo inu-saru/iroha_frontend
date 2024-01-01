@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { Radio } from "../Radio"
 
 interface DropDownItemProps {
-  icon: React.ReactElement
+  icon?: React.ReactElement
   radioName?: string
   radioChecked?: boolean
   label: string
