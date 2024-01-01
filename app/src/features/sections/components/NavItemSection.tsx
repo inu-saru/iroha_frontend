@@ -21,11 +21,13 @@ export const NavItemSection = ({
     searchParams.get("vocabulary_type") != null
       ? `&vocabulary_type=${searchParams.get("vocabulary_type")}`
       : ""
+  const sort =
+    searchParams.get("sort") != null ? `&sort=${searchParams.get("sort")}` : ""
 
   return (
     <NavItem dropDown={dropDown} isActive={sectionId === `${resource.id}`}>
       <Link
-        to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}${vocabularyType}`}
+        to={`/app/spaces/${spaceId}/vocabularies?sid=${resource.id}${vocabularyType}${sort}`}
         className={clsx("block py-1 px-2 truncate")}
       >
         <Icon className="float-left" variant="section" />

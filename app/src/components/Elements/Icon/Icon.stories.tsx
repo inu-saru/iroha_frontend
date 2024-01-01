@@ -105,9 +105,15 @@ export const Section: Story = {
   }
 }
 
-export const Sort: Story = {
+export const SortAsc: Story = {
   args: {
-    variant: "sort"
+    variant: "sortAsc"
+  }
+}
+
+export const SortDesc: Story = {
+  args: {
+    variant: "sortDesc"
   }
 }
 

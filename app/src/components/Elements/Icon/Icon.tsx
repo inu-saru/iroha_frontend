@@ -17,7 +17,8 @@ import { ReactComponent as MoreHoriz } from "@/assets/icons/more_horiz.svg"
 import { ReactComponent as Pending } from "@/assets/icons/pending.svg"
 import { ReactComponent as Search } from "@/assets/icons/search.svg"
 import { ReactComponent as Section } from "@/assets/icons/section.svg"
-import { ReactComponent as Sort } from "@/assets/icons/sort.svg"
+import { ReactComponent as SortAsc } from "@/assets/icons/sort_asc.svg"
+import { ReactComponent as SortDesc } from "@/assets/icons/sort_desc.svg"
 import { ReactComponent as Space } from "@/assets/icons/space.svg"
 
 const variants = {
@@ -36,7 +37,8 @@ const variants = {
   pending: <Pending />,
   search: <Search />,
   section: <Section />,
-  sort: <Sort />,
+  sortAsc: <SortAsc />,
+  sortDesc: <SortDesc />,
   space: <Space />
 }
 
