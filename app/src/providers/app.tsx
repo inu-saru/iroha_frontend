@@ -3,7 +3,6 @@ import { ErrorBoundary } from "react-error-boundary"
 import { HelmetProvider } from "react-helmet-async"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { BrowserRouter as Router } from "react-router-dom"
 
 import { Spinner } from "@/components/Elements"
 
@@ -41,7 +40,7 @@ export const AppProvider = ({ children }: AppProviderProps): JSX.Element => {
             {process.env.NODE_ENV !== "test" && <ReactQueryDevtools />}
             <Toasts />
             <AuthLoader renderLoading={() => loading}>
-              <Router>{children}</Router>
+              {children}
             </AuthLoader>
           </QueryClientProvider>
         </HelmetProvider>

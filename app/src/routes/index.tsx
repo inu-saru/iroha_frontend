@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 
 import { useUser } from "@/lib/auth"
 
@@ -13,7 +13,7 @@ export const AppRoutes = (): JSX.Element => {
     { path: "*", element: <NotFound /> }
   ]
   const routes = user.data ? protectedRoutes : publicRoutes
-  const element = useRoutes([...routes, ...commonRoutes])
+  const element = createBrowserRouter([...routes, ...commonRoutes])
 
-  return <>{element}</>
+  return <RouterProvider router={element} />
 }
