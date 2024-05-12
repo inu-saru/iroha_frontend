@@ -21,3 +21,14 @@ $ cd app
 /iroha_front/app
 $ npm run storybook
 ```
+
+## build
+```
+$ docker exec -it iroha_web sh
+
+/iroha_front
+$ cd app
+
+/iroha_front/app
+$ npm run build
+```
