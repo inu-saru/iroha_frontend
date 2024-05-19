@@ -19,6 +19,8 @@ import { ReactComponent as Search } from "@/assets/icons/search.svg"
 import { ReactComponent as Section } from "@/assets/icons/section.svg"
 import { ReactComponent as SortAsc } from "@/assets/icons/sort_asc.svg"
 import { ReactComponent as SortDesc } from "@/assets/icons/sort_desc.svg"
+import { ReactComponent as NameAsc } from "@/assets/icons/name_asc.svg"
+import { ReactComponent as NameDesc } from "@/assets/icons/name_desc.svg"
 import { ReactComponent as Space } from "@/assets/icons/space.svg"
 
 const variants = {
@@ -39,6 +41,8 @@ const variants = {
   section: <Section />,
   sortAsc: <SortAsc />,
   sortDesc: <SortDesc />,
+  nameAsc: <NameAsc />,
+  nameDesc: <NameDesc />,
   space: <Space />
 }
 
