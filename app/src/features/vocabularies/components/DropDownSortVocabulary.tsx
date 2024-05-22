@@ -15,6 +15,14 @@ export const DropDownSortVocabulary = (): JSX.Element => {
   let selectedIcon: IconVariant
   let selectedLabel
   switch (sort) {
+    case "en_asc":
+      selectedIcon = "nameAsc"
+      selectedLabel = "名前(a-z)"
+      break
+    case "en_desc":
+      selectedIcon = "nameDesc"
+      selectedLabel = "名前(z-a)"
+      break
     case "date_asc":
       selectedIcon = "sortAsc"
       selectedLabel = "日付"
@@ -54,6 +62,24 @@ export const DropDownSortVocabulary = (): JSX.Element => {
         label="日付"
         handleClick={() => {
           setSearchParams({ ...config, sort: "date_asc" })
+        }}
+      />
+      <DropDownItem
+        icon={<Icon variant="nameAsc" />}
+        radioName={"sortVocabulary"}
+        radioChecked={selectedIcon === "nameAsc"}
+        label="名前(a-z)"
+        handleClick={() => {
+          setSearchParams({ ...config, sort: "en_asc" })
+        }}
+      />
+      <DropDownItem
+        icon={<Icon variant="nameDesc" />}
+        radioName={"sortVocabulary"}
+        radioChecked={selectedIcon === "nameDesc"}
+        label="名前(z-a)"
+        handleClick={() => {
+          setSearchParams({ ...config, sort: "en_desc" })
         }}
       />
     </DropDown>
