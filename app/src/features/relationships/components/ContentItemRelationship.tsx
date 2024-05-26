@@ -12,13 +12,10 @@ export const ContentItemRelationship = ({
   dropDown
 }: ContentItemRelationshipProps): JSX.Element => {
   return (
-    <ContentItem dropDown={dropDown}>
-      <div className="flex gap-x-8 items-center">
-        <div className="text-h300 w-full">{resource.follower.en}</div>
-        <div className="text-middle text-natural-700 w-full">
-          {resource.follower.ja}
-        </div>
-      </div>
-    </ContentItem>
+    <ContentItem
+      original={resource.follower.en}
+      translation={resource.follower.ja}
+      dropDown={dropDown}
+    />
   )
 }
