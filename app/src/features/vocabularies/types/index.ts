@@ -13,3 +13,6 @@ export interface VocabularySearchParams {
   vocabulary_type?: string
   sort?: string
 }
+
+const vocabularyTypes = ['sentence', 'word'] as const
+export type VocabularyTypes = typeof vocabularyTypes[number]
