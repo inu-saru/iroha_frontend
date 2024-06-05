@@ -13,7 +13,8 @@ export const ContentItemRelationship = ({
   dropDown
 }: ContentItemRelationshipProps): JSX.Element => {
   const { vocabularyId } = useUrlParams()
-  const relation = resource.followed.id.toString() === vocabularyId ? resource.follower : resource.followed
+  // NOTE: resouce.followedはtanstackQueryの一時データの場合はnullになっている
+  const relation = resource.followed == null || resource.followed.id.toString() === vocabularyId ? resource.follower : resource.followed
   const variant = relation.vocabulary_type === 'sentence' ? 'column' : 'row'
 
   return (
