@@ -27,7 +27,9 @@ export const Vocabulary = (): JSX.Element => {
               <ContentItemsRelationship vocabularyType={vocabularyType} />
             </div>
           }
-          <RelationshipContentFooter />
+          {
+            vocabularyType === 'sentence' && <RelationshipContentFooter />
+          }
         </div>
       </ContentLayout>
     </>
