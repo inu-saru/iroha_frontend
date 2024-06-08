@@ -1,6 +1,7 @@
 import { ContentItem } from "@/components/Content/ContentItem"
 
 import { type Relationship } from "../types"
+import { useUrlParams } from "@/lib/useUrlParams"
 
 interface ContentItemRelationshipProps {
   resource: Relationship | any
@@ -11,14 +12,17 @@ export const ContentItemRelationship = ({
   resource,
   dropDown
 }: ContentItemRelationshipProps): JSX.Element => {
+  const { vocabularyId } = useUrlParams()
+  // NOTE: resouce.followedはtanstackQueryの一時データの場合はnullになっている
+  const relation = resource.followed == null || resource.followed.id.toString() === vocabularyId ? resource.follower : resource.followed
+  const variant = relation.vocabulary_type === 'sentence' ? 'column' : 'row'
+
   return (
-    <ContentItem dropDown={dropDown}>
-      <div className="flex gap-x-8 items-center">
-        <div className="text-h300 w-full">{resource.follower.en}</div>
-        <div className="text-middle text-natural-700 w-full">
-          {resource.follower.ja}
-        </div>
-      </div>
-    </ContentItem>
+    <ContentItem
+      variant={variant}
+      original={relation.en}
+      translation={relation.ja}
+      dropDown={dropDown}
+    />
   )
 }

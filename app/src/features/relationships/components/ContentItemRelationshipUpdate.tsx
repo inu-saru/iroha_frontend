@@ -23,6 +23,7 @@ export const ContentItemRelationshipUpdate = ({
   toggle
 }: ContentItemRelationshipUpdateProps): JSX.Element => {
   const { spaceId, vocabularyId, config } = useUrlParams()
+  const relation = resource.followed.id.toString() === vocabularyId ? resource.follower : resource.followed
 
   const relationshipQuery = useRelationship({
     spaceId,
@@ -39,7 +40,7 @@ export const ContentItemRelationshipUpdate = ({
   const onSubmit = async (data: any): Promise<void> => {
     const vocabularyUpdateParams = {
       method: "PUT",
-      url: `/api/v1/spaces/${spaceId}/vocabularies/${resource.follower.id}`,
+      url: `/api/v1/spaces/${spaceId}/vocabularies/${relation.id}`,
       body: {
         vocabulary: {
           en: data.en,
@@ -74,6 +75,8 @@ export const ContentItemRelationshipUpdate = ({
     )
   }
 
+  const fetchedRelation = resource.followed.id.toString() === vocabularyId ? relationshipQuery.data?.follower : relationshipQuery.data?.followed
+
   return (
     <>
       <div className="px-8 py-4 border-b border-natural-40">
@@ -81,8 +84,8 @@ export const ContentItemRelationshipUpdate = ({
           onSubmit={onSubmit}
           options={{
             defaultValues: {
-              en: relationshipQuery.data?.follower.en,
-              ja: relationshipQuery.data?.follower.ja
+              en: fetchedRelation?.en,
+              ja: fetchedRelation?.ja
             }
           }}
           schema={schema}

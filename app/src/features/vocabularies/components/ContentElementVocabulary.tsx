@@ -8,12 +8,17 @@ import { useDeleteVocabulary } from "../api/deleteVocabulary"
 import { useVocabulary } from "../api/getVocabulary"
 import { DropDownVocabulary } from "./DropDownVocabulary"
 import { useUrlParams } from "@/lib/useUrlParams"
+import React from "react"
 
-export const ContentElementVocabulary = (): JSX.Element => {
+export const ContentElementVocabulary = ({ updateVocabularyType }:any): JSX.Element => {
   const { spaceId, vocabularyId, searchParams, config } = useUrlParams()
   const vocabularyQuery = useVocabulary({ spaceId, vocabularyId })
   const deleteVocabularyMutation = useDeleteVocabulary({ config, spaceId })
   const navigate = useNavigate()
+
+  React.useEffect(() => {
+    updateVocabularyType(vocabularyQuery.data?.vocabulary_type)
+  }, [vocabularyQuery]);
 
   return (
     <>
