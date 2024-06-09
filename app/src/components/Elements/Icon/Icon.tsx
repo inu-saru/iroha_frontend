@@ -13,6 +13,7 @@ import { ReactComponent as Close } from "@/assets/icons/close.svg"
 import { ReactComponent as Default } from "@/assets/icons/default.svg"
 import { ReactComponent as EditActive } from "@/assets/icons/edit_active.svg"
 import { ReactComponent as Edit } from "@/assets/icons/edit.svg"
+import { ReactComponent as Mic } from "@/assets/icons/mic.svg"
 import { ReactComponent as MoreHoriz } from "@/assets/icons/more_horiz.svg"
 import { ReactComponent as Pending } from "@/assets/icons/pending.svg"
 import { ReactComponent as Search } from "@/assets/icons/search.svg"
@@ -22,6 +23,8 @@ import { ReactComponent as SortDesc } from "@/assets/icons/sort_desc.svg"
 import { ReactComponent as NameAsc } from "@/assets/icons/name_asc.svg"
 import { ReactComponent as NameDesc } from "@/assets/icons/name_desc.svg"
 import { ReactComponent as Space } from "@/assets/icons/space.svg"
+import { ReactComponent as Stop } from "@/assets/icons/stop.svg"
+import { ReactComponent as VolumeUp } from "@/assets/icons/volume_up.svg"
 
 const variants = {
   default: <Default />,
@@ -35,6 +38,7 @@ const variants = {
   close: <Close />,
   editActive: <EditActive />,
   edit: <Edit />,
+  mic: <Mic />,
   moreHoriz: <MoreHoriz />,
   pending: <Pending />,
   search: <Search />,
@@ -43,7 +47,9 @@ const variants = {
   sortDesc: <SortDesc />,
   nameAsc: <NameAsc />,
   nameDesc: <NameDesc />,
-  space: <Space />
+  space: <Space />,
+  stop: <Stop />,
+  volumeUp: <VolumeUp />
 }
 
 export type IconVariant = keyof typeof variants
