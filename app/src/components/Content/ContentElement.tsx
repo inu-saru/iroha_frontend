@@ -1,5 +1,5 @@
 import React from "react"
-import { Spinner } from "../Elements"
+import { Spinner, TextToSpeechButton } from "../Elements"
 
 interface ContentElementProps {
   resourceId: string | undefined
@@ -42,6 +42,7 @@ export const ContentElement = ({
             {dropDownWithResourceId}
           </div>
         )}
+        <TextToSpeechButton text={original} />
       </div>
     </>
   )
