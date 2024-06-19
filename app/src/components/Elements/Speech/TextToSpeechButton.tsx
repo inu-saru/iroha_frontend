@@ -30,7 +30,6 @@ export const TextToSpeechButton = ({text}:SpeechProps): JSX.Element => {
         speak(utter)
       }}
       icon={<Icon variant={'volumeUp'} />}
-      className="mt-4 -mb-2"
     />
   )
 }
