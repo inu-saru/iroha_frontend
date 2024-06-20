@@ -11,6 +11,7 @@ import { ReactComponent as ArrowRight } from "@/assets/icons/arrow_right.svg"
 import { ReactComponent as ArrowUp } from "@/assets/icons/arrow_up.svg"
 import { ReactComponent as Close } from "@/assets/icons/close.svg"
 import { ReactComponent as Default } from "@/assets/icons/default.svg"
+import { ReactComponent as Disabled } from "@/assets/icons/disabled.svg"
 import { ReactComponent as EditActive } from "@/assets/icons/edit_active.svg"
 import { ReactComponent as Edit } from "@/assets/icons/edit.svg"
 import { ReactComponent as Mic } from "@/assets/icons/mic.svg"
@@ -36,6 +37,7 @@ const variants = {
   arrowRight: <ArrowRight />,
   arrowUp: <ArrowUp />,
   close: <Close />,
+  disabled: <Disabled />,
   editActive: <EditActive />,
   edit: <Edit />,
   mic: <Mic />,

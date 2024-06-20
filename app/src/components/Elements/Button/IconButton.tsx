@@ -1,25 +1,35 @@
 import clsx from "clsx"
 import * as React from "react"
+import { Icon } from "../Icon"
+
+const variants = {
+  default: "hover:bg-primary-30",
+  active: "bg-error-30 hover:bg-error-40",
+  disabled: ""
+}
 
 const sizes = {
   default: "py-2 px-2"
 }
 
-interface IconProps { icon: React.ReactElement }
-
 export type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  type?: string
+  disabled?: boolean
+  className?: string
   size?: keyof typeof sizes
-  isActive?: boolean
-} & IconProps
+  variant?: keyof typeof variants
+  icon: React.ReactElement
+}
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
       type = "button",
+      disabled = false,
       className = "",
+      variant = "default",
       size = "default",
       icon,
-      isActive = false,
       ...props
     },
     ref
@@ -28,15 +38,17 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       <button
         ref={ref}
         type={type}
+        disabled={disabled}
         className={clsx(
-          "flex justify-center items-center rounded-full hover:bg-primary-30",
+          "flex justify-center items-center rounded-full",
+          variants[variant],
           sizes[size],
           className
         )}
         {...props}
       >
-
-        {!isActive && icon}
+        {icon}
+        { variant === 'disabled' && <Icon variant='disabled' className='-ml-6' />}
       </button>
     )
   }
