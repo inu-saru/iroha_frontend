@@ -27,6 +27,14 @@ export const DropDownVocabularyCreate = (): JSX.Element => {
           )
         }}
       />
+      <DropDownItem
+        label="一括作成"
+        handleClick={() => {
+          navigate(
+            `/app/spaces/${spaceId}/vocabularies/bulk/new?${searchParams.toString()}`
+          )
+        }}
+      />
     </DropDown>
   )
 }
