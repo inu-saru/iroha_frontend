@@ -54,7 +54,12 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
                 registration={register("ja")}
               />
               <div className="flex justify-end">
-                <Button type="submit">作成</Button>
+                <Button
+                  type="submit"
+                  isLoading={createVocabularyMutation.isLoading}
+                >
+                  作成
+                </Button>
               </div>
             </>
           )}

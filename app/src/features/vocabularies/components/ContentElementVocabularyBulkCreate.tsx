@@ -47,7 +47,12 @@ export const ContentElementVocabularyBulkCreate = (): JSX.Element => {
                 registration={register("q")}
               />
               <div className="flex justify-end">
-                <Button type="submit">作成</Button>
+                <Button
+                  type="submit"
+                  isLoading={createVocabularyBulkMutation.isLoading}
+                >
+                  作成
+                </Button>
               </div>
             </>
           )}
