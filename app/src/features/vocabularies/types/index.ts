@@ -1,4 +1,5 @@
 import { type BaseEntity } from "@/types"
+import { type Relationship } from "@/features/relationships/types"
 
 export type Vocabulary = {
   vocabulary_type: string
@@ -16,3 +17,8 @@ export interface VocabularySearchParams {
 
 const vocabularyTypes = ['sentence', 'word'] as const
 export type VocabularyTypes = typeof vocabularyTypes[number]
+
+export type VocabularyBulk = {
+  vocabulary: Vocabulary
+  relationship: Relationship
+} & BaseEntity

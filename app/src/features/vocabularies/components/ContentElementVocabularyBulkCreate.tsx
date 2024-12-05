@@ -4,17 +4,16 @@ import { z } from "zod"
 import { ContentHeader } from "@/components/Content"
 import { Button, Form, Input } from "@/components/Elements"
 
-import { useCreateVocabulary } from "../api/createVocabulary"
+import { useCreateVocabularyBulk } from "../api/createVocabularyBulk"
 import { useUrlParams } from "@/lib/useUrlParams"
 
 const schema = z.object({
-  en: z.string().min(1, { message: "1文字以上入力する必要があります。" }),
-  ja: z.string().min(0)
+  q: z.string().min(1, { message: "1文字以上入力する必要があります。" }),
 })
 
-export const ContentElementVocabularyCreate = (): JSX.Element => {
+export const ContentElementVocabularyBulkCreate = (): JSX.Element => {
   const { spaceId, searchParams, config } = useUrlParams()
-  const createVocabularyMutation = useCreateVocabulary({ config, spaceId })
+  const createVocabularyBulkMutation = useCreateVocabularyBulk({ config, spaceId })
   const navigate = useNavigate()
 
   const onSubmit = async (data: any): Promise<void> => {
@@ -23,12 +22,12 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
       section_id: searchParams.get("sid"),
       vocabulary_type: "sentence"
     }
-    const vocabulary = await createVocabularyMutation.mutateAsync({
+    const vocabularyBulk = await createVocabularyBulkMutation.mutateAsync({
       data: output
     })
     navigate(
       `/app/spaces/${spaceId}/vocabularies/${
-        vocabulary.id
+        vocabularyBulk.vocabulary.id
       }?${searchParams.toString()}`
     )
   }
@@ -43,20 +42,14 @@ export const ContentElementVocabularyCreate = (): JSX.Element => {
             <>
               <Input
                 type="text"
-                label="英語文"
+                label="文章"
                 error={formState.errors.en}
-                registration={register("en")}
-              />
-              <Input
-                type="text"
-                label="日本語文"
-                error={formState.errors.ja}
-                registration={register("ja")}
+                registration={register("q")}
               />
               <div className="flex justify-end">
                 <Button
                   type="submit"
-                  isLoading={createVocabularyMutation.isLoading}
+                  isLoading={createVocabularyBulkMutation.isLoading}
                 >
                   作成
                 </Button>
