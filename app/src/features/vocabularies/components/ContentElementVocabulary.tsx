@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom"
 
 import { ConfirmationDialog } from "@/components/Dialog"
 import { ContentElement } from "@/components/Content/ContentElement"
-import { Button, SwitcherDialog } from "@/components/Elements"
+import { Button, SwitcherDialog, TextToSpeechButton, SpeechToTextButton, RecordingPlayer, Icon } from "@/components/Elements"
 
 import { useDeleteVocabulary } from "../api/deleteVocabulary"
 import { useVocabulary } from "../api/getVocabulary"
 import { DropDownVocabulary } from "./DropDownVocabulary"
 import { useUrlParams } from "@/lib/useUrlParams"
-import React from "react"
+
+import React, { useState } from "react"
 
 export const ContentElementVocabulary = ({ updateVocabularyType }:any): JSX.Element => {
   const { spaceId, vocabularyId, searchParams, config } = useUrlParams()
@@ -20,6 +21,18 @@ export const ContentElementVocabulary = ({ updateVocabularyType }:any): JSX.Elem
     updateVocabularyType(vocabularyQuery.data?.vocabulary_type)
   }, [vocabularyQuery]);
 
+  const [transcript, setTranscript] = useState<string>('')
+  const [recognitionStatus, setRecognitionStatus] = useState<boolean>(false)
+  const [recordingStatus, setRecordingStatus] = useState<string>('idle')
+  const speechToTextButtonRef = React.createRef<typeof SpeechToTextButton>()
+  const handleResetTranscript = (): void => {
+    speechToTextButtonRef.current?.handleResetTranscript()
+  }
+
+  React.useEffect(() => {
+    handleResetTranscript()
+  }, [vocabularyQuery.data?.en])
+
   return (
     <>
       <SwitcherDialog>
@@ -27,11 +40,30 @@ export const ContentElementVocabulary = ({ updateVocabularyType }:any): JSX.Elem
           <>
             <ContentElement
               resourceId={vocabularyQuery.data?.id}
-              original={vocabularyQuery.data?.en}
-              translation={vocabularyQuery.data?.ja}
+              resourceName={vocabularyQuery.data?.en}
               isLoading={vocabularyQuery.isLoading}
               dropDown={<DropDownVocabulary deleteToggle={methods.openWith} />}
-            />
+            >
+              <div className="mb-4 text-h400">{vocabularyQuery.data?.en}</div>
+              <div className="ext-middle text-natural-700">{vocabularyQuery.data?.ja}</div>
+
+              <div className="mt-4 -mb-4 flex gap-2">
+                <TextToSpeechButton text={vocabularyQuery.data?.en}  />
+                <SpeechToTextButton setTranscript={setTranscript} setRecognitionStatus={setRecognitionStatus} recordingStatus={recordingStatus} ref={speechToTextButtonRef} />
+              </div>
+              <div className={transcript === '' ? 'hidden' : 'block'}>
+                <div className="flex gap-4 items-center mt-4">
+                  <p className="block w-full text-default mt-2 px-4 py-3 text-natural-900 border border-natural-40 bg-white focus:ring-primary-100 focus:border-primary-100">
+                    {transcript}
+                  </p>
+                  <div onClick={handleResetTranscript}>
+                    <Icon bgColor="white" variant="close" />
+                  </div>
+                </div>
+                <RecordingPlayer setRecordingStatus={setRecordingStatus} recognitionStatus={recognitionStatus} />
+              </div>
+            </ContentElement>
+
             <ConfirmationDialog
               isOpen={methods.isOpen}
               close={methods.closeWith}
