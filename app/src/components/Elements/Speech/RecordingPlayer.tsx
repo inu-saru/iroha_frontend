@@ -1,7 +1,12 @@
 import React from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 
-export const RecordingPlayer = ({setRecordingStatus,recognitionStatus}): JSX.Element => {
+interface RecordingPlayerProps {
+  setRecordingStatus: (value: string) => void;
+  recognitionStatus: boolean
+}
+
+export const RecordingPlayer = ({setRecordingStatus, recognitionStatus}: RecordingPlayerProps): JSX.Element => {
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({ video: false })
 
@@ -10,7 +15,7 @@ export const RecordingPlayer = ({setRecordingStatus,recognitionStatus}): JSX.Ele
   }, [status])
 
   React.useEffect(() => {
-    if(recognitionStatus === true) {
+    if(recognitionStatus) {
       startRecording()
     } else {
       stopRecording()
