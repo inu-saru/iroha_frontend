@@ -6,13 +6,19 @@ import { IconButton } from "../Button"
 
 interface SpeechToTextButtonProps {
   setTranscript: (value: string) => void;
+  setRecognitionStatus: (value: boolean) => void;
+  recordingStatus: string
 }
 
 interface SpeechToTextButtonBaseRef {
   handleResetTranscript: () => void
 }
 
-const SpeechToTextButtonBase = ({setTranscript}: SpeechToTextButtonProps, ref:Ref<typeof SpeechToTextButton>): JSX.Element => {
+const startRecognition = (): void => {
+  void SpeechRecognition.startListening({ language: 'en-US' })
+}
+
+const SpeechToTextButtonBase = ({setTranscript, setRecognitionStatus, recordingStatus}: SpeechToTextButtonProps, ref:Ref<typeof SpeechToTextButton>): JSX.Element => {
   const {
     transcript,
     listening,
@@ -23,6 +29,10 @@ const SpeechToTextButtonBase = ({setTranscript}: SpeechToTextButtonProps, ref:Re
   React.useEffect(() => {
     setTranscript(transcript)
   }, [transcript])
+
+  React.useEffect(() => {  
+    setRecognitionStatus(listening)
+  } ,[listening])
 
   useImperativeHandle(ref, () => ({
     handleResetTranscript() {
@@ -38,8 +48,10 @@ const SpeechToTextButtonBase = ({setTranscript}: SpeechToTextButtonProps, ref:Re
     <div>
       {
         listening
-          ? <IconButton onClick={SpeechRecognition.stopListening} icon={<Icon variant={'stop'} />} variant='active' />
-          : <IconButton onClick={() => {SpeechRecognition.startListening({ language: 'en-US' })}} icon={<Icon variant={'mic'} />}  />
+          ? <IconButton onClick={SpeechRecognition.stopListening} icon={<Icon variant={'stop'} />}
+                        variant={recordingStatus === 'acquiring_media' ? 'disabled' : 'active'} 
+                        isLoading={recordingStatus === 'acquiring_media'} />
+          : <IconButton onClick={startRecognition} icon={<Icon variant={'mic'} />}  />
       }
     </div>
   )
