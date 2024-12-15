@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Spinner, TextToSpeechButton, SpeechToTextButton, Icon } from "../Elements"
+import { Spinner, TextToSpeechButton, SpeechToTextButton, RecordingPlayer, Icon } from "../Elements"
 
 interface ContentElementProps {
   resourceId: string | undefined
@@ -17,6 +17,8 @@ export const ContentElement = ({
   dropDown = undefined
 }: ContentElementProps): JSX.Element => {
   const [transcript, setTranscript] = useState<string>('')
+  const [recognitionStatus, setRecognitionStatus] = useState<boolean>(false)
+  const [recordingStatus, setRecordingStatus] = useState<string>('idle')
   const speechToTextButtonRef = React.createRef<typeof SpeechToTextButton>()
   const handleResetTranscript = (): void => {
     speechToTextButtonRef.current?.handleResetTranscript()
@@ -54,18 +56,20 @@ export const ContentElement = ({
         )}
         <div className="mt-4 -mb-4 flex gap-2">
           <TextToSpeechButton text={original}  />
-          <SpeechToTextButton setTranscript={setTranscript} ref={speechToTextButtonRef} />
+          <SpeechToTextButton setTranscript={setTranscript} setRecognitionStatus={setRecognitionStatus} recordingStatus={recordingStatus} ref={speechToTextButtonRef} />
         </div>
-        {(transcript !== "") &&
-          (<div className="flex gap-4 items-center mt-4">
+
+        <div className={transcript === '' ? 'hidden' : 'block'}>
+          <div className="flex gap-4 items-center mt-4">
             <p className="block w-full text-default mt-2 px-4 py-3 text-natural-900 border border-natural-40 bg-white focus:ring-primary-100 focus:border-primary-100">
               {transcript}
             </p>
             <div onClick={handleResetTranscript}>
               <Icon bgColor="white" variant="close" />
             </div>
-          </div>)
-        }
+          </div>
+          <RecordingPlayer setRecordingStatus={setRecordingStatus} recognitionStatus={recognitionStatus} />
+        </div>
       </div>
     </>
   )
