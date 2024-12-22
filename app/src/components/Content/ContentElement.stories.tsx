@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
+import React from "react"
 import { ContentElement } from "./ContentElement"
 
 const meta = {
@@ -16,10 +17,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    resourceId: "999",
-    original: "original text",
-    translation: "translated text",
-    isLoading: false
+  render: () => {
+    return (
+      <ContentElement resourceId="999" resourceName="resource name" isLoading={false}>
+        <p>Content</p>
+      </ContentElement>
+    )
   }
 }
