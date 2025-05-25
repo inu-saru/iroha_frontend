@@ -16,6 +16,8 @@ import { ReactComponent as EditActive } from "@/assets/icons/edit_active.svg"
 import { ReactComponent as Edit } from "@/assets/icons/edit.svg"
 import { ReactComponent as Mic } from "@/assets/icons/mic.svg"
 import { ReactComponent as MoreHoriz } from "@/assets/icons/more_horiz.svg"
+import { ReactComponent as OpenDetail } from "@/assets/icons/open_detail.svg"
+import { ReactComponent as OpenDetailDesable } from "@/assets/icons/open_detail_desable.svg"
 import { ReactComponent as Pending } from "@/assets/icons/pending.svg"
 import { ReactComponent as Search } from "@/assets/icons/search.svg"
 import { ReactComponent as Section } from "@/assets/icons/section.svg"
@@ -42,6 +44,8 @@ const variants = {
   edit: <Edit />,
   mic: <Mic />,
   moreHoriz: <MoreHoriz />,
+  openDetail: <OpenDetail />,
+  openDetailDeactive: <OpenDetailDesable />,
   pending: <Pending />,
   search: <Search />,
   section: <Section />,
