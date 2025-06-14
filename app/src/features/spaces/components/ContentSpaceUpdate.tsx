@@ -2,6 +2,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 
 import { ContentWithSubContentLayout } from "../../../components/Layout/ContentWithSubContentLayout"
 import { Input, Checkboxes, Button, IconButton, Icon, UnSelectItem, DeletableSelectItem, InputField, Spinner } from "@/components/Elements"
@@ -9,7 +10,6 @@ import { Input, Checkboxes, Button, IconButton, Icon, UnSelectItem, DeletableSel
 import { useUpdateSpace } from "../api/updateSpace"
 import { useUrlParams } from "@/lib/useUrlParams"
 import { useSpace, getSpace } from "../api/getSpace"
-import { getSpaces } from "../api/getSpaces"
 
 const schema = z.object({
   name: z.string().min(1, "入力してください。"),
@@ -19,6 +19,7 @@ const schema = z.object({
 export const ContentSpaceUpdate = (): JSX.Element => {
   const { spaceId, config } = useUrlParams()
   const spaceQuery = useSpace({ spaceId })
+  const queryClient = useQueryClient()
 
   const updateSpaceMutation = useUpdateSpace({
     config
@@ -62,8 +63,9 @@ export const ContentSpaceUpdate = (): JSX.Element => {
       data,
       resourceId: spaceId
     })
+    
     await getSpace({ spaceId })
-    await getSpaces({ page: 1 })
+    await queryClient.invalidateQueries({ queryKey: ["spaces"] })
   }
 
   const constantLanguages = [
