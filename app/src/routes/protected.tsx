@@ -9,6 +9,10 @@ const { VocabularyRoutes } = lazyImport(
   async () => await import("@/features/vocabularies/routes"),
   "VocabularyRoutes"
 )
+const { SpaceRoutes } = lazyImport(
+  async () => await import("@/features/spaces/routes"),
+  "SpaceRoutes"
+)
 const { Dashboard } = lazyImport(
   async () => await import("@/features/misc"),
   "Dashboard"
@@ -36,6 +40,7 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: "spaces/:spaceId/vocabularies/*", element: <VocabularyRoutes /> },
+      { path: "spaces/*", element: <SpaceRoutes /> },
       { path: "", element: <Dashboard /> }
     ]
   },
