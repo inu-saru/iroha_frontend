@@ -1,20 +1,17 @@
 import React from "react"
 
-import { Icon } from "@/components/Elements"
+import { Icon, Link } from "@/components/Elements"
 import { NavHeader } from "@/components/Nav"
 
-interface NavItemHeaderSpaceProps {
-  toggle: () => void
-}
 
-export const NavItemHeaderSpace = ({
-  toggle
-}: NavItemHeaderSpaceProps): JSX.Element => {
+export const NavItemHeaderSpace = (): JSX.Element => {
   return (
     <NavHeader title="スペース">
-      <div onClick={toggle}>
-        <Icon variant="add" bgColor="white" />
-      </div>
+      <Link to="/app/spaces/new">
+        <div>
+          <Icon variant="add" bgColor="white" />
+        </div>
+      </Link>
     </NavHeader>
   )
 }
